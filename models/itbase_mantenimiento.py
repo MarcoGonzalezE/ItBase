@@ -26,3 +26,5 @@ class ItBaseDispositivos(models.Model):
     _name = "itbase.dispositivo"
     dispositivo_id = fields.Many2one('itbase.mantenimiento', string="ID Dispositivo")
     name = fields.Char(string="Dispositivo/Periferico")
+    estado = fields.Selection([('uso','En Uso'),
+                               ('def','Reemplazado')], string="Estado")

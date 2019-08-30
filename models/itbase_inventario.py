@@ -81,6 +81,7 @@ class ItBase_Equipo(models.Model):
 
 	dispositivos_ids = fields.One2many('itbase.dispositivo', 'dispositivo_id', string='Dispositivos')
 	licencia_ids = fields.One2many('itbase.licencia', 'equipo_id', string="Licencias")
+	asignar_ids = fields.One2many('itbase.equipo.asignar', 'equipo_id', string="Asignaciones")
 
 
 class SistemaOperativo(models.Model):
@@ -94,6 +95,22 @@ class Marca(models.Model):
 class ProgramaLicencia(models.Model):
 	_name = 'itbase.licencia'
 	equipo_id = fields.Many2one('itbase.equipo', string='ID Equipo')
-	name = fields.Char(string="Licencia")
+	name = fields.Char(string="Programa")
 	licencia_bolean = fields.Selection([('si','Si'),('no','No')], string='¿Licencia?')
 	numero_licencia = fields.Char(string="Numero de Licencia")
+
+class AsigacionEquipo(models.Model):
+	_name =	'itbase.equipo.asignar'
+	equipo_id = fields.Many2one('itbase.equipo', string='Equipo')
+	name = fields.Many2one('res.partner', string="Asignada(o)")
+	correo = fields.Char(string="Correo")
+	departamento = fields.Char(string="Departamento")
+	fecha_asignacion = fields.Date(string="Fecha de Asignacion")
+	fecha_devolucion = fields.Date(string="Fecha de Devolucion")
+	nota = fields.Char(string="Nota")
+
+	@api.multi
+	@api.onchange('name')
+	def _correo_asignado(self):
+		self.correo = self.name.email
+

@@ -33,18 +33,41 @@
                                 <field name="procesador"/>
                             </group>
                         </group>
-                        <field name="dispositivos_ids"/>
-                        <notebook>
-                            <page string="Licencias">
-                                <field name="licencia_ids">
-                                    <tree editable="bottom">
-                                        <field name="name"/>
-                                        <field name="licencia_bolean"/>
-                                        <field name="numero_licencia"/>
-                                    </tree>
-                                </field>
-                            </page>
-                        </notebook>
+                        <group>
+                            <notebook>
+                                <page string="Asignaciones">
+                                    <field name="asignar_ids">
+                                        <tree editable="top">
+                                            <field name="name"/>
+                                            <field name="correo"/>
+                                            <field name="departamento"/>
+                                            <field name="fecha_asignacion"/>
+                                            <field name="fecha_devolucion"/>
+                                            <field name="nota"/>
+                                        </tree>
+                                    </field>
+                                </page>
+                                <page string="Dispositivos Adicionales">
+                                    <field name="dispositivos_ids">
+                                        <tree editable="bottom">
+                                            <field name="name"/>
+                                            <field name="estado"/>
+                                            <button name="dispositivo_id" icon="fa-check text-success" attrs="{'invisible': ['|',('estado','=','def')]}"/>
+                                            <button name="dispositivo_id" icon="fa-times-circle text-danger" attrs="{'invisible': ['|',('estado','=','uso')]}"/>
+                                        </tree>
+                                    </field>
+                                </page>
+                                <page string="Programas Adicionales">
+                                    <field name="licencia_ids">
+                                        <tree editable="bottom">
+                                            <field name="name"/>
+                                            <field name="licencia_bolean"/>
+                                            <field name="numero_licencia"/>
+                                        </tree>
+                                    </field>
+                                </page>
+                            </notebook>
+                        </group>
                     </sheet>
                 </form>
             </field>
