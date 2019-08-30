@@ -1,0 +1,9 @@
+<?xml version = "1.0"?>
+<odoo>
+	<data>
+		<menuitem id="itbase_parent_menu" name="IT Base" sequence="10" web_icon="itbase,static/description/itbase_icon.png"/>
+		<menuitem id="itbase_inventario_menu" name="Inventario" parent="itbase_parent_menu" sequence="10"/>
+		<menuitem id="itbase_equipos_menu" name="Equipos" sequence="20" parent="itbase_inventario_menu" action="itbase_computadora_action"/>
+		<menuitem id="itbase_mantenimiento_menu" name="Mantenimiento" sequence="30" parent="itbase_parent_menu" action="itbase_mantenimiento_action"/>
+	</data>
+</odoo>

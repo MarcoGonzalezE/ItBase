@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- Sistemas Operativos -->
+	<data noupdate="1">
+		<record id="itbase_so_windows" model="itbase.so">
+			<field name="name">Windows</field>
+		</record>
+		<record id="itbase_so_linux" model="itbase.so">
+			<field name="name">Linux</field>
+		</record>
+		<record id="itbase_so_macos" model="itbase.so">
+			<field name="name">Mac OS</field>
+		</record>
+	</data>
+<!-- Marcas -->
+	<data noupdate="1">
+		<record id="itbase_marca_lenovo" model="itbase.marca">
+			<field name="name">Lenovo</field>
+		</record>
+		<record id="itbase_marca_hp" model="itbase.marca">
+			<field name="name">HP</field>
+		</record>
+		<record id="itbase_marca_dell" model="itbase.marca">
+			<field name="name">Dell</field>
+		</record>			
+	</data>
+<!-- Secuencias -->
+	<!-- Equipo -->
+	<data noupdate="1">
+		<record id="seq_itbase_equipo" model="ir.sequence">
+			<field name="name">itbase_equipo_sequence</field>
+			<field name="code">itbase.equipo</field>
+			<field name="prefix">AVI</field>
+			<field name="padding">4</field>
+			<field name="company_id" eval="False"/>
+		</record>
+	</data>
+	<!-- Mantenimientos -->
+	<data noupdate="1">
+		<record id="seq_itbase_mantenimiento" model="ir.sequence">
+			<field name="name">itbase_mantenimiento_sequence</field>
+			<field name="code">itbase.mantenimiento</field>
+			<field name="prefix">MANT</field>
+			<field name="padding">4</field>
+			<field name="company_id" eval="False"/>
+		</record>
+	</data>
+
+</odoo>
