@@ -11,20 +11,22 @@
                     </header>
                     <sheet>
                         <div class="oe_button_box" name="button_box">
-                            <button class="oe_inline oe_stat_button" name="349" type="action" icon="fa-cogs" context="{'search_default_equipo_id': active_id}">
+                            <button class="oe_inline oe_stat_button" name="%(itbase_mantenimiento_view_tree)d" type="action" icon="fa-cogs" context="{'search_default_equipo_id': active_id}">
                                 <field string="Mantenimientos" name="mantenimientos" widget="statinfo"/>
                             </button>
                         </div>
                         <field name="imagen_medium" widget="image" class="oe_avatar"/>
                         <div class="oe_title">
-                            <h2><field name="name"/></h2>
+                            <table>
+                                <tr><td><h2><field name="name"/></h2></td></tr>
+                                <tr><td><strong><field name="tipo" placeholder="Tipo"/></strong></td></tr>
+                                <tr><td><strong><field name="marca" placeholder="Marca"/></strong></td></tr>
+                                <tr><td><strong><field name="modelo" placeholder="Modelo"/></strong></td></tr>
+                            </table>
                         </div>
                         <group>
                             <group>
                                 <field name="company_id"/>
-                                <field name="marca"/>
-                                <field name="modelo"/>
-                                <field name="tipo"/>
                             </group>
                             <group>
                                 <field name="arquitectura" widget="radio"/>
@@ -35,7 +37,7 @@
                         </group>
                         <group>
                             <notebook>
-                                <page string="Asignaciones">
+                                <page string="Historial de Asignaciones">
                                     <field name="asignar_ids">
                                         <tree editable="top">
                                             <field name="name"/>
@@ -98,19 +100,22 @@
                                     <img t-att-src="kanban_image('itbase.equipo', 'imagen_medium', record.id.value)"/>
                                 </div>
                                 <div class="oe_kanban_details">
-                                    <strong>
-                                        <span t-if="record.marca.value">[<field name="name"/>]</span>
+                                    <strong class="oe_partner_heading">
+                                        <span  t-if="record.marca.value">[<field name="name"/>]</span>
                                     </strong>
+                                    <ul>
+                                        <strong><field name="marca"/></strong> - <field name="modelo"/>
+                                    </ul>
+                                    <ul>
+                                        <field name="company_id"/>
+                                    </ul>
                                 </div>
-                                <div>
-                                    <field name="marca"/>
-                                </div>
-                                <div>
-                                    <field name="modelo"/>
+                                <!--<div>
+                                    <strong><field name="marca"/></strong> - <field name="modelo"/>
                                 </div>
                                 <div>
                                     <field name="company_id"/>
-                                </div>
+                                </div>-->
                             </div>
                         </t>                        
                     </templates>

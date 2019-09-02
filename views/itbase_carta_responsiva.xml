@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<report id="carta_responsiva" string="Carta Responsiva" model="itbase.equipo" report_type="qweb-pdf" name="ItBase.carta_responsiva_document"/>
+		<template id="carta_responsiva_document">
+			<t t-call="report.html_container">
+				<t t-foreach="docs" t-as="o">
+					<div class="page">
+						<!-- <header align="center" class="header">
+							<img t-if="res_company.logo" t-att-src="'data:image/png;base64,%s' % res_company.logo" style="max-height: 450px;"/>
+						</header> -->
+						<p align="center"><H3 style="text-transform: uppercase;">carta responsiva de asignacion de <span t-field="o.tipo"/></H3></p>
+						<p>La Barca, Jalisco; 
+							<t t-foreach="o.asignar_ids" t-as="asig">
+								<span t-field="asig.fecha_asignacion"/>
+							</t>
+						</p>
+						<p>Por este conducto declaro bajo protesta de decir verdad que recibo equipo de computo y que en adelante se detalla, en perfectas condiciones y funcionamiento, a mi entera satisfacción:</p>
+						<br/>						
+						<p align="center">
+									<table style="witdh:100%;">
+										<tr>
+											<td align="center" style="padding: 5px;">Marca</td>
+											<td align="center" style="padding: 5px;"><strong><span t-field="o.marca.name"/></strong></td>
+											<td align="center" rowspan="6" style="max-height: 150px;max-width: 150px;"><span t-field="o.imagen_medium" t-options='{"widget": "image"}'/></td>
+										</tr>
+										<tr>
+											<td align="center" style="padding: 5px;">Modelo</td>
+											<td align="center" style="padding: 5px;"><strong><span t-field="o.modelo"/></strong></td>
+										</tr>
+										<tr>
+											<td align="center" style="padding: 5px;">Referencia Interna</td>
+											<td align="center" style="padding: 5px;"><strong><span t-field="o.name"/></strong></td>
+										</tr>
+										<tr>
+											<td align="center" style="padding: 5px;">Sistema Operativo</td>
+											<td align="center" style="padding: 5px;"><span t-field="o.so_id.name"/> <span t-field="o.arquitectura"/></td>
+										</tr>
+										<tr>
+											<td align="center" style="padding: 5px;">Dispositivo Extra</td>
+											<td align="center" style="padding: 5px;">
+												<t t-foreach="o.dispositivos_ids" t-as="dispo">													
+													<span t-field="dispo.name"/>
+													<br/>
+												</t>
+											</td>
+										</tr>
+									</table>
+								</p>
+						<br/>
+						<p>Reconozco que este equipo de cómputo es propiedad de GRUPO ALVAMEX como préstamo para cubrir las necesidades de herramienta de trabajo.</p>
+						<p>Quedo como único y exclusivo responsable del resguardo de dicho equipo, así como el uso adecuado del mismo. En caso de robo, extravío o pérdida total me comprometo a pagar el costo total del equipo; y en caso de falla o daño atribuible al mal uso del equipo, pagaré el costo de la reparación.</p>
+						<p>Habiendo leído y estando de acuerdo en el contenido y consecuencias de la presente carta responsiva de asignación de equipo de cómputo, para fines laborales la firmo en la ciudad de La Barca, Jalisco.</p>
+						<p align="center">ATENTAMENTE<br/>GERENCIA<br/><strong>Avicampo SPR de RL de CV</strong></p>
+						<br/>
+						<br/>
+						<p align="center">Recibe:____________________________________________<br/>Nombre y firma<br/>Departamento:</p>
+						<br/>
+						<br/>
+						<p align="center">____________________________________________<br/>Departamento de IT</p>
+					</div>
+				</t>
+			</t>
+		</template>
+	</data>
+</odoo>

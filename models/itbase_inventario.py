@@ -65,6 +65,7 @@ class ItBase_Equipo(models.Model):
 			vals['name'] = self.env['ir.sequence'].next_by_code('itbase.equipo') or "Nuevo"
 			return super(ItBase_Equipo, self).create(vals)
 
+#CONTADOR DE MANTENIMIENTOS
 	mantenimiento = fields.One2many('itbase.mantenimiento', 'equipo_id', string="Mantenimientos")
 	mantenimiento_count = fields.Integer(compute="_count_mantenimiento", string="Mantenimientos")
 	mantenimientos = fields.Char(compute="_count_mantenimientos", string="Mantenimientos")
@@ -79,8 +80,13 @@ class ItBase_Equipo(models.Model):
 	def _count_mantenimientos(self):
 		self.mantenimientos = str(self.mantenimiento_count)
 
+#DISPOSITIVOS EXTRA
 	dispositivos_ids = fields.One2many('itbase.dispositivo', 'dispositivo_id', string='Dispositivos')
+
+#PROGRAMAS ADICIONALES - LICENCIAS
 	licencia_ids = fields.One2many('itbase.licencia', 'equipo_id', string="Licencias")
+
+#HISTORIAL DE ASIGNACIONES
 	asignar_ids = fields.One2many('itbase.equipo.asignar', 'equipo_id', string="Asignaciones")
 
 

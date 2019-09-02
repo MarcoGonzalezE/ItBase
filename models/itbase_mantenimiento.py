@@ -10,6 +10,7 @@ class ItBaseMantenimiento(models.Model):
     fecha_mantenimiento = fields.Datetime(string="Fecha de Mantenimiento")
     tipo = fields.Selection([('cor','Corretivo'),('pre','Preventivo')], string="Tipo de Mantenimiento")
     fecha_programado = fields.Date(string="Fecha de Programacion")
+#REFACCIONES - DISPOSITIVOS
     dispositivos_ids = fields.One2many('itbase.dispositivo', 'dispositivo_id', string="Dispositivos")
     estado = fields.Selection([('draft','Creado'),
                                ('espera','En Espera'),
