@@ -14,6 +14,7 @@
         'views/itbase_computadora.xml',
         'views/itbase_mantenimiento.xml',
         'views/itbase_carta_responsiva.xml',
+        'views/itbase_soluciones.xml',
         'views/menu.xml',
     ],
     # only loaded in demonstration mode

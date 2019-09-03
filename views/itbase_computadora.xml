@@ -15,14 +15,22 @@
                                 <field string="Mantenimientos" name="mantenimientos" widget="statinfo"/>
                             </button>
                         </div>
+                        <div class="oe_title">
+                            <h2><field name="name"/></h2>
+                        </div>
                         <field name="imagen_medium" widget="image" class="oe_avatar"/>
                         <div class="oe_title">
-                            <table>
+                            <p>
+                                <strong><field name="tipo" placeholder="Tipo"/></strong><br/>
+                                <strong><field name="marca" placeholder="Marca"/></strong><br/>
+                                <strong><field name="modelo" placeholder="Modelo"/></strong><br/>
+                            </p>
+                            <!-- <table>
                                 <tr><td><h2><field name="name"/></h2></td></tr>
                                 <tr><td><strong><field name="tipo" placeholder="Tipo"/></strong></td></tr>
                                 <tr><td><strong><field name="marca" placeholder="Marca"/></strong></td></tr>
                                 <tr><td><strong><field name="modelo" placeholder="Modelo"/></strong></td></tr>
-                            </table>
+                            </table> -->
                         </div>
                         <group>
                             <group>

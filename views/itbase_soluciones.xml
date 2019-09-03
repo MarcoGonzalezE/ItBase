@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="itbase_soluciones_form_view" model="ir.ui.view">
+			<field name="name">itbase.soluciones.form.view</field>
+            <field name="model">itbase.soluciones</field>
+            <field name="arch" type="xml">
+            	<form>
+            		<div class="oe_title">
+            			<h2><field name="name" placeholder="Problema"/></h2>
+            		</div>
+            		<group>
+            			<field name="area"/>
+            			<field name="url" widget="url"/>
+            		</group>
+            		<group>
+            			<field name="resumen" widget="html"/>
+            		</group>
+            	</form>
+            </field>
+		</record>
+
+		<record id="itbase_soluciones_view_tree" model="ir.ui.view">
+            <field name="name">itbase.soluciones.tree.view</field>
+            <field name="model">itbase.soluciones</field>
+            <field name="arch" type="xml">
+                    <tree string="soluciones">
+                        <field name="name"/>
+                        <field name="area"/>
+                    </tree>
+            </field>
+        </record>
+
+        <record id="itbase_soluciones_action" model="ir.actions.act_window">
+            <field name="name">Soluciones</field>
+            <field name="res_model">itbase.soluciones</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p>
+                    No se encontro ninguna solucion.
+                </p>
+            </field>
+        </record>
+
+        <!-- <record id="itbase_soliciones_dashboard_kanban_view" model="ir.ui.view">
+        	<field name="name">itbase.soluciones.dashboard</field>        	
+            <field name="model">itbase.soluciones</field>
+        	<field name="arch" type="xml">
+        		<kanban class="oe_background_grey o_kanban_dashboard o_salesteam_kanban o_project_kanban " create="0">
+        			<field name="name"/>
+        			<templates>
+        				<span t-name="kanban-box">
+        					<div class="o_project_kanban_manage">
+        						<a class="o_kanban_manage_toggle_button" href="#">More
+        							<i class="fa fa-caret-down"/>
+        						</a>
+        					</div>
+        					<div class="o_project_kanban_main" >
+        						<div class="o_kanban_card_content o_visible">
+        							<div class="o_kanban_primary_left" >
+        								<div class="">
+        									<center>
+        										<span>
+        											<span t-field="record.name"/>
+        										</span>
+        									</center>
+        								</div>
+        								<div>
+        										<center>
+       											<button class="btn btn-primary" type="action" name="itbase_soluciones_action" string="Soluciones">Soluciones</button>
+       										</center>
+       									</div>
+       								</div>
+       							</div>
+       							<div class="o_kanban_card_manage_pane o_invisible">
+       								<div class="col-xs-6 o_kanban_card_manage_section o_kanban_manage_view">
+       									<div class="o_kanban_card_manage_title">
+       										<span>View</span>
+       									</div>
+       								</div>
+       							</div>
+       						</div>
+        				</span>
+        			</templates>
+        		</kanban>
+        	</field>
+        </record> -->
+	</data>	
+</odoo>

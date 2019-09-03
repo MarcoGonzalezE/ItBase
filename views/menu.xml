@@ -5,5 +5,6 @@
 		<menuitem id="itbase_inventario_menu" name="Inventario" parent="itbase_parent_menu" sequence="10"/>
 		<menuitem id="itbase_equipos_menu" name="Equipos" sequence="20" parent="itbase_inventario_menu" action="itbase_computadora_action"/>
 		<menuitem id="itbase_mantenimiento_menu" name="Mantenimiento" sequence="30" parent="itbase_parent_menu" action="itbase_mantenimiento_action"/>
+		<menuitem id="itbase_soluciones_menu" name="Soluciones" sequence="40" parent="itbase_parent_menu" action="itbase_soluciones_action"/>
 	</data>
 </odoo>
