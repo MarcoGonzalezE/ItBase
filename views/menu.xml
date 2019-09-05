@@ -4,8 +4,9 @@
 		<menuitem id="itbase_parent_menu" name="IT Base" sequence="10" web_icon="itbase,static/description/itbase_icon.png"/>
 		<menuitem id="itbase_inventario_menu" name="Inventario" parent="itbase_parent_menu" sequence="10"/>
 		<menuitem id="itbase_equipos_menu" name="Equipos" sequence="20" parent="itbase_inventario_menu" action="itbase_computadora_action"/>
-		<menuitem id="itbase_soporte_menu" name="Soporte" sequence="50" parent="itbase_parent_menu" action="itbase_soporte_action"/>
 		<menuitem id="itbase_mantenimiento_menu" name="Mantenimiento" sequence="30" parent="itbase_parent_menu" action="itbase_mantenimiento_action"/>
 		<menuitem id="itbase_soluciones_menu" name="Soluciones" sequence="40" parent="itbase_parent_menu" action="itbase_soluciones_action"/>
+		<menuitem id="itbase_soporte_menu" name="Soporte" sequence="50" parent="itbase_parent_menu" action="itbase_soporte_action"/>
+		<menuitem id="itbase_servidores_menu" name="Servidores" sequence="60" parent="itbase_inventario_menu" action="itbase_servidores_action"/>
 	</data>
 </odoo>

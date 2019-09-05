@@ -24,6 +24,15 @@
 			<field name="name">Dell</field>
 		</record>			
 	</data>
+<!-- Tipo de Servidores -->
+	<data noupdate="1">
+		<record id="itbase_servidor_local" model="itbase.servidores.tipo">
+			<field name="name">Local</field>
+		</record>
+		<record id="itbase_servidor_vps" model="itbase.servidores.tipo">
+			<field name="name">VPS</field>
+		</record>
+	</data>
 <!-- Secuencias -->
 	<!-- Equipo -->
 	<data noupdate="1">
