@@ -33,6 +33,18 @@
 			<field name="name">VPS</field>
 		</record>
 	</data>
+<!-- Gestores de Base de Datos -->
+	<data noupdate="1">
+		<record id="itbase_basedatos_mysql" model="itbase.basedatos.sistema">
+			<field name="name">MySQL</field>
+		</record>
+		<record id="itbase_basedatos_sqlserver" model="itbase.basedatos.sistema">
+			<field name="name">SQL Server</field>
+		</record>
+		<record id="itbase_basedatos_postgresql" model="itbase.basedatos.sistema">
+			<field name="name">PostgreSQL</field>
+		</record>
+	</data>
 <!-- Secuencias -->
 	<!-- Equipo -->
 	<data noupdate="1">

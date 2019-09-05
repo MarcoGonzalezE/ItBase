@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="itbase_basedatos_view_form" model="ir.ui.view">
+			<field name="name">itbase.basedatos.form.view</field>
+			<field name="model">itbase.basedatos</field>
+			<field name="arch" type="xml">
+				<form string="Bases de Datos">
+					<sheet>
+						<group col="2">
+							<group>
+								<field name="servidor_id"/>
+								<field name="name"/>
+								<field name="sistema"/>
+							</group>
+							<group>
+								<field name="ip" readonly="1"/>
+								<field name="contrasena" />
+								<field name="puerto"/>
+							</group>
+						</group>
+						<notebook>
+							<page string="Usuarios">
+								<field name="usuarios_ids" options="{'not_delete': True}">
+									<tree editable="buttom">
+										<field name="name"/>
+										<field name="contrasena"/>
+									</tree>
+								</field>
+							</page>
+						</notebook>
+					</sheet>
+					<div class="oe_chatter">
+						<field name="message_follower_ids" widget="mail_followers"
+							groups="base.group_user" />
+							<field name="message_ids" widget="mail_thread" />
+						</div>
+					</form>
+				</field>
+			</record>
+
+			<record id="itbase_basedatos_view_tree" model="ir.ui.view">
+				<field name="name">itbase.basedatos.tree.view</field>
+				<field name="model">itbase.basedatos</field>
+				<field name="arch" type="xml">
+					<tree string="Base de Datos">
+						<field name="servidor_id"/>
+						<field name="name"/>
+						<field name="ip"/>
+						<field name="sistema"/>
+					</tree>
+				</field>
+			</record>
+
+			<record id="itbase_basedatos_action" model="ir.actions.act_window">
+				<field name="name">Base de Datos</field>
+				<field name="res_model">itbase.basedatos</field>
+				<field name="view_type">form</field>
+				<field name="view_mode">tree,form</field>
+				<field name="view_id" ref="itbase_basedatos_view_tree"/>
+			</record>
+		</data>
+	</odoo>

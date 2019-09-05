@@ -8,5 +8,6 @@
 		<menuitem id="itbase_soluciones_menu" name="Soluciones" sequence="40" parent="itbase_parent_menu" action="itbase_soluciones_action"/>
 		<menuitem id="itbase_soporte_menu" name="Soporte" sequence="50" parent="itbase_parent_menu" action="itbase_soporte_action"/>
 		<menuitem id="itbase_servidores_menu" name="Servidores" sequence="60" parent="itbase_inventario_menu" action="itbase_servidores_action"/>
+		<menuitem id="itbase_basedatos_menu" name="Base de Datos" sequence="70" parent="itbase_inventario_menu" action="itbase_basedatos_action"/>
 	</data>
 </odoo>
