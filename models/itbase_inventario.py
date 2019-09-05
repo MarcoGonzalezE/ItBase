@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from odoo import models, fields, api, tools
+import datetime
 
 # class itbase(models.Model):
 #     _name = 'itbase.itbase'
@@ -15,6 +16,7 @@ from odoo import models, fields, api, tools
 
 class ItBase_Equipo(models.Model):
 	_name = 'itbase.equipo'
+	_inherit = ['mail.thread']
 
 	name = fields.Char(readonly=True, default="Nuevo")
 	marca = fields.Many2one('itbase.marca', string="Marca", track_visibility='onchange')
@@ -89,6 +91,44 @@ class ItBase_Equipo(models.Model):
 #HISTORIAL DE ASIGNACIONES
 	asignar_ids = fields.One2many('itbase.equipo.asignar', 'equipo_id', string="Asignaciones")
 
+#ULTIMO ASIGNADO
+	asignado = fields.Char(string="Asignada(o)")
+	correo = fields.Char(string="Correo")
+	departamento = fields.Char(string="Departamento")
+	fecha_asignacion = fields.Date(string="Fecha de Asignacion")
+
+	@api.multi
+	def asignar_equipo(self):
+		self.estado = 'assigned'
+		return {
+            'name': "Asignar equipo",
+            'type': 'ir.actions.act_window',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'view_name': 'form',
+            'res_model': 'itbase.equipo.asignar',
+            'context': {'default_equipo_id': self.id},
+            'target': 'new'
+        }
+		
+
+	@api.multi
+	def disponible_equipo(self):
+		self.estado = 'not_assigned'
+		
+
+	# @api.multi
+	# @api.depends('asignar_ids')
+	# def _compute_asignado(self):
+	# 	for r in self:
+
+	# 		persona = self.env['itbase.equipo.asignar'].search([('id','=',r.asignar_ids)],limit=1)
+	# 		r.asignado = self.persona.name
+	# 		r.correo = self.persona.correo
+	# 		r.departamento = self.persona.departamento
+	# 		r.fecha_asignacion = self.persona.fecha_asignacion
+
+
 
 class SistemaOperativo(models.Model):
 	_name = 'itbase.so'
@@ -119,4 +159,17 @@ class AsigacionEquipo(models.Model):
 	@api.onchange('name')
 	def _correo_asignado(self):
 		self.correo = self.name.email
+		self.equipo_id.asignado = self.name.name
+		self.equipo_id.correo = self.correo
+		self.equipo_id.departamento = self.departamento
+		self.equipo_id.fecha_asignacion = self.fecha_asignacion
+
+
+	@api.onchange('equipo_id.estado')
+	def asignar_equipo(self):
+		if (self.fecha_asignacion == False, self.equipo_id.estado == 'not_assigned'):
+			self.fecha_asignacion = datetime.date.today()
+			
+
+	
 

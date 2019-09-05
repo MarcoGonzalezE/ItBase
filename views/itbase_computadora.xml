@@ -7,6 +7,8 @@
             <field name="arch" type="xml">
                 <form>
                     <header>
+                        <button type="object" name="asignar_equipo" string="Asignar" class="btn-primary" attrs="{'invisible' :[('estado', '=', 'assigned')]}"/>
+                        <button type="object" name="disponible_equipo" string="Devolucion" attrs="{'invisible' :[('estado', '=', 'not_assigned')]}"/>
                         <field name="estado" widget="statusbar"/>
                     </header>
                     <sheet>
@@ -35,6 +37,10 @@
                         <group>
                             <group>
                                 <field name="company_id"/>
+                                <field name="asignado"/>
+                                <field name="correo"/>
+                                <field name="departamento"/>
+                                <field name="fecha_asignacion"/>
                             </group>
                             <group>
                                 <field name="arquitectura" widget="radio"/>
@@ -46,7 +52,7 @@
                         <group>
                             <notebook>
                                 <page string="Historial de Asignaciones">
-                                    <field name="asignar_ids">
+                                    <field name="asignar_ids" readonly="True">
                                         <tree editable="top">
                                             <field name="name"/>
                                             <field name="correo"/>
@@ -79,6 +85,15 @@
                             </notebook>
                         </group>
                     </sheet>
+                    <div class="oe_chatter">
+                      <style>
+                          .o_chatter_button_new_message {
+                              display: none;
+                          }
+                      </style>
+                      <field name="message_follower_ids" widget="mail_followers"/>
+                      <field name="message_ids" widget="mail_thread"/>
+                  </div>
                 </form>
             </field>
         </record>
@@ -88,7 +103,6 @@
             <field name="model">itbase.equipo</field>
             <field name="arch" type="xml">
                 <tree>
-                    <field name="imagen"/>
                     <field name="name"/>
                     <field name="modelo"/>
                 </tree>
@@ -141,5 +155,23 @@
                 </p>
             </field>
         </record>
+
+
+<!--- VENTANA DE ASIGNACION DE EQUIPO -->
+        <record id="itbase_asignacion_view_form" model="ir.ui.view">
+          <field name="name">itbase.equipo.asignar.form.view</field>
+          <field name="model">itbase.equipo.asignar</field>
+          <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="equipo_id" readonly="True"/>
+                    <field name="name"/>
+                    <field name="correo"/>
+                    <field name="departamento"/>
+                    <field name="fecha_asignacion"/>
+                </group>
+            </form>
+          </field>
+      </record>
     </data>
 </odoo>

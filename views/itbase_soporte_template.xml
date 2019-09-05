@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<!-- <template id="itbase_solicitudes_soporte" name="Soporte" page="True">
+			<t t-call="website.layout">
+				<div class="container">
+					<div align="center">
+						<div class="col-md-12 mt16 mb16">
+							<button class="btn-primary">
+								
+							</button>
+							<br/>
+							<button class="btn-primary">
+								
+							</button>
+						</div>
+					</div>
+				</div>
+			</t>
+		</template> -->
+
+		<!-- <template id="itbase_enviar_ticket" name="Crear solicitud de soporte" page="True">
+			<t t-call="website.layout">
+				<div id="wrap" class="oe_stucture oe_empty">
+					<section>
+						<div class="container">
+							<div class="row">
+								<div class="col-md-12">
+									<h1 class="text-center">Soporte</h1>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+			</t>
+		</template> -->
+	</data>
+</odoo>

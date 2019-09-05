@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record id="itbase_soporte_form_view" model="ir.ui.view">
+			<field name="name">itbase.soporte.view.form</field>
+			<field name="model">itbase.soporte</field>
+			<field name="arch" type="xml">
+				<form>
+					<header>
+						<button type="object" name="cancelar" string="Cancelar" attrs="{'invisible' :[('estado','=', 'cancel')]}"/>
+						<field name="estado" widget="statusbar"/>
+					</header>
+					<sheet>
+						<div class="oe_title">
+                            <h2><field name="name" attrs="{'readonly' :[('estado','=', 'cancel')]}"/></h2>
+                        </div>
+						<group>
+							<group>
+								<field name="solicitante" attrs="{'readonly' :[('estado','=', 'cancel')]}"/>
+								<field name="correo" attrs="{'readonly' :[('estado','=', 'cancel')]}"/>
+								<field name="fecha_soporte" attrs="{'readonly' :[('estado','=', 'cancel')]}"/>
+								<field name="equipo_id" attrs="{'readonly' :[('estado','=', 'cancel')]}"/>
+							</group>
+							<group>
+								<field name="asignada" attrs="{'readonly' :[('estado','=', 'cancel')]}"/>
+								<field name="fecha_limite" attrs="{'readonly' :[('estado','=', 'cancel')]}"/>
+								<field name="prioridad" attrs="{'readonly' :[('estado','=', 'cancel')]}"/>
+								<field name="fecha_fin" readonly="1" attrs="{'invisible' :[('fecha_fin','=', False)]}"/>
+							</group>
+						</group>
+						<notebook>
+							<page string="Descripcion">
+								<field name="descripcion" widget="html" attrs="{'readonly' :[('estado','=', 'cancel')]}"/>
+							</page>
+						</notebook>
+					</sheet>
+					<div class="oe_chatter">
+                      <style>
+                          .o_chatter_button_new_message {
+                              display: none;
+                          }
+                      </style>
+                      <field name="message_follower_ids" widget="mail_followers"/>
+                      <field name="message_ids" widget="mail_thread"/>
+                  </div>
+				</form>
+			</field>
+		</record>
+
+		<record id="itbase_soporte_kanban_view" model="ir.ui.view">
+			<field name="name">itbase.soporte.view.kanban</field>
+			<field name="model">itbase.soporte</field>
+			<field name="arch" type="xml">
+				<kanban default_group_by="estado" class="o_kanban_small_column">
+					<field name="name"/>
+					<field name="estado"/>
+					<field name="solicitante"/>
+					<field name="asignada"/>
+					<field name="prioridad"/>
+					<field name="fecha_limite"/>
+					<templates>
+						<t t-name="kanban-box">
+							<div class="oe_kanban_content oe_kanban_global_click" tooltip="kanban_tooltip">
+								<div class="oe_kanban_details">
+									<p><b><field name="name"/></b><br/></p>
+									<p>Solicita: <field name="solicitante"/><br/></p>
+									<p attrs="{'invisible' :[('fecha_limite','=', False)]}">Fecha limite: <font color="red"><field name="fecha_limite"/></font><br/></p>
+								</div>
+								<div class="oe_kanban_bottom_left">
+									<field name="prioridad" widget="priority" readonly="1"></field>
+								</div>
+								<div class="oe_kanban_bottom_right">
+									<img t-att-src="kanban_image('res.users', 'image_small', record.asignada.raw_value)" t-att-title="record.asignada.value" width="24" height="24" class="oe_kanban_avatar pull-right"/>
+								</div>
+								<!-- <div class="text-muted">
+									<p>Fecha limite: <font color="red"><field name="fecha_limite"/></font></p>
+								</div>
+								<div class="oe_kanban_bottom_left">
+									<field name="prioridad" widget="priority" readonly="1"></field>
+								</div>
+								<div class="oe_kanban_details">
+									<br/><b>Asignada a <field name="asignada"/></b><br/>
+								</div> -->
+								<!-- <div class="oe_kanban_bottom_right">
+									<div class="pull-left">
+										<field name="estado" widget="kanban_state_selection"/>
+									</div>
+								</div> -->
+							</div>
+						</t>
+					</templates>
+				</kanban>
+			</field>
+		</record>
+
+		<record id="itbase_soporte_action" model="ir.actions.act_window">
+			<field name="name">Soporte</field>
+			<field name="res_model">itbase.soporte</field>
+			<field name="view_mode">kanban,form</field>
+			<field name="help" type="html">
+                <p>
+                    No se encontro ninguna solicitud de soporte.
+                </p>
+            </field>
+        </record>
+	</data>
+</odoo>

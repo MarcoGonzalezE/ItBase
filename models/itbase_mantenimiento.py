@@ -4,18 +4,19 @@ import datetime
 
 class ItBaseMantenimiento(models.Model):
     _name = 'itbase.mantenimiento'
+    _inherit = ['mail.thread']
 
     name = fields.Char(readonly=True, default="Nuevo")
-    equipo_id = fields.Many2one('itbase.equipo', string="Equipo")
-    fecha_mantenimiento = fields.Datetime(string="Fecha de Mantenimiento")
-    tipo = fields.Selection([('cor','Corretivo'),('pre','Preventivo')], string="Tipo de Mantenimiento")
-    fecha_programado = fields.Date(string="Fecha de Programacion")
+    equipo_id = fields.Many2one('itbase.equipo', string="Equipo", track_visibility='onchange')
+    fecha_mantenimiento = fields.Datetime(string="Fecha de Mantenimiento", track_visibility='onchange')
+    tipo = fields.Selection([('cor','Corretivo'),('pre','Preventivo')], string="Tipo de Mantenimiento", track_visibility='onchange')
+    fecha_programado = fields.Date(string="Fecha de Programacion", track_visibility='onchange')
 #REFACCIONES - DISPOSITIVOS
     dispositivos_ids = fields.One2many('itbase.dispositivo', 'dispositivo_id', string="Dispositivos")
     estado = fields.Selection([('draft','Creado'),
                                ('espera','En Espera'),
                                ('proceso','En Proceso'),
-                               ('final','Finalizado')], string="Estado")
+                               ('final','Finalizado')], string="Estado", track_visibility='onchange')
 
     @api.model
     def create(self, vals):

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from odoo import http
+#import request
 
 # class Itbase(http.Controller):
 #     @http.route('/itbase/itbase/', auth='public')
@@ -18,3 +19,15 @@ from odoo import http
 #         return http.request.render('itbase.object', {
 #             'object': obj
 #         })
+
+# class ItBaseController(http.Controller):
+# 	@http.route('/soluciones/ticket/enviar', type="http", auth="public", website=True)
+# 	def itbase_enviar_ticket(self,""kw):
+# 		person_name = ""
+# 		person_name = http.request.env.user.name
+# 		return http.request.render('Itbase.itbase_enviar_ticket',
+# 			{
+# 			'solicitante': person_name,
+# 			'correo' : http.request.env.user.email
+# 			})
+	
