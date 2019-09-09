@@ -39,7 +39,7 @@ class ItBase_Equipo(models.Model):
 	imagen = fields.Binary(string="Imagen Computadora", attachment=True)
 	imagen_small = fields.Binary(attachment=True)
 	imagen_medium = fields.Binary(attachment=True)
-	company_id = fields.Many2one('res.company', string="Compañia", default=lambda self: self.env['res.company']._company_default_get('itbase.equipo'))
+	company_id = fields.Many2one('itbase.equipo.compania', string="Compañia")
 
 	@api.one
 	@api.depends('imagen_variante','imagen')
@@ -169,6 +169,10 @@ class AsigacionEquipo(models.Model):
 	def asignar_equipo(self):
 		if (self.fecha_asignacion == False, self.equipo_id.estado == 'not_assigned'):
 			self.fecha_asignacion = datetime.date.today()
+
+class Compania(models.Model):
+	_name = 'itbase.equipo.compania'
+	name = fields.Char(string="Compañia")
 			
 
 	

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record id= "itbase_departamento_view_form" model="ir.ui.view">
+			<field name="name">itbase.departamento.form.view</field>
+			<field name="model">itbase.departamento</field>
+			<field name="arch" type="xml">
+				<form>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_inline oe_stat_button" name="%(itbase_mantenimiento_view_tree)d" type="action" icon="fa-cogs" context="{'search_default_equipo_id': active_id}">
+                                <field string="Mantenimientos" name="mantenimientos" widget="statinfo"/>
+                            </button>
+                            <button class="oe_inline oe_stat_button" name="%(itbase_soporte_view_tree)d" type="action" icon="fa-ticket" >
+                                <field string="Soporte" name="soportes" widget="statinfo"/>
+                            </button>
+                        </div>
+                        <div>
+                            <field name="imagen" widget="image" class="oe_avatar"/>
+                        </div>
+                        <group>
+                            <field name="name"/>
+                            <field name="puesto"/>
+                        </group>
+                    </sheet>
+                </form>
+			</field>
+		</record>
+
+		<!-- <record id="itbase_departamento_view_kanban" model="ir.ui.view">
+			<field name="name">itbase.departamento.form.view</field>
+			<field name="model">itbase.departamento</field>
+			<field name="arch" type="xml">
+				<kanban class="o_res_partner_kanban">
+                    <field name="name"/>
+                    <field name="puesto"/>
+                    <template>
+                    	<t t-name="kanban-box"> 
+                            <div class="oe_kanban_global_click">
+                                <div class="o_kanban_image">
+                                	<img t-att-src="kanban_image('res.users', 'image_small', record.id.raw_value)" height="40" width="40" class="oe_avatar oe_kanban_avatar_smallbox mb0" alt="Avatar" />
+                                </div>
+                                <div class="oe_kanban_details">
+                                    <strong class="oe_partner_heading">
+                                        <field name="name"/>
+                                    </strong>
+                                    <ul>
+                                        <strong><field name="puesto"/></strong>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </template>
+                </kanban>
+            </field>
+        </record>
+ -->
+        <record id="itbase_departamento_view_tree" model="ir.ui.view">
+            <field name="name">itbase.departamento.tree.view</field>
+            <field name="model">itbase.departamento</field>
+            <field name="arch" type="xml">
+                <tree string="Departamento de IT">
+                    <field name="name"/>
+                    <field name="puesto"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="itbase_departamento_action" model="ir.actions.act_window">
+            <field name="name">Departamento de IT</field>
+            <field name="res_model">itbase.departamento</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+	</data>
+</odoo>

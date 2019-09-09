@@ -19,6 +19,7 @@
         'views/itbase_soporte_template.xml',
         'views/itbase_servidores.xml',
         'views/itbase_basedatos.xml',
+        'views/itbase_departamento.xml',
         'views/menu.xml',
     ],
     # only loaded in demonstration mode

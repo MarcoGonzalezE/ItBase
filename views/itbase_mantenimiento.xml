@@ -19,6 +19,7 @@
                                 <field name="tipo"/>
                             </group>
                             <group>
+                                <field name="encargado"/>
                                 <field name="fecha_mantenimiento"/>
                                 <field name="fecha_programado"/>
                             </group>

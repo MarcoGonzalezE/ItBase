@@ -14,7 +14,7 @@ class ItBaseSoporte(models.Model):
 	name = fields.Char(string="Asunto", track_visibility='onchange')
 	solicitante = fields.Many2one('res.partner', string="Solicitante")
 	correo = fields.Char(string="Correo")
-	asignada = fields.Many2one('res.users', string="Asignada", track_visibility='onchange')
+	asignada = fields.Many2one('itbase.departamento', string="Asignada", track_visibility='onchange')
 	prioridad = fields.Selection(PRIORIDADES, select=True, string="Prioridad", default=PRIORIDADES[0][0], track_visibility='onchange')
 	fecha_soporte = fields.Datetime(string="Fecha de solicitud", default=_default_fecha_soporte, track_visibility='onchange')
 	fecha_limite = fields.Date(string="Fecha limite", track_visibility='onchange')

@@ -13,6 +13,7 @@ class ItBaseMantenimiento(models.Model):
     fecha_programado = fields.Date(string="Fecha de Programacion", track_visibility='onchange')
 #REFACCIONES - DISPOSITIVOS
     dispositivos_ids = fields.One2many('itbase.dispositivo', 'dispositivo_id', string="Dispositivos")
+    encargado = fields.Many2one('itbase.departamento', string="Encargado")
     estado = fields.Selection([('draft','Creado'),
                                ('espera','En Espera'),
                                ('proceso','En Proceso'),

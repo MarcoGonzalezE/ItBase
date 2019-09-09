@@ -94,5 +94,27 @@
         		</kanban>
         	</field>
         </record> -->
+
+<!-- AREAS -->
+        <record id="itbase_area_view_tree" model="ir.ui.view">
+            <field name="name">itbase.soluciones.area.tree.view</field>
+            <field name="model">itbase.soluciones.area</field>
+            <field name="arch" type="xml">
+                <tree string="Areas" editable="buttom">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="itbase_area_action" model="ir.actions.act_window">
+            <field name="name">Areas</field>
+            <field name="res_model">itbase.soluciones.area</field>
+            <field name="view_mode">tree</field>
+            <field name="help" type="html">
+                <p>
+                    No se encontro ninguna compañia.
+                </p>
+            </field>
+        </record>
 	</data>	
 </odoo>
