@@ -6,6 +6,9 @@
 			<field name="model">itbase.basedatos</field>
 			<field name="arch" type="xml">
 				<form string="Bases de Datos">
+					<!-- <header>
+						<button type="object" name="_ver_contrasena" string="Ver" class="btn-primary"/>
+					</header> -->
 					<sheet>
 						<group col="2">
 							<group>
@@ -15,7 +18,7 @@
 							</group>
 							<group>
 								<field name="ip" readonly="1"/>
-								<field name="contrasena" />
+								<field name="contrasena" password="True"/>
 								<field name="puerto"/>
 							</group>
 						</group>
@@ -24,7 +27,7 @@
 								<field name="usuarios_ids" options="{'not_delete': True}">
 									<tree editable="buttom">
 										<field name="name"/>
-										<field name="contrasena"/>
+										<field name="contrasena" password="True"/>
 									</tree>
 								</field>
 							</page>

@@ -25,7 +25,8 @@ class ItBase_Equipo(models.Model):
 	procesador = fields.Char()
 	ram = fields.Integer()
 	tipo = fields.Selection([('escritorio','Escritorio'),
-							('laptop','Laptop')],
+							('laptop','Laptop'),
+							('celular','Telefono/Celular')],
 							string="Tipo", track_visibility='onchange')
 	arquitectura = fields.Selection([('x_32','32 bits'),('x_64','64 bits')], string="Arquitectura")
 	estado = fields.Selection([('created','Creado'),
@@ -147,6 +148,7 @@ class ProgramaLicencia(models.Model):
 
 class AsigacionEquipo(models.Model):
 	_name =	'itbase.equipo.asignar'
+	
 	equipo_id = fields.Many2one('itbase.equipo', string='Equipo')
 	name = fields.Many2one('res.partner', string="Asignada(o)")
 	correo = fields.Char(string="Correo")

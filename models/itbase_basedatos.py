@@ -29,6 +29,7 @@ class ItBaseBaseDeDatosUsuarios(models.Model):
 	_name = 'itbase.basedatos.usuarios'
 
 	base_id = fields.Many2one('itbase.basedatos', string="ID Base")
-	name = fields.Char(string="Nombre")
+	name = fields.Char(string="Usuario")
 	contrasena = fields.Char(string="Contrasena")
+
 		

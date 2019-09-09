@@ -8,11 +8,11 @@
 				<form>
 					<header>
 						<button type="object" name="cancelar" string="Cancelar" attrs="{'invisible' :[('estado','=', 'cancel')]}"/>
-						<field name="estado" widget="statusbar"/>
+						<field name="estado" widget="statusbar" clickable="True"/>
 					</header>
 					<sheet>
 						<div class="oe_title">
-                            <h2><field name="name" attrs="{'readonly' :[('estado','=', 'cancel')]}"/></h2>
+                            <h2><field name="name" attrs="{'readonly' :[('estado','=', 'cancel')]}" placeholder="Asunto"/></h2>
                         </div>
 						<group>
 							<group>
@@ -93,6 +93,7 @@
 			</field>
 		</record>
 
+
 		<record id="itbase_soporte_view_tree" model="ir.ui.view">
             <field name="name">itbase.soporte.tree.view</field>
             <field name="model">itbase.soporte</field>
@@ -108,10 +109,26 @@
             </field>
         </record>
 
+		<record id="itbase_soporte_tree_view" model="ir.ui.view">
+          <field name="name">itbase.soporte.tree.view</field>
+          <field name="model">itbase.soporte</field>
+          <field name="arch" type="xml">
+      	      <tree>
+      	      	<field name="name"/>
+				<field name="solicitante"/>
+				<field name="asignada"/>
+				<field name="prioridad"/>
+				<field name="fecha_limite"/>
+				<field name="estado"/>
+      	      </tree>
+      	  </field>
+      </record>
+
+
 		<record id="itbase_soporte_action" model="ir.actions.act_window">
 			<field name="name">Soporte</field>
 			<field name="res_model">itbase.soporte</field>
-			<field name="view_mode">kanban,form</field>
+			<field name="view_mode">kanban,tree,form</field>
 			<field name="help" type="html">
                 <p>
                     No se encontro ninguna solicitud de soporte.

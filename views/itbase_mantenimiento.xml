@@ -7,6 +7,7 @@
             <field name="arch" type="xml">
                 <form>
                     <header>
+                        <button type="object" name="finalizado" string="Finalizado" attrs="{'invisible' :[('estado','=', 'final')]}"/>
                         <field name="estado" widget="statusbar"/>
                     </header>
                     <sheet>
@@ -16,6 +17,8 @@
                         <group>
                             <group>
                                 <field name="equipo_id"/>
+                                <field name="servidor_id"/>
+                                <field name="base_id"/>
                                 <field name="tipo"/>
                             </group>
                             <group>
@@ -25,6 +28,9 @@
                             </group>
                         </group>
                         <notebook>
+                            <page string="Descripcion">
+                                <field name="descripcion" widget="html" attrs="{'readonly' :[('estado','=', 'cancel')]}"/>
+                            </page>
                             <page string = "Refacciones">
                                 <field name="dispositivos_ids">
                                     <tree editable="buttom">
@@ -54,9 +60,12 @@
                     <tree string="Mantenimiento">
                         <field name="name"/>
                         <field name="equipo_id"/>
-                        <field name="fecha_mantenimiento"/>
-                        <field name="tipo"/>
+                        <field name="servidor_id"/>
+                        <field name="base_id"/>
                         <field name="fecha_programado"/>
+                        <field name="tipo"/>
+                        <field name="fecha_mantenimiento"/>
+                        <field name="estado"/>
                     </tree>
             </field>
         </record>
