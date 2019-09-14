@@ -10,6 +10,14 @@
 						<field name="estado" widget="statusbar" clickable="True"/>
 					</header>
 					<sheet>
+						<div class="oe_button_box" name="button_box">
+                            <button class="oe_inline oe_stat_button" name="%(itbase_mantenimiento_servidor_view_tree)d" type="action" icon="fa-cogs" context="{'search_default_servidor_id': active_id}">
+                                <field string="Mantenimientos" name="mantenimientos" widget="statinfo"/>
+                            </button>
+                            <button class="oe_inline oe_stat_button" name="%(itbase_basedatos_view_tree)d" type="action" icon="fa-database" context="{'search_default_servidor_id': active_id}">
+                                <field string="Base de Datos" name="bases" widget="statinfo"/>
+                            </button>
+                        </div>
 						<group col="2">
 							<group>
 								<field name="name"/>
@@ -24,10 +32,11 @@
 								<field name="ip_tipo" widget="radio"/>
 								<field name="ram" />
 							</group>
-						</group>
-						<group>
-							<field name="proveedor"/>
-						</group>
+							<group>
+								<field name="compania"/>
+								<field name="proveedor"/>
+							</group>
+						</group>						
 						<notebook>
 							<page string="Servicios">
 								<field name="servicios_ids">
@@ -48,60 +57,55 @@
 											<t t-name="kanban-box">
 												<div class="oe_kanban_global_click" style="max-width: 200px">
 													<div class="o_kanban_record_top">
-														<img
-															t-att-src="kanban_image('res.users', 'image_small', record.id.raw_value)"
-															height="40" width="40" class="oe_avatar oe_kanban_avatar_smallbox mb0"
-															alt="Avatar" />
-															<div class="o_kanban_record_headings ml8">
-																<strong class="o_kanban_record_title">
-																	<field name="name" />
-																</strong>
-															</div>
+														<img t-att-src="kanban_image('res.users', 'image_small', record.id.raw_value)" height="40" width="40" class="oe_avatar oe_kanban_avatar_smallbox mb0" alt="Avatar" />
+														<div class="o_kanban_record_headings ml8">
+															<strong class="o_kanban_record_title">
+																<field name="name" />
+															</strong>
 														</div>
 													</div>
-												</t>
-											</templates>
-										</kanban>
-									</field>
-								</page>								
-							</notebook>
-						</sheet>
-						<div class="oe_chatter">
-							<field name="message_follower_ids" widget="mail_followers"
-								groups="base.group_user" />
-								<field name="message_ids" widget="mail_thread" />
-							</div>
-						</form>
-					</field>
-				</record>
+												</div>
+											</t>
+										</templates>
+									</kanban>
+								</field>
+							</page>								
+						</notebook>
+					</sheet>
+					<div class="oe_chatter">
+						<field name="message_follower_ids" widget="mail_followers" groups="base.group_user" />
+						<field name="message_ids" widget="mail_thread" />
+					</div>
+				</form>
+			</field>
+		</record>
 
+		<record id="itbase_servidores_view_tree" model="ir.ui.view">
+			<field name="name">itbase.servidores.tree.view</field>
+			<field name="model">itbase.servidores</field>
+			<field name="arch" type="xml">
+				<tree string="Servidores">
+					<field name="name"/>
+					<field name="compania"/>
+					<field name="sistema"/>
+					<field name="tipo"/>
+					<field name="ip"/>
+					<field name="estado"/>
+				</tree>
+			</field>
+		</record>
 
-				<record id="itbase_servidores_view_tree" model="ir.ui.view">
-					<field name="name">itbase.servidores.tree.view</field>
-					<field name="model">itbase.servidores</field>
-					<field name="arch" type="xml">
-						<tree string="Servidores" >
-							<field name="name" />
-							<field name="sistema" />
-							<field name="tipo" />
-							<field name="ip" />
-							<field name="proveedor"/>
-							<field name="estado"/>
-						</tree>
-					</field>
-				</record>
-
-				<record id="itbase_servidores_action" model="ir.actions.act_window">
-					<field name="name">Servidores</field>
-					<field name="res_model">itbase.servidores</field>
-					<field name="view_type">form</field>
-					<field name="view_mode">tree,form</field>
-					<field name="view_id" ref="itbase_servidores_view_tree"/>
-					<field name="help" type="html">
-						<p>
-							No se encontro ningun servidor registrado.
-						</p>
-					</field>
-				</record>
-			</data>
-		</odoo>
+		<record id="itbase_servidores_action" model="ir.actions.act_window">
+			<field name="name">Servidores</field>
+			<field name="res_model">itbase.servidores</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="view_id" ref="itbase_servidores_view_tree"/>
+			<field name="help" type="html">
+				<p>
+					No se encontro ningun servidor registrado.
+				</p>
+			</field>
+		</record>
+	</data>
+</odoo>

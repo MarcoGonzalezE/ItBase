@@ -93,7 +93,6 @@
 			</field>
 		</record>
 
-
 		<record id="itbase_soporte_view_tree" model="ir.ui.view">
             <field name="name">itbase.soporte.tree.view</field>
             <field name="model">itbase.soporte</field>
@@ -123,7 +122,6 @@
       	      </tree>
       	  </field>
       </record>
-
 
 		<record id="itbase_soporte_action" model="ir.actions.act_window">
 			<field name="name">Soporte</field>

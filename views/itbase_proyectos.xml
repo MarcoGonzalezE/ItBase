@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record id="itbase_proyectos_form_view" model="ir.ui.view">
+			<field name="name">itbase.proyectos.view.form</field>
+			<field name="model">itbase.proyectos</field>
+			<field name="arch" type="xml">
+				<form>
+					<header>
+						<field name="estado" widget="statusbar" clickable="True"/>
+					</header>
+					<sheet>
+						<div class="oe_title">
+							<h2><field name="name" attrs="{'readonly' :[('estado','=', 'cancel')]}" placeholder="Nombre del Proyecto"/></h2>
+						</div>
+						<group>
+							<group>
+								<field name="responsable"/>
+								<field name="compania"/>
+								<field name="fecha_inicio"/>
+							</group>
+							<group>
+								<field name="prioridad"/>
+								<field name="fecha_imp"/>
+							</group>
+							<group>
+								<field name="repositorio" widget="url"/>
+								<field name="otro" widget="url"/>
+							</group>	
+						</group>
+						<notebook>
+							<page string="Uso">
+								<field name="uso" widget="html"/>
+							</page>
+							<page string="Comentarios">
+								<field name="comentarios" widget="text"/>
+							</page>
+							<page string="Tareas">
+								<field name="tareas_ids">
+									<tree editable="bottom">
+										<field name="name"/>
+										<field name="comentarios" widget="text"/>
+										<field name="fecha_inicio"/>
+										<field name="fecha_final"/>
+										<field name="estado"/>
+									</tree>
+								</field>
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="itbase_proyectos_view_tree" model="ir.ui.view">
+            <field name="name">itbase.proyectos.tree.view</field>
+            <field name="model">itbase.proyectos</field>
+            <field name="arch" type="xml">
+                <tree string="Proyectos">
+                    <field name="name"/>
+					<field name="responsable"/>
+					<field name="compania"/>
+					<field name="prioridad"/>
+					<field name="estado"/>
+                </tree>
+            </field>
+        </record>
+
+		<record id="itbase_proyectos_action" model="ir.actions.act_window">
+			<field name="name">Proyectos</field>
+			<field name="res_model">itbase.proyectos</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+                <p>
+                    No se encontro ningun proyecto.
+                </p>
+            </field>
+        </record>
+	</data>
+</odoo>

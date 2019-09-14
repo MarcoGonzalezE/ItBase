@@ -32,7 +32,7 @@ class ItBaseSoporte(models.Model):
 
 	@api.onchange('estado')
 	def _onchange_estado(self):
-		if self.estado == 'complete':
+		if self.estado == 'Completado':
 			self.fecha_fin = datetime.datetime.now()
 
 	def cancelar(self):

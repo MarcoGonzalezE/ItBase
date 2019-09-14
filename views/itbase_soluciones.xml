@@ -51,7 +51,6 @@
       </field>
     </record>
 
-<<<<<<< Updated upstream
         <!-- <record id="itbase_soliciones_dashboard_kanban_view" model="ir.ui.view">
         	<field name="name">itbase.soluciones.dashboard</field>        	
             <field name="model">itbase.soluciones</field>
@@ -117,7 +116,7 @@
                 </p>
             </field>
         </record>
-=======
+
     <record id="itbase_soliciones_dashboard_kanban_view" model="ir.ui.view">
       <field name="name">itbase.soluciones.dashboard</field>        	
       <field name="model">itbase.soluciones</field>
@@ -140,6 +139,5 @@
       	</kanban>
       </field>
     </record>
->>>>>>> Stashed changes
 	</data>	
 </odoo>

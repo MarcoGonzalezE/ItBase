@@ -24,6 +24,9 @@ class ItBase_Equipo(models.Model):
 	so_id = fields.Many2one('itbase.so', string="Sistema Operativo", track_visibility='onchange')
 	procesador = fields.Char()
 	ram = fields.Integer()
+	numero_tel = fields.Char(string="Numero de Telefono")
+	imei = fields.Char(string="IMEI")
+	telefonia = fields.Char(string="Compañia Telefonica")
 	tipo = fields.Selection([('escritorio','Escritorio'),
 							('laptop','Laptop'),
 							('celular','Telefono/Celular')],
@@ -67,6 +70,8 @@ class ItBase_Equipo(models.Model):
 		if vals.get('name', "Nuevo") == "Nuevo":
 			vals['name'] = self.env['ir.sequence'].next_by_code('itbase.equipo') or "Nuevo"
 			return super(ItBase_Equipo, self).create(vals)
+
+	
 
 #CONTADOR DE MANTENIMIENTOS
 	mantenimiento = fields.One2many('itbase.mantenimiento', 'equipo_id', string="Mantenimientos")
@@ -119,11 +124,11 @@ class ItBase_Equipo(models.Model):
 		
 
 	# @api.multi
-	# @api.depends('asignar_ids')
+	# @api.depends('estado')
 	# def _compute_asignado(self):
 	# 	for r in self:
 
-	# 		persona = self.env['itbase.equipo.asignar'].search([('id','=',r.asignar_ids)],limit=1)
+	# 		persona = self.env['itbase.equipo.asignar'].search([('id','=',r.asignar_ids.equipo_id)],limit=1)
 	# 		r.asignado = self.persona.name
 	# 		r.correo = self.persona.correo
 	# 		r.departamento = self.persona.departamento
@@ -157,24 +162,10 @@ class AsigacionEquipo(models.Model):
 	fecha_devolucion = fields.Date(string="Fecha de Devolucion")
 	nota = fields.Char(string="Nota")
 
-	@api.multi
-	@api.onchange('name')
-	def _correo_asignado(self):
-		self.correo = self.name.email
-		self.equipo_id.asignado = self.name.name
-		self.equipo_id.correo = self.correo
-		self.equipo_id.departamento = self.departamento
-		self.equipo_id.fecha_asignacion = self.fecha_asignacion
-
-
-	@api.onchange('equipo_id.estado')
-	def asignar_equipo(self):
-		if (self.fecha_asignacion == False, self.equipo_id.estado == 'not_assigned'):
-			self.fecha_asignacion = datetime.date.today()
-
 class Compania(models.Model):
 	_name = 'itbase.equipo.compania'
 	name = fields.Char(string="Compañia")
+	sequence = fields.Char(string="Inicio Secuencia")
 			
 
 	

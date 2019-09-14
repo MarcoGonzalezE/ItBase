@@ -46,12 +46,32 @@
 		</record>
 	</data>
 <!-- Secuencias -->
-	<!-- Equipo -->
+	<!-- Equipo Laptop -->
 	<data noupdate="1">
 		<record id="seq_itbase_equipo" model="ir.sequence">
 			<field name="name">itbase_equipo_sequence</field>
 			<field name="code">itbase.equipo</field>
-			<field name="prefix">AVI</field>
+			<field name="prefix">LAP-</field>
+			<field name="padding">4</field>
+			<field name="company_id" eval="False"/>
+		</record>
+	</data>
+	<!-- Equipo Escritorio -->
+	<data noupdate="1">
+		<record id="seq_itbase_equipo_esc" model="ir.sequence">
+			<field name="name">itbase_equipo_esc_sequence</field>
+			<field name="code">itbase.equipo.pc</field>
+			<field name="prefix">PC-</field>
+			<field name="padding">4</field>
+			<field name="company_id" eval="False"/>
+		</record>
+	</data>
+	<!-- Equipo Celular -->
+	<data noupdate="1">
+		<record id="seq_itbase_equipo_cel" model="ir.sequence">
+			<field name="name">itbase_equipo_cel_sequence</field>
+			<field name="code">itbase.equipo.cel</field>
+			<field name="prefix">CEL-</field>
 			<field name="padding">4</field>
 			<field name="company_id" eval="False"/>
 		</record>

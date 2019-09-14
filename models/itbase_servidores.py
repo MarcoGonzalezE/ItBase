@@ -22,6 +22,7 @@ class ItBaseServidores(models.Model):
 	proveedor = fields.Many2one('res.partner', string="Proveedor", track_visibility='onchange')
 	estado = fields.Selection([('activo','Activo'),
 								('inactivo','Inactivo')], string="Estado", track_visibility='onchange')
+	compania = fields.Many2one('itbase.equipo.compania', string="Compania", track_visibility='onchange')
 
 	@api.one
 	@api.depends('ip', 'usuario')
@@ -34,6 +35,36 @@ class ItBaseServidores(models.Model):
 	@api.model
 	def _default_user_id(self):
 		return [self.env.context.get('uid'), SUPERUSER_ID]
+
+#CONTADOR DE MANTENIMIENTOS
+	mantenimiento = fields.One2many('itbase.mantenimiento', 'servidor_id', string="Mantenimientos")
+	mantenimiento_count = fields.Integer(compute="_count_mantenimiento", string="Mantenimientos")
+	mantenimientos = fields.Char(compute="_count_mantenimientos", string="Mantenimientos")
+
+	@api.one
+	@api.depends('mantenimiento')
+	def _count_mantenimiento(self):
+		self.mantenimiento_count = self.mantenimiento.search_count([('servidor_id','=',self.id)])
+
+	@api.one
+	@api.depends('mantenimiento_count')
+	def _count_mantenimientos(self):
+		self.mantenimientos = str(self.mantenimiento_count)
+
+#CONTADOR DE BASE DE DATOS
+	base = fields.One2many('itbase.basedatos', 'servidor_id', string="Bases")
+	base_count = fields.Integer(compute="_count_base", string="Bases")
+	bases = fields.Char(compute="_count_bases", string="Bases")
+
+	@api.one
+	@api.depends('base')
+	def _count_base(self):
+		self.base_count = self.base.search_count([('servidor_id','=',self.id)])
+
+	@api.one
+	@api.depends('base_count')
+	def _count_bases(self):
+		self.bases = str(self.base_count)
 
 
 class ServidorTipo(models.Model):

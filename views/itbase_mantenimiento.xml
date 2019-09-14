@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <record id="itbase_mantenimiento_view_form" model="ir.ui.view">
-            <field name="name">itbase.mantenimiento.form.view</field>
+<!--FORM-->
+    <!-- Form Equipo -->
+        <record id="itbase_mantenimiento_equipo_view_form" model="ir.ui.view">
+            <field name="name">itbase.mantenimiento.equipo.form.view</field>
             <field name="model">itbase.mantenimiento</field>
             <field name="arch" type="xml">
                 <form>
@@ -17,7 +19,107 @@
                         <group>
                             <group>
                                 <field name="equipo_id"/>
+                                <field name="tipo"/>
+                            </group>
+                            <group>
+                                <field name="encargado"/>
+                                <field name="fecha_mantenimiento"/>
+                                <field name="fecha_programado"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Descripcion">
+                                <field name="descripcion" widget="html" attrs="{'readonly' :[('estado','=', 'cancel')]}"/>
+                            </page>
+                            <page string = "Refacciones">
+                                <field name="dispositivos_ids">
+                                    <tree editable="buttom">
+                                        <field name="name"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                      <style>
+                          .o_chatter_button_new_message {
+                              display: none;
+                          }
+                      </style>
+                      <field name="message_follower_ids" widget="mail_followers"/>
+                      <field name="message_ids" widget="mail_thread"/>
+                  </div>
+                </form>
+            </field>
+        </record>
+
+    <!-- Form Servidor -->
+        <record id="itbase_mantenimiento_servidor_view_form" model="ir.ui.view">
+            <field name="name">itbase.mantenimiento.servidor.form.view</field>
+            <field name="model">itbase.mantenimiento</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button type="object" name="finalizado" string="Finalizado" attrs="{'invisible' :[('estado','=', 'final')]}"/>
+                        <field name="estado" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h2><field name="name"/></h2>
+                        </div>
+                        <group>
+                            <group>
                                 <field name="servidor_id"/>
+                                <field name="tipo"/>
+                            </group>
+                            <group>
+                                <field name="encargado"/>
+                                <field name="fecha_mantenimiento"/>
+                                <field name="fecha_programado"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Descripcion">
+                                <field name="descripcion" widget="html" attrs="{'readonly' :[('estado','=', 'cancel')]}"/>
+                            </page>
+                            <page string = "Refacciones">
+                                <field name="dispositivos_ids">
+                                    <tree editable="buttom">
+                                        <field name="name"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                      <style>
+                          .o_chatter_button_new_message {
+                              display: none;
+                          }
+                      </style>
+                      <field name="message_follower_ids" widget="mail_followers"/>
+                      <field name="message_ids" widget="mail_thread"/>
+                  </div>
+                </form>
+            </field>
+        </record>
+
+    <!-- Form Base de Datos -->
+        <record id="itbase_mantenimiento_base_view_form" model="ir.ui.view">
+            <field name="name">itbase.mantenimiento.base.form.view</field>
+            <field name="model">itbase.mantenimiento</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button type="object" name="finalizado" string="Finalizado" attrs="{'invisible' :[('estado','=', 'final')]}"/>
+                        <field name="estado" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h2><field name="name"/></h2>
+                        </div>
+                        <group>
+                            <group>
                                 <field name="base_id"/>
                                 <field name="tipo"/>
                             </group>
@@ -53,6 +155,8 @@
             </field>
         </record>
 
+<!--TREE-->
+    <!-- Tree TODOS -->
         <record id="itbase_mantenimiento_view_tree" model="ir.ui.view">
             <field name="name">itbase.mantenimiento.tree.view</field>
             <field name="model">itbase.mantenimiento</field>
@@ -69,16 +173,132 @@
                     </tree>
             </field>
         </record>
+    <!-- Tree Equipo -->
+        <record id="itbase_mantenimiento_equipo_view_tree" model="ir.ui.view">
+            <field name="name">itbase.mantenimiento.equipo.tree.view</field>
+            <field name="model">itbase.mantenimiento</field>
+            <field name="arch" type="xml">
+                    <tree string="Mantenimiento">
+                        <field name="name"/>
+                        <field name="equipo_id"/>
+                        <field name="fecha_programado"/>
+                        <field name="tipo"/>
+                        <field name="fecha_mantenimiento"/>
+                        <field name="estado"/>
+                    </tree>
+            </field>
+        </record>
 
-        <record id="itbase_mantenimiento_action" model="ir.actions.act_window">
+    <!-- Tree Servidor -->
+        <record id="itbase_mantenimiento_servidor_view_tree" model="ir.ui.view">
+            <field name="name">itbase.mantenimiento.servidor.tree.view</field>
+            <field name="model">itbase.mantenimiento</field>
+            <field name="arch" type="xml">
+                    <tree string="Mantenimiento">
+                        <field name="name"/>
+                        <field name="servidor_id"/>
+                        <field name="fecha_programado"/>
+                        <field name="tipo"/>
+                        <field name="fecha_mantenimiento"/>
+                        <field name="estado"/>
+                    </tree>
+            </field>
+        </record>
+
+    <!-- Tree Base de Datos -->
+        <record id="itbase_mantenimiento_base_view_tree" model="ir.ui.view">
+            <field name="name">itbase.mantenimiento.base.tree.view</field>
+            <field name="model">itbase.mantenimiento</field>
+            <field name="arch" type="xml">
+                    <tree string="Mantenimiento">
+                        <field name="name"/>
+                        <field name="base_id"/>
+                        <field name="fecha_programado"/>
+                        <field name="tipo"/>
+                        <field name="fecha_mantenimiento"/>
+                        <field name="estado"/>
+                    </tree>
+            </field>
+        </record>
+
+
+<!--ACTIONS-->
+    <!-- Mantenimiento - Equipo -->
+        <record id="itbase_mantenimiento_equipo_action" model="ir.actions.act_window">
             <field name="name">Mantenimiento</field>
             <field name="res_model">itbase.mantenimiento</field>
             <field name="view_mode">tree,form</field>
+            <field name="domain">[('equipo_id','!=', False)]</field>
             <field name="help" type="html">
                 <p>
                     No se encontro ningun mantenimiento.
                 </p>
             </field>
+        </record>
+        <record id="tree_itbase_equipo_action_view" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="res_model">itbase.mantenimiento</field>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="itbase_mantenimiento_equipo_view_tree"/>
+            <field name="act_window_id" ref="itbase_mantenimiento_equipo_action"/>
+        </record>
+        <record id="form_itbase_equipo_action_view" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="itbase_mantenimiento_equipo_view_form"/>
+            <field name="act_window_id" ref="itbase_mantenimiento_equipo_action"/>
+        </record>
+
+    <!-- Mantenimiento - Servidor -->
+        <record id="itbase_mantenimiento_servidor_action" model="ir.actions.act_window">
+            <field name="name">Mantenimiento</field>
+            <field name="res_model">itbase.mantenimiento</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('servidor_id','!=', False)]</field>
+            <field name="help" type="html">
+                <p>
+                    No se encontro ningun mantenimiento.
+                </p>
+            </field>
+        </record>
+        <record id="tree_itbase_servidor_action_view" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="res_model">itbase.mantenimiento</field>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="itbase_mantenimiento_servidor_view_tree"/>
+            <field name="act_window_id" ref="itbase_mantenimiento_servidor_action"/>
+        </record>
+        <record id="form_itbase_servidor_action_view" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="itbase_mantenimiento_servidor_view_form"/>
+            <field name="act_window_id" ref="itbase_mantenimiento_servidor_action"/>
+        </record>
+
+    <!-- Mantenimiento - Base de Datos -->
+        <record id="itbase_mantenimiento_base_action" model="ir.actions.act_window">
+            <field name="name">Mantenimiento</field>
+            <field name="res_model">itbase.mantenimiento</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('base_id','!=', False)]</field>
+            <field name="help" type="html">
+                <p>
+                    No se encontro ningun mantenimiento.
+                </p>
+            </field>
+        </record>
+        <record id="tree_itbase_base_action_view" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="res_model">itbase.mantenimiento</field>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="itbase_mantenimiento_base_view_tree"/>
+            <field name="act_window_id" ref="itbase_mantenimiento_base_action"/>
+        </record>
+        <record id="form_itbase_equipo_action_view" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="itbase_mantenimiento_base_view_form"/>
+            <field name="act_window_id" ref="itbase_mantenimiento_base_action"/>
         </record>
     </data>
 </odoo>
