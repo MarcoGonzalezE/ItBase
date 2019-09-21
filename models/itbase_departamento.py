@@ -39,3 +39,18 @@ class ItBaseDepartamento(models.Model):
 	@api.depends('soporte_count')
 	def _count_soportes(self):
 		self.soportes = str(self.soporte_count)
+
+#CONTADOR DE PROYECTOS
+	proyecto = fields.One2many('itbase.proyectos', 'responsable', string="Proyectos")
+	proyecto_count = fields.Integer(compute="_count_proyecto", string="Proyectos")
+	proyectos = fields.Char(compute="_count_proyectos", string="Proyectos")
+
+	@api.one
+	@api.depends('proyecto')
+	def _count_proyecto(self):
+		self.proyecto_count = self.proyecto.search_count([('responsable','=',self.id)])
+
+	@api.one
+	@api.depends('proyecto_count')
+	def _count_proyectos(self):
+		self.proyectos = str(self.proyecto_count)

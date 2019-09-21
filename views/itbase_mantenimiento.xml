@@ -294,7 +294,7 @@
             <field name="view_id" ref="itbase_mantenimiento_base_view_tree"/>
             <field name="act_window_id" ref="itbase_mantenimiento_base_action"/>
         </record>
-        <record id="form_itbase_equipo_action_view" model="ir.actions.act_window.view">
+        <record id="form_itbase_base_action_view" model="ir.actions.act_window.view">
             <field eval="2" name="sequence"/>
             <field name="view_mode">form</field>
             <field name="view_id" ref="itbase_mantenimiento_base_view_form"/>
