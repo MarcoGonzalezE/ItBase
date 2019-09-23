@@ -8,15 +8,18 @@
 				<form>
                     <sheet>
                         <div class="oe_button_box" name="button_box">
-                            <button class="oe_inline oe_stat_button" name="%(itbase_mantenimiento_view_tree)d" type="action" icon="fa-cogs" context="{'search_default_equipo_id': active_id}">
+                            <button class="oe_inline oe_stat_button" name="%(itbase_mantenimientos_action)d" type="action" icon="fa-cogs" context="{'search_default_equipo_id': active_id}">
                                 <field string="Mantenimientos" name="mantenimientos" widget="statinfo"/>
                             </button>
-                            <button class="oe_inline oe_stat_button" name="%(itbase_soporte_view_tree)d" type="action" icon="fa-ticket" >
+                            <button class="oe_inline oe_stat_button" name="%(itbase_soporte_action)d" type="action" icon="fa-ticket" >
                                 <field string="Soporte" name="soportes" widget="statinfo"/>
                             </button>
-                            <button class="oe_inline oe_stat_button" name="%(itbase_proyectos_view_tree)d" type="action" icon="fa-sitemap" context="{'search_default_equipo_id': active_id}">
+                            <button class="oe_inline oe_stat_button" name="%(itbase_productos_action)d" type="action" icon="fa-sitemap" context="{'search_default_equipo_id': active_id}">
                                 <field string="Proyectos" name="proyectos" widget="statinfo"/>
                             </button>
+                            <!-- <button class="oe_inline oe_stat_button" name="%(itbase_tareas_action)d" type="action" icon="fa-calendar-ckeck-o" context="{'search_default_equipo_id': active_id}">
+                                <field string="Tareas" name="tareas" widget="statinfo"/>
+                            </button> -->
                         </div>
                         <div>
                             <field name="imagen" widget="image" class="oe_avatar"/>

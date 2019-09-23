@@ -12,6 +12,7 @@ class ItBaseSoporte(models.Model):
 		return datetime.datetime.now()
 
 	name = fields.Char(string="Asunto", track_visibility='onchange')
+	seq = fields.Char(string="Secuencia", store="True")
 	solicitante = fields.Many2one('res.partner', string="Solicitante")
 	correo = fields.Char(string="Correo")
 	asignada = fields.Many2one('itbase.departamento', string="Asignada", track_visibility='onchange')
@@ -32,15 +33,17 @@ class ItBaseSoporte(models.Model):
 
 	@api.onchange('estado')
 	def _onchange_estado(self):
-		if self.estado == 'Completado':
+		if self.estado == 'complete':
 			self.fecha_fin = datetime.datetime.now()
 
 	def cancelar(self):
 		self.estado = 'cancel'
 
-	#@api.model
-	#def create(self, vals):
-	 	# self.fecha_soporte = datetime.datetime.now()
+	@api.model
+	def create(self, vals):
+		if vals.get('seq', "Nuevo") == "Nuevo":
+			vals['seq'] = self.env['ir.sequence'].next_by_code('itbase.soporte') or "Nuevo"
+			return super(ItBaseSoporte, self).create(vals)
 
 	
 		

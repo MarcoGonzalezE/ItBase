@@ -37,10 +37,10 @@
                         <group>
                             <group>
                                 <field name="company_id"/>
-                                <field name="asignado" attrs="{'readonly':[('estado','=','assigned')]}"/>
+                               <!--  <field name="asignado" attrs="{'readonly':[('estado','=','assigned')]}"/>
                                 <field name="correo" attrs="{'readonly':[('estado','=','assigned')]}"/>
                                 <field name="departamento" attrs="{'readonly':[('estado','=','assigned')]}"/>
-                                <field name="fecha_asignacion" attrs="{'readonly':[('estado','=','assigned')]}"/>
+                                <field name="fecha_asignacion" attrs="{'readonly':[('estado','=','assigned')]}"/> -->
                             </group>
                             <group>
                                 <field name="arquitectura" widget="radio" attrs="{'invisible':[('tipo','=','celular')]}"/>

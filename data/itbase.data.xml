@@ -86,5 +86,15 @@
 			<field name="company_id" eval="False"/>
 		</record>
 	</data>
+	<!--Soporte-->
+	<data noupdate="1">
+		<record id="seq_itbase_soporte" model="ir.sequence">
+			<field name="name">itbase_soporte_sequence</field>
+			<field name="code">itbase.soporte</field>
+			<field name="prefix">SP</field>
+			<field name="padding">4</field>
+			<field name="company_id" eval="False"/>
+		</record>
+	</data>
 
 </odoo>

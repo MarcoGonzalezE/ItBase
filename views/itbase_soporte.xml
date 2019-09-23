@@ -12,6 +12,7 @@
 					</header>
 					<sheet>
 						<div class="oe_title">
+							<field name="seq" readonly="1"/>
                             <h2><field name="name" attrs="{'readonly' :[('estado','=', 'cancel')]}" placeholder="Asunto"/></h2>
                         </div>
 						<group>
@@ -52,6 +53,7 @@
 			<field name="model">itbase.soporte</field>
 			<field name="arch" type="xml">
 				<kanban default_group_by="estado" class="o_kanban_small_column">
+					<field name="seq"/>
 					<field name="name"/>
 					<field name="estado"/>
 					<field name="solicitante"/>
@@ -62,7 +64,7 @@
 						<t t-name="kanban-box">
 							<div class="oe_kanban_content oe_kanban_global_click" tooltip="kanban_tooltip">
 								<div class="oe_kanban_details">
-									<p><b><field name="name"/></b><br/></p>
+									<p><b><field name="seq"/>/<field name="name"/></b><br/></p>
 									<p>Solicita: <field name="solicitante"/><br/></p>
 									<p attrs="{'invisible' :[('fecha_limite','=', False)]}">Fecha limite: <font color="red"><field name="fecha_limite"/></font><br/></p>
 								</div>
@@ -98,6 +100,7 @@
             <field name="model">itbase.soporte</field>
             <field name="arch" type="xml">
                 <tree string="Soporte">
+                	<field name="seq"/>
                     <field name="name"/>
 					<field name="estado"/>
 					<field name="solicitante"/>
@@ -113,6 +116,7 @@
           <field name="model">itbase.soporte</field>
           <field name="arch" type="xml">
       	      <tree>
+      	      	<field name="seq"/>
       	      	<field name="name"/>
 				<field name="solicitante"/>
 				<field name="asignada"/>

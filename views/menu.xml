@@ -1,7 +1,7 @@
 <?xml version = "1.0"?>
 <odoo>
 	<data>
-		<menuitem id="itbase_parent_menu" name="IT Base" sequence="10" web_icon="itbase,static/description/itbase_icon.png"/>
+		<menuitem id="itbase_parent_menu" name="IT Base" sequence="10" web_icon="ItBase,static/description/itbase_icon.png"/>
 
 		<menuitem id="itbase_inventario_menu" name="Inventario" parent="itbase_parent_menu" sequence="20"/>
 		<menuitem id="itbase_equipos_menu" name="Equipos" sequence="21" parent="itbase_inventario_menu" action="itbase_computadora_action"/>
@@ -15,15 +15,20 @@
 
 		<menuitem id="itbase_soluciones_menu" name="Soluciones" sequence="40" parent="itbase_parent_menu" action="itbase_soluciones_action"/>
 
-		<menuitem id="itbase_proyectos_menu" name="Proyectos" sequence="50" parent="itbase_parent_menu" action="itbase_proyectos_action"/>
+		<menuitem id="itbase_desarollo_menu" name="Desarrollo" sequence="50" parent="itbase_parent_menu"/>
+		<menuitem id="itbase_proyectos_menu" name="Proyectos" sequence="51" parent="itbase_desarollo_menu" action="itbase_proyectos_action"/>
+		<menuitem id="itbase_productos_menu" name="Productos" sequence="52" parent="itbase_desarollo_menu" action="itbase_productos_action"/>
+		<menuitem id="itbase_tareas_menu" name="Tareas" sequence="53" parent="itbase_desarollo_menu" action="itbase_tareas_action"/>
+
 
 		<menuitem id="itbase_soporte_menu" name="Soporte" sequence="60" parent="itbase_parent_menu" action="itbase_soporte_action"/>
 
-		<menuitem id="itbase_configuracion_menu" name="Configuracion" sequence="70" parent="itbase_parent_menu"/>
-		<menuitem id="itbase_departamento_menu" name="Departamento de IT" sequence="71" parent="itbase_configuracion_menu" action="itbase_departamento_action"/>
-		<menuitem id="itbase_valores_menu" name="Valores" sequence="72" parent="itbase_configuracion_menu"/>
-		<menuitem id="itbase_companias_menu" name="Compañias" sequence="73" parent="itbase_valores_menu" action="itbase_companias_action"/>
-		<menuitem id="itbase_area_menu" name="Areas" sequence="74" parent="itbase_valores_menu" action="itbase_area_action"/>
+		<menuitem id="itbase_configuracion_menu" name="Configuracion" sequence="70" parent="itbase_parent_menu"/>		
+		<menuitem id="itbase_valores_menu" name="Valores" sequence="71" parent="itbase_configuracion_menu"/>
+		<menuitem id="itbase_companias_menu" name="Compañias" sequence="72" parent="itbase_valores_menu" action="itbase_companias_action"/>
+		<menuitem id="itbase_area_menu" name="Areas" sequence="73" parent="itbase_valores_menu" action="itbase_area_action"/>
+
+		<menuitem id="itbase_departamento_menu" name="Departamento de IT" sequence="80" parent="itbase_parent_menu" action="itbase_departamento_action"/>
 	</data>
 </odoo>
 

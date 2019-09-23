@@ -18,7 +18,7 @@ class ItBase_Equipo(models.Model):
 	_name = 'itbase.equipo'
 	_inherit = ['mail.thread']
 
-	name = fields.Char(readonly=True, default="Nuevo")
+	name = fields.Char(default="Nuevo", store="True", track_visibility='onchange')
 	marca = fields.Many2one('itbase.marca', string="Marca", track_visibility='onchange')
 	modelo = fields.Char(string="Modelo", track_visibility='onchange')
 	so_id = fields.Many2one('itbase.so', string="Sistema Operativo", track_visibility='onchange')
@@ -64,12 +64,16 @@ class ItBase_Equipo(models.Model):
 			self.imagen_variante = image
 		else:
 			self.imagen = image
+
+	@api.onchange('company_id')
+	def _onchange_compania(self):
+		self.name = self.company_id.sequence
 			
-	@api.model
-	def create(self, vals):
-		if vals.get('name', "Nuevo") == "Nuevo":
-			vals['name'] = self.env['ir.sequence'].next_by_code('itbase.equipo') or "Nuevo"
-			return super(ItBase_Equipo, self).create(vals)
+	# @api.model
+	# def create(self, vals):
+	# 	if vals.get('name', "Nuevo") == "Nuevo":
+	# 		vals['name'] = self.env['ir.sequence'].next_by_code('itbase.equipo') or "Nuevo"
+	# 		return super(ItBase_Equipo, self).create(vals)
 
 	
 

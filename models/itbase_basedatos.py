@@ -21,6 +21,21 @@ class ItBaseBaseDeDatos(models.Model):
 		if self.servidor_id:
 			self.ip = self.servidor_id.ip
 
+	#CONTADOR DE MANTENIMIENTOS
+	mantenimiento = fields.One2many('itbase.mantenimiento', 'base_id', string="Mantenimientos")
+	mantenimiento_count = fields.Integer(compute="_count_mantenimiento", string="Mantenimientos")
+	mantenimientos = fields.Char(compute="_count_mantenimientos", string="Mantenimientos")
+
+	@api.one
+	@api.depends('mantenimiento')
+	def _count_mantenimiento(self):
+		self.mantenimiento_count = self.mantenimiento.search_count([('base_id','=',self.id)])
+
+	@api.one
+	@api.depends('mantenimiento_count')
+	def _count_mantenimientos(self):
+		self.mantenimientos = str(self.mantenimiento_count)
+
 class ItBaseBaseDeDatosSistema(models.Model):
 	_name = 'itbase.basedatos.sistema'
 	name = fields.Char(string="Gestor")

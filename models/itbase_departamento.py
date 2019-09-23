@@ -41,7 +41,7 @@ class ItBaseDepartamento(models.Model):
 		self.soportes = str(self.soporte_count)
 
 #CONTADOR DE PROYECTOS
-	proyecto = fields.One2many('itbase.proyectos', 'responsable', string="Proyectos")
+	proyecto = fields.One2many('itbase.productos', 'responsable', string="Proyectos")
 	proyecto_count = fields.Integer(compute="_count_proyecto", string="Proyectos")
 	proyectos = fields.Char(compute="_count_proyectos", string="Proyectos")
 
@@ -54,3 +54,18 @@ class ItBaseDepartamento(models.Model):
 	@api.depends('proyecto_count')
 	def _count_proyectos(self):
 		self.proyectos = str(self.proyecto_count)
+
+# #CONTADOR DE TAREAS
+# 	tarea = fields.One2many('itbase.proyectos.tarea', 'responsable', string="Tareas")
+# 	tarea_count = fields.Integer(compute="_count_tarea", string="Tareas")
+# 	tareas = fields.Char(compute="_count_tareas", string="Tareas")
+
+# 	@api.one
+# 	@api.depends('tarea')
+# 	def _count_tarea(self):
+# 		self.tarea_count = self.tarea.search_count([('responsable','=',self.id)])
+
+# 	@api.one
+# 	@api.depends('tarea_count')
+# 	def _count_tareas(self):
+# 		self.tareas = str(self.tarea_count)

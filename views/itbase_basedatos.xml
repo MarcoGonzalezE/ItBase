@@ -10,6 +10,11 @@
 						<button type="object" name="_ver_contrasena" string="Ver" class="btn-primary"/>
 					</header> -->
 					<sheet>
+						<div class="oe_button_box" name="button_box">
+                            <button class="oe_inline oe_stat_button" name="%(itbase_mantenimiento_base_action)d" type="action" icon="fa-cogs" context="{'search_default_servidor_id': active_id}">
+                                <field string="Mantenimientos" name="mantenimientos" widget="statinfo"/>
+                            </button>
+                        </div>
 						<group col="2">
 							<group>
 								<field name="servidor_id"/>
