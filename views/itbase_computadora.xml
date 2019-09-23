@@ -9,7 +9,7 @@
                     <header>
                         <button type="object" name="asignar_equipo" string="Asignar" class="btn-primary" attrs="{'invisible' :[('estado', '=', 'assigned')]}"/>
                         <button type="object" name="disponible_equipo" string="Devolucion" attrs="{'invisible' :[('estado', '=', 'not_assigned')]}" class="oe_inline"/>
-                        <field name="estado" widget="statusbar"/>
+                        <field name="estado" widget="statusbar" clickable="True"/>
                     </header>
                     <sheet>
                         <div class="oe_button_box" name="button_box">

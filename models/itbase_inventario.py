@@ -45,6 +45,8 @@ class ItBase_Equipo(models.Model):
 	imagen_medium = fields.Binary(attachment=True)
 	company_id = fields.Many2one('itbase.equipo.compania', string="Compañia")
 
+	_sql_constraints = [('equipo_uniq', 'UNIQUE (name)', '¡El numero del equipo ya existe!')]
+
 	@api.one
 	@api.depends('imagen_variante','imagen')
 	def _compute_images(self):
@@ -165,6 +167,10 @@ class AsigacionEquipo(models.Model):
 	fecha_asignacion = fields.Date(string="Fecha de Asignacion")
 	fecha_devolucion = fields.Date(string="Fecha de Devolucion")
 	nota = fields.Char(string="Nota")
+
+	@api.onchange('name')
+	def _onchange_asignado(self):
+		self.correo = self.name.email
 
 class Compania(models.Model):
 	_name = 'itbase.equipo.compania'
