@@ -96,5 +96,25 @@
 			<field name="company_id" eval="False"/>
 		</record>
 	</data>
+	<!--Historias-->
+	<data noupdate="1">
+		<record id="seq_itbase_historias" model="ir.sequence">
+			<field name="name">itbase_historias_sequence</field>
+			<field name="code">itbase.historias</field>
+			<field name="prefix">HIST</field>
+			<field name="padding">4</field>
+			<field name="company_id" eval="False"/>
+		</record>
+	</data>
+	<!--Errores-->
+	<data noupdate="1">
+		<record id="seq_itbase_errores" model="ir.sequence">
+			<field name="name">itbase_errores_sequence</field>
+			<field name="code">itbase.errores</field>
+			<field name="prefix">BUG</field>
+			<field name="padding">4</field>
+			<field name="company_id" eval="False"/>
+		</record>
+	</data>
 
 </odoo>

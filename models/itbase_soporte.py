@@ -45,5 +45,14 @@ class ItBaseSoporte(models.Model):
 			vals['seq'] = self.env['ir.sequence'].next_by_code('itbase.soporte') or "Nuevo"
 			return super(ItBaseSoporte, self).create(vals)
 
-	
-		
+	@api.multi
+	def name_get(self):
+		res = super(ItBaseSoporte, self).name_get()
+		result = []
+		for element in res:
+			soporte_id = element[0]
+			code = self.browse(soporte_id).seq
+			desc = self.browse(soporte_id).name
+			name = code and '[%s] %s' % (code, desc) or '%s' % desc
+			result.append((soporte_id, name))
+		return result		

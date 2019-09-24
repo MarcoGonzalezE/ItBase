@@ -19,6 +19,8 @@
 		<menuitem id="itbase_proyectos_menu" name="Proyectos" sequence="51" parent="itbase_desarollo_menu" action="itbase_proyectos_action"/>
 		<menuitem id="itbase_productos_menu" name="Productos" sequence="52" parent="itbase_desarollo_menu" action="itbase_productos_action"/>
 		<menuitem id="itbase_tareas_menu" name="Tareas" sequence="53" parent="itbase_desarollo_menu" action="itbase_tareas_action"/>
+		<menuitem id="itbase_historias_menu" name="Historias" sequence="54" parent="itbase_desarollo_menu" action="itbase_historias_action"/>
+		<menuitem id="itbase_errores_menu" name="Bugs" sequence="55" parent="itbase_desarollo_menu" action="itbase_errores_action"/>
 
 
 		<menuitem id="itbase_soporte_menu" name="Soporte" sequence="60" parent="itbase_parent_menu" action="itbase_soporte_action"/>

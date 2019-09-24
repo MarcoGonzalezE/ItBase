@@ -133,7 +133,6 @@
                 </p>
             </field>
         </record>
-
 <!--  TAREAS -->
 		<record id="itbase_tareas_action" model="ir.actions.act_window">
 			<field name="name">Tareas</field>
@@ -151,6 +150,7 @@
             <field name="model">itbase.proyectos.tarea</field>
             <field name="arch" type="xml">
                 <tree string="productos">
+                	<field name="id"/>
                     <field name="name"/>
                     <field name="proyecto_id"/>
 					<field name="responsable"/>
@@ -167,6 +167,7 @@
 			<field name="arch" type="xml">
 				<form>
 					<header>
+						<button name="asignar" string="Yo lo hago" class="oe_highlight" type="object" icon='fa-thumbs-o-up' attrs="{'invisible': [('asignada', '!=', False)]}"/>
 						<field name="estado" widget="statusbar" clickable="True"/>
 					</header>
 					<sheet>
@@ -176,15 +177,30 @@
 						<group>
 							<group>
 								<field name="proyecto_id"/>
+								<field name="historia_id"/>
 								<field name="responsable"/>
 								<field name="fecha_inicio"/>
 								<field name="fecha_final"/>
 							</group>
 							<group>
-								<field name="comentarios" widget="text"/>
+								<field name="fecha_creacion" readonly="1"/>								
+								<field name="asignada" readonly="1"/>
+								<field name="horas" attrs="{'required': [('asignada', '!=', False)]}"/>
 							</group>							
-						</group>						
+						</group>
+						<group string="Comentarios">
+							<p><field name="comentarios" widget="text"/></p>
+						</group>
 					</sheet>
+					<div class="oe_chatter">
+						<style>
+                          .o_chatter_button_new_message {
+                              display: none;
+                          }
+                      	</style>
+                      	<field name="message_follower_ids" widget="mail_followers"/>
+                      	<field name="message_ids" widget="mail_thread"/>
+                    </div>
 				</form>
 			</field>
 		</record>
@@ -196,6 +212,153 @@
 				<graph stacked="False">
 					<field name="responsable" string="Responsable"/>
 				</graph>
+			</field>
+		</record>
+<!-- Historias -->
+		<record id="itbase_historias_action" model="ir.actions.act_window">
+			<field name="name">Historias</field>
+			<field name="res_model">itbase.historias</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+                <p>
+                    No se encontro ninguna historia.
+                </p>
+            </field>
+		</record>
+
+		<record id="itbase_historias_view_tree" model="ir.ui.view">
+            <field name="name">itbase.historias.tree.view</field>
+            <field name="model">itbase.historias</field>
+            <field name="arch" type="xml">
+                <tree string="Historias">
+                    <field name="name"/>
+                    <field name="asunto"/>
+                    <field name="producto_id"/>
+					<field name="responsable"/>
+					<field name="fecha_inicio"/>
+					<field name="fecha_final"/>
+					<field name="prioridad"/>
+					<field name="estado"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="itbase_historias_form_view" model="ir.ui.view">
+			<field name="name">itbase.historias.view.form</field>
+			<field name="model">itbase.historias</field>
+			<field name="arch" type="xml">
+				<form>
+					<header>
+						<field name="estado" widget="statusbar" clickable="True"/>
+					</header>
+					<sheet>
+						<div class="oe_title">
+							<h2><field name="name"/></h2>
+						</div>
+						<group>
+							<group>
+								<field name="asunto"/>
+								<field name="producto_id"/>
+								<field name="responsable"/>
+							</group>
+							<group>								
+								<field name="fecha_inicio"/>
+								<field name="fecha_final"/>
+								<field name="prioridad"/>
+							</group>							
+						</group>
+						<group string="Como">
+							<p><field name="como" widget="html"/></p>
+						</group>
+						<group string="Quiero">
+							<p><field name="quiero" widget="html"/></p>
+						</group>
+						<group string="Para">
+							<p><field name="para" widget="html"/></p>
+						</group>
+						<group string="Término">
+							<p><field name="termino" widget="html"/></p>
+						</group>
+					</sheet>
+					<div class="oe_chatter">
+						<style>
+							.o_chatter_button_new_message {
+							display: none;
+							}
+						</style>
+						<field name="message_follower_ids" widget="mail_followers"/>
+						<field name="message_ids" widget="mail_thread"/>
+					</div>
+				</form>
+			</field>
+		</record>
+<!--ERRORES-->
+		<record id="itbase_errores_action" model="ir.actions.act_window">
+			<field name="name">Bugs</field>
+			<field name="res_model">itbase.errores</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+                <p>
+                    No se encontro ninguna historia.
+                </p>
+            </field>
+		</record>
+
+		<record id="itbase_errores_view_tree" model="ir.ui.view">
+            <field name="name">itbase.errores.tree.view</field>
+            <field name="model">itbase.errores</field>
+            <field name="arch" type="xml">
+                <tree string="Bugs">
+                    <field name="name"/>
+                    <field name="asunto"/>
+                    <field name="producto_id"/>
+                    <field name="tarea_id"/>
+					<field name="responsable"/>
+					<field name="fecha_inicio"/>
+					<field name="fecha_final"/>
+					<field name="estado"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="itbase_errores_form_view" model="ir.ui.view">
+			<field name="name">itbase.errores.view.form</field>
+			<field name="model">itbase.errores</field>
+			<field name="arch" type="xml">
+				<form>
+					<header>
+						<field name="estado" widget="statusbar" clickable="True"/>
+					</header>
+					<sheet>
+						<div class="oe_title">
+							<h2><field name="name" readonly="1"/></h2>
+						</div>
+						<group>
+							<group>
+								<field name="asunto"/>
+								<field name="producto_id" readonly="1"/>
+								<field name="tarea_id"/>
+								<field name="responsable"/>
+							</group>
+							<group>								
+								<field name="fecha_inicio"/>
+								<field name="fecha_final"/>
+							</group>							
+						</group>
+						<group string="Descripcion">
+							<p><field name="descripcion" widget="html"/></p>
+						</group>
+					</sheet>
+					<div class="oe_chatter">
+						<style>
+							.o_chatter_button_new_message {
+							display: none;
+							}
+						</style>
+						<field name="message_follower_ids" widget="mail_followers"/>
+						<field name="message_ids" widget="mail_thread"/>
+					</div>
+				</form>
 			</field>
 		</record>
 	</data>
