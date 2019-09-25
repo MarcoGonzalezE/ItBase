@@ -21,13 +21,14 @@ class ItBaseProyectos(models.Model):
 
 class ItBaseProductos(models.Model):
 	_name = 'itbase.productos'
+	_inherit = ['mail.thread']
 
-	name = fields.Char(string="Nombre del Producto")
-	dueno = fields.Many2one('res.partner', string="Dueno del Producto")
-	responsable = fields.Many2one('itbase.departamento', string="Responsable")
-	fecha_inicio = fields.Date(string="Fecha de Inicio")
-	compania = fields.Many2one('itbase.equipo.compania', string="Compania")
-	fecha_imp = fields.Date(string="Fecha de Implementacion")
+	name = fields.Char(string="Nombre del Producto", track_visibility='onchange')
+	dueno = fields.Many2one('res.partner', string="Dueno del Producto", track_visibility='onchange')
+	responsable = fields.Many2one('itbase.departamento', string="Responsable", track_visibility='onchange')
+	fecha_inicio = fields.Date(string="Fecha de Inicio", track_visibility='onchange')
+	compania = fields.Many2one('itbase.equipo.compania', string="Compania", track_visibility='onchange')
+	fecha_imp = fields.Date(string="Fecha de Implementacion", track_visibility='onchange')
 	repositorio = fields.Char(string="Repositorio")
 	proyecto = fields.Many2one('itbase.proyectos', string="Proyecto")
 	otro = fields.Char(string="Otros")

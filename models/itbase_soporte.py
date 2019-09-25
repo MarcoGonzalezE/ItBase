@@ -19,20 +19,27 @@ class ItBaseSoporte(models.Model):
 	prioridad = fields.Selection(PRIORIDADES, select=True, string="Prioridad", default=PRIORIDADES[0][0], track_visibility='onchange')
 	fecha_soporte = fields.Datetime(string="Fecha de solicitud", default=_default_fecha_soporte, track_visibility='onchange')
 	fecha_limite = fields.Date(string="Fecha limite", track_visibility='onchange')
-	fecha_fin = fields.Datetime(string="Fecha finalizacion", track_visibility='onchange')
+	fecha_fin = fields.Datetime(string="Fecha finalizacion", compute="_compute_fechafin", track_visibility='onchange')
 	descripcion = fields.Char(string="Descripcion")
 	estado = fields.Selection([('nuevo','Nuevo'),
 							  ('process','En Proceso'),
 							  ('complete','Completado'),
 							  ('cancel','Cancelado')], string="Estado", default='nuevo', track_visibility='onchange')
 	equipo_id = fields.Many2one('itbase.equipo', string="Equipo", track_visibility='onchange')
+	producto_id = fields.Many2one('itbase.productos', string="Producto", track_visibility='onchange')
+	proyecto_id = fields.Many2one('itbase.proyectos', string="Proyecto", track_visibility='onchange')
 
 	@api.onchange('solicitante')
 	def _onchange_solicitante(self):
 		self.correo = self.solicitante.email
 
-	@api.onchange('estado')
-	def _onchange_estado(self):
+	@api.onchange('producto_id')
+	def _onchange_producto(self):
+		self.proyecto_id = self.producto_id.proyecto
+		pass
+
+	@api.depends('estado')
+	def _compute_fechafin(self):
 		if self.estado == 'complete':
 			self.fecha_fin = datetime.datetime.now()
 

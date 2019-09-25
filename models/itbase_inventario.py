@@ -33,7 +33,7 @@ class ItBase_Equipo(models.Model):
 							string="Tipo", track_visibility='onchange')
 	arquitectura = fields.Selection([('x_32','32 bits'),('x_64','64 bits')], string="Arquitectura")
 	estado = fields.Selection([('created','Creado'),
-								('not_assigned','Sin Asignnar'),
+								('not_assigned','Sin Asignar'),
 								('assigned','Asignado'),
 								('repair','Reparacion'),
 								('maintenance','Mantenimiento'),
@@ -95,7 +95,7 @@ class ItBase_Equipo(models.Model):
 		self.mantenimientos = str(self.mantenimiento_count)
 
 #DISPOSITIVOS EXTRA
-	dispositivos_ids = fields.One2many('itbase.dispositivo', 'dispositivo_id', string='Dispositivos')
+	dispositivos_ids = fields.One2many('itbase.dispositivo', 'equipo_id', string='Dispositivos')
 
 #PROGRAMAS ADICIONALES - LICENCIAS
 	licencia_ids = fields.One2many('itbase.licencia', 'equipo_id', string="Licencias")
@@ -127,18 +127,29 @@ class ItBase_Equipo(models.Model):
 	@api.multi
 	def disponible_equipo(self):
 		self.estado = 'not_assigned'
+		self.asignado = False
+		self.correo = False
+		self.departamento = False
+		self.fecha_asignacion = False
 		
 
 	# @api.multi
 	# @api.depends('estado')
 	# def _compute_asignado(self):
-	# 	for r in self:
+	# 	asignado_id = self.env['itbase.equipo.asignar'].search([('fecha_devolucion','=',False)],limit=1)
+	# 	print(asignado_id)
+	# 	self.asignado = asignado_id.name
+	# 	self.asignado = self.asignado_id.name
+	# 	self.correo = self.asignado_id.correo
+	# 	self.departamento = self.asignado_id.departamento
+	# 	self.fecha_asignacion = self.asignado_id.fecha_asignacion
+		# for r in self:
 
-	# 		persona = self.env['itbase.equipo.asignar'].search([('id','=',r.asignar_ids.equipo_id)],limit=1)
-	# 		r.asignado = self.persona.name
-	# 		r.correo = self.persona.correo
-	# 		r.departamento = self.persona.departamento
-	# 		r.fecha_asignacion = self.persona.fecha_asignacion
+		# 	persona = self.env['itbase.equipo.asignar'].search([('id','=',r.asignar_ids.equipo_id)],limit=1)
+		# 	r.asignado = self.persona.name
+		# 	r.correo = self.persona.correo
+		# 	r.departamento = self.persona.departamento
+		# 	r.fecha_asignacion = self.persona.fecha_asignacion
 
 
 

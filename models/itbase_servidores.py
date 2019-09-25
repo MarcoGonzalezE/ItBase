@@ -16,6 +16,7 @@ class ItBaseServidores(models.Model):
 	ssh = fields.Char(string="SSH", compute="_make_ssh_command")
 	sistema = fields.Many2one('itbase.so', string="Sistema operativo")
 	ram = fields.Integer()
+	responsable = fields.Many2one('itbase.departamento', string="Responsable")
 	tipo = fields.Many2one('itbase.servidores.tipo', string="Tipo de Servidor")
 	servicios_ids = fields.One2many('itbase.servidores.programas','servidor_id', string="Servicios", track_visibility='onchange')
 	usuarios_ids = fields.Many2many('res.users', 'server_user_rel', 'server_id', 'user_id', string="Usuarios", track_visibility='onchange')

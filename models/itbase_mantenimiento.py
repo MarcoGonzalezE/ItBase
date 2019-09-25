@@ -35,9 +35,23 @@ class ItBaseMantenimiento(models.Model):
         self.estado = 'final'
         self.fecha_mantenimiento = datetime.datetime.now()
 
+    # @api.model
+    # def create(vals, self):
+    #     dispositivos_ids = self.env['itbase.dispositivo'].search([('dispositivo_id','=',self.id)])
+    #     l_ids = []
+    #     for r in dispositivos_ids:
+    #         self.r.equipo_id = self.equipo_id
+
+
 class ItBaseDispositivos(models.Model):
     _name = "itbase.dispositivo"
-    dispositivo_id = fields.Many2one('itbase.mantenimiento', string="ID Dispositivo")
+    dispositivo_id = fields.Many2one('itbase.mantenimiento', ondelete='cascade', index=True, string="ID Dispositivo")
+    equipo_id = fields.Many2one('itbase.equipo', string="Equipo", store=True, ondelete='cascade', index=True)
     name = fields.Char(string="Dispositivo/Periferico")
     estado = fields.Selection([('uso','En Uso'),
                                ('def','Reemplazado')], string="Estado")
+
+    # @api.onchange('dispositivo_id')
+    # def _onchange_dispositivo(self):
+    #     if self.dispositivo_id == True:
+    #         self.equipo_id = self.dispositivo_id.equipo_id

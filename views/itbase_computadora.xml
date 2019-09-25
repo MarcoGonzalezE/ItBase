@@ -26,13 +26,7 @@
                                 <strong><field name="tipo" placeholder="Tipo"/></strong><br/>
                                 <strong><field name="marca" placeholder="Marca"/></strong><br/>
                                 <strong><field name="modelo" placeholder="Modelo"/></strong><br/>
-                            </p>
-                            <!-- <table>
-                                <tr><td><h2><field name="name"/></h2></td></tr>
-                                <tr><td><strong><field name="tipo" placeholder="Tipo"/></strong></td></tr>
-                                <tr><td><strong><field name="marca" placeholder="Marca"/></strong></td></tr>
-                                <tr><td><strong><field name="modelo" placeholder="Modelo"/></strong></td></tr>
-                            </table> -->
+                            </p>                            
                         </div>
                         <group>
                             <group>
@@ -71,8 +65,8 @@
                                         <tree editable="bottom">
                                             <field name="name"/>
                                             <field name="estado"/>
-                                            <button name="dispositivo_id" icon="fa-check text-success" attrs="{'invisible': ['|',('estado','=','def')]}"/>
-                                            <button name="dispositivo_id" icon="fa-times-circle text-danger" attrs="{'invisible': ['|',('estado','=','uso')]}"/>
+                                            <button name="dispositivo_id" icon="fa-check text-success" attrs="{'invisible': [('estado','!=','uso')]}"/>
+                                            <button name="dispositivo_id" icon="fa-times-circle text-danger" attrs="{'invisible': [('estado','!=','def')]}"/>
                                         </tree>
                                     </field>
                                 </page>
@@ -110,6 +104,7 @@
                     <field name="modelo"/>
                     <field name="company_id"/>
                     <field name="numero_tel"/>
+                    <field name="estado"/>
                 </tree>
             </field>
         </record>
@@ -135,6 +130,9 @@
                                     </ul>
                                     <ul>
                                         <field name="company_id"/>
+                                    </ul>
+                                    <ul>
+                                        <field name="estado"/>
                                     </ul>
                                 </div>
                                 <!--<div>

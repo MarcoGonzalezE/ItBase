@@ -21,6 +21,8 @@
 								<field name="correo" attrs="{'readonly' :[('estado','=', 'cancel')]}"/>
 								<field name="fecha_soporte" attrs="{'readonly' :[('estado','=', 'cancel')]}"/>
 								<field name="equipo_id" attrs="{'readonly' :[('estado','=', 'cancel')]}"/>
+								<field name="producto_id" attrs="{'readonly' :[('estado','=', 'cancel')]}"/>
+								<field name="proyecto_id" attrs="{'readonly' :[('estado','=', 'cancel')]}"/>
 							</group>
 							<group>
 								<field name="asignada" attrs="{'readonly' :[('estado','=', 'cancel')]}"/>
