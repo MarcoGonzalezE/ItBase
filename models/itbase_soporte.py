@@ -19,7 +19,7 @@ class ItBaseSoporte(models.Model):
 	prioridad = fields.Selection(PRIORIDADES, select=True, string="Prioridad", default=PRIORIDADES[0][0], track_visibility='onchange')
 	fecha_soporte = fields.Datetime(string="Fecha de solicitud", default=_default_fecha_soporte, track_visibility='onchange')
 	fecha_limite = fields.Date(string="Fecha limite", track_visibility='onchange')
-	fecha_fin = fields.Datetime(string="Fecha finalizacion", compute="_compute_fechafin", track_visibility='onchange')
+	fecha_fin = fields.Datetime(string="Fecha finalizacion", track_visibility='onchange')
 	descripcion = fields.Char(string="Descripcion")
 	estado = fields.Selection([('nuevo','Nuevo'),
 							  ('process','En Proceso'),
@@ -28,6 +28,7 @@ class ItBaseSoporte(models.Model):
 	equipo_id = fields.Many2one('itbase.equipo', string="Equipo", track_visibility='onchange')
 	producto_id = fields.Many2one('itbase.productos', string="Producto", track_visibility='onchange')
 	proyecto_id = fields.Many2one('itbase.proyectos', string="Proyecto", track_visibility='onchange')
+	compania = fields.Many2one('itbase.equipo.compania', string="Compania", track_visibility='onchange')
 
 	@api.onchange('solicitante')
 	def _onchange_solicitante(self):
@@ -35,22 +36,28 @@ class ItBaseSoporte(models.Model):
 
 	@api.onchange('producto_id')
 	def _onchange_producto(self):
-		self.proyecto_id = self.producto_id.proyecto
-		pass
-
-	@api.depends('estado')
-	def _compute_fechafin(self):
-		if self.estado == 'complete':
-			self.fecha_fin = datetime.datetime.now()
+		self.proyecto_id = self.producto_id.proyecto	
 
 	def cancelar(self):
 		self.estado = 'cancel'
 
 	@api.model
 	def create(self, vals):
+		print("Has creado un nuevo soporte")
 		if vals.get('seq', "Nuevo") == "Nuevo":
 			vals['seq'] = self.env['ir.sequence'].next_by_code('itbase.soporte') or "Nuevo"
 			return super(ItBaseSoporte, self).create(vals)
+
+	@api.onchange('estado')
+	def _get_fechafin(self):
+		print("Entrando a funcion de fech fin")
+		if self.estado == "Completado":
+			self.fecha_fin = datetime.datetime.now()
+
+	# @api.multi
+	# def write(self, values):
+	# 	if self.estado == "Completado":
+	# 		self.fecha_fin = datetime.datetime.now()
 
 	@api.multi
 	def name_get(self):

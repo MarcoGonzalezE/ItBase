@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record id="itbase_reuniones_form_view" model="ir.ui.view">
+			<field name="name">itbase.reuniones.view.form</field>
+			<field name="model">itbase.reuniones</field>
+			<field name="arch" type="xml">
+				<form>
+					<!-- <header>
+						<field name="estado" widget="statusbar" clickable="True"/>
+					</header> -->
+					<sheet>
+						<div class="oe_title">
+							<h2><field name="name" placeholder="Tema"/></h2>
+						</div>
+						<group>
+							<group>
+								<field name="fecha"/>
+								<field name="compania"/>
+								<field name="producto"/>
+							</group>
+							<group>
+								<field name="area"/>
+								<field name="asistencia" widget="many2many_tags"/>
+							</group>							
+						</group>
+						<notebook>
+							<page string="Historias">
+								<field name="historia_ids">
+									<tree editable="bottom">
+										<field name="asunto"/>
+										<field name="como" widget="text"/>
+										<field name="quiero" widget="text"/>
+										<field name="para" widget="text"/>
+										<field name="termino" widget="text"/>
+									</tree>
+								</field>
+							</page>
+						</notebook>						
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="itbase_reuniones_view_tree" model="ir.ui.view">
+            <field name="name">itbase.reuniones.tree.view</field>
+            <field name="model">itbase.reuniones</field>
+            <field name="arch" type="xml">
+                <tree string="Reuniones">
+                    <field name="name"/>
+					<field name="compania"/>
+					<field name="fecha"/>
+					<field name="producto"/>
+					<field name="area"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="itbase_reuniones_action" model="ir.actions.act_window">
+			<field name="name">Reuniones</field>
+			<field name="res_model">itbase.reuniones</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+                <p>
+                    No se encontro ninguna reunione.
+                </p>
+            </field>
+        </record>		
+    </data>
+</odoo>

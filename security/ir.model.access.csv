@@ -22,3 +22,4 @@ access_itbase_soluciones_area,itbase.soluciones.area,model_itbase_soluciones_are
 access_itbase_soporte,itbase.soporte,model_itbase_soporte,,1,1,1,1
 access_itbase_errores,itbase.errores,model_itbase_errores,,1,1,1,1
 access_itbase_historias,itbase.historias,model_itbase_historias,,1,1,1,1
+access_itbase_reuniones,itbase.reuniones,model_itbase_reuniones,,1,1,1,1

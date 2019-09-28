@@ -41,6 +41,7 @@ class ItBaseProductos(models.Model):
 							  ('imple','Implementado'),
 							  ('cancel','Cancelado')], string="Estado", default='nuevo', track_visibility='onchange')
 	tareas_ids = fields.One2many('itbase.proyectos.tarea', 'proyecto_id', string="Tareas")
+	imagen = fields.Binary(string="Logo", attachment=True)
 
 	@api.onchange('proyecto')
 	def _onchange_compania(self):
@@ -105,6 +106,7 @@ class ItBaseHistorias(models.Model):
 							  ('process','En Proceso'),
 							  ('complete','Completado'),
 							  ('cancel','Cancelado')], string="Estado", default='nuevo', track_visibility='onchange')
+	reunion_id = fields.Many2one('itbase.reuniones', string="Reunion")
 
 	@api.multi
 	def name_get(self):

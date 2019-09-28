@@ -18,14 +18,15 @@
 						<group>
 							<group>
 								<field name="solicitante" attrs="{'readonly' :[('estado','=', 'cancel')]}"/>
-								<field name="correo" attrs="{'readonly' :[('estado','=', 'cancel')]}"/>
-								<field name="fecha_soporte" attrs="{'readonly' :[('estado','=', 'cancel')]}"/>
+								<field name="correo" attrs="{'readonly' :[('estado','=', 'cancel')]}"/>								
+								<field name="compania" attrs="{'readonly' :[('estado','=', 'cancel')]}"/>
 								<field name="equipo_id" attrs="{'readonly' :[('estado','=', 'cancel')]}"/>
 								<field name="producto_id" attrs="{'readonly' :[('estado','=', 'cancel')]}"/>
 								<field name="proyecto_id" attrs="{'readonly' :[('estado','=', 'cancel')]}"/>
 							</group>
 							<group>
 								<field name="asignada" attrs="{'readonly' :[('estado','=', 'cancel')]}"/>
+								<field name="fecha_soporte" attrs="{'readonly' :[('estado','=', 'cancel')]}"/>
 								<field name="fecha_limite" attrs="{'readonly' :[('estado','=', 'cancel')]}"/>
 								<field name="prioridad" attrs="{'readonly' :[('estado','=', 'cancel')]}"/>
 								<field name="fecha_fin" readonly="1" attrs="{'invisible' :[('fecha_fin','=', False)]}"/>
