@@ -7,7 +7,7 @@
 			<field name="arch" type="xml">
 				<form>
 					<header>
-						<button type="object" name="cancelar" string="Cancelar" attrs="{'invisible' :[('estado','=', 'cancel')]}"/>
+						<button type="object" name="cancelar" string="Cancelar" attrs="{'invisible' :['|',('estado','=', 'cancel'),('estado','=', 'complete')]}"/>
 						<field name="estado" widget="statusbar" clickable="True"/>
 					</header>
 					<sheet>
@@ -30,6 +30,7 @@
 								<field name="fecha_limite" attrs="{'readonly' :[('estado','=', 'cancel')]}"/>
 								<field name="prioridad" attrs="{'readonly' :[('estado','=', 'cancel')]}"/>
 								<field name="fecha_fin" readonly="1" attrs="{'invisible' :[('fecha_fin','=', False)]}"/>
+								<field name="tarea_id" readonly="1" attrs="{'invisible' :[('tarea_id','=', False)]}"/>
 							</group>
 						</group>
 						<notebook>
@@ -128,7 +129,7 @@
 				<field name="estado"/>
       	      </tree>
       	  </field>
-      </record>
+      	</record>
 
 		<record id="itbase_soporte_action" model="ir.actions.act_window">
 			<field name="name">Soporte</field>
@@ -140,5 +141,28 @@
                 </p>
             </field>
         </record>
+
+<!--Crear tarea -->
+		<record id="itbase_soporte_tarea" model="ir.ui.view">
+			<field name="name">Crear tarea</field>
+			<field name="model">itbase.soporte.tarea</field>
+			<field name="arch" type="xml">
+				<form string="Crear tarea">
+					<separator colspan="4" string="¿Convertir la solicitud de soporte a Tarea?"/>
+					<footer>
+						<button name="crear_tarea" string="Crear" type="object"/>
+						<button class="oe_link" special="cancel" string="Cancel"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+		
+		<act_window id="action_itbase_soporte_tarea" 
+			key2="client_action_multi" 
+			name="Crear Tarea" 
+			res_model="itbase.soporte.tarea"
+			src_model="itbase.soporte"
+			target="new"
+			view_mode="form"/>
 	</data>
 </odoo>

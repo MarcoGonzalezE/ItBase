@@ -233,6 +233,7 @@
 								<field name="fecha_creacion" readonly="1"/>								
 								<field name="asignada" readonly="1"/>
 								<field name="horas" attrs="{'required': [('asignada', '!=', False)]}"/>
+								<field name="soporte_id" readonly="1" attrs="{'invisible': [('soporte_id', '=', False)]}"/>
 							</group>							
 						</group>
 						<group string="Comentarios">

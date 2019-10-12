@@ -55,6 +55,7 @@ class ItBaseProyectosTareas(models.Model):
 
 	proyecto_id = fields.Many2one('itbase.productos', string="Producto" , track_visibility='onchange')
 	historia_id = fields.Many2one('itbase.historias', string="Historia" , track_visibility='onchange')
+	soporte_id = fields.Many2one('itbase.soporte', string="Origen", track_visibility='onchange')
 	name = fields.Char(string="Tarea" , track_visibility='onchange')
 	comentarios = fields.Char(string="Comentarios")
 	fecha_creacion = fields.Datetime(string="Fecha de Creacion", default=fields.Datetime.now)

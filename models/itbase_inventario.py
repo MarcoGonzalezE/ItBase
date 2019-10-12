@@ -104,10 +104,12 @@ class ItBase_Equipo(models.Model):
 	asignar_ids = fields.One2many('itbase.equipo.asignar', 'equipo_id', string="Asignaciones")
 
 #ULTIMO ASIGNADO
-	asignado = fields.Char(string="Asignada(o)")
-	correo = fields.Char(string="Correo")
-	departamento = fields.Char(string="Departamento")
-	fecha_asignacion = fields.Date(string="Fecha de Asignacion")
+	asignado = fields.Many2one('itbase.equipo.asignar', string="Asignada(o)", track_visibility='onchange')
+	correo = fields.Char(related="asignado.correo", string="Correo", track_visibility='onchange')
+	departamento = fields.Char(related="asignado.departamento", string="Departamento", track_visibility='onchange')
+	fecha_asignacion = fields.Date(related="asignado.fecha_asignacion", string="Fecha de Asignacion", track_visibility='onchange')
+
+
 
 	@api.multi
 	def asignar_equipo(self):
@@ -122,6 +124,7 @@ class ItBase_Equipo(models.Model):
             'context': {'default_equipo_id': self.id},
             'target': 'new'
         }
+
 		
 
 	@api.multi
@@ -150,6 +153,18 @@ class ItBase_Equipo(models.Model):
 		# 	r.correo = self.persona.correo
 		# 	r.departamento = self.persona.departamento
 		# 	r.fecha_asignacion = self.persona.fecha_asignacion
+
+	@api.multi
+	def name_get(self):
+		res = super(ItBase_Equipo, self).name_get()
+		result = []
+		for element in res:
+			equipo_id = element[0]
+			code = self.browse(equipo_id).name
+			desc = self.browse(equipo_id).asignado.name.name
+			name = code and '[%s] %s' % (code, desc) or '%s' % desc
+			result.append((equipo_id, name))
+		return result
 
 
 
@@ -182,6 +197,10 @@ class AsigacionEquipo(models.Model):
 	@api.onchange('name')
 	def _onchange_asignado(self):
 		self.correo = self.name.email
+
+	def asignar_historial(self):
+		asignados = self.env['itbase.equipo.asignar'].search([],order='id desc')[0].id
+		self.equipo_id.asignado = asignados
 
 class Compania(models.Model):
 	_name = 'itbase.equipo.compania'
