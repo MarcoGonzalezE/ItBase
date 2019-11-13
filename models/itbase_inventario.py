@@ -18,7 +18,7 @@ class ItBase_Equipo(models.Model):
 	_name = 'itbase.equipo'
 	_inherit = ['mail.thread']
 
-	name = fields.Char(default="Nuevo", store="True", track_visibility='onchange')
+	name = fields.Char(default="Nuevo", store=True, track_visibility='onchange')
 	marca = fields.Many2one('itbase.marca', string="Marca", track_visibility='onchange')
 	modelo = fields.Char(string="Modelo", track_visibility='onchange')
 	so_id = fields.Many2one('itbase.so', string="Sistema Operativo", track_visibility='onchange')
@@ -44,6 +44,7 @@ class ItBase_Equipo(models.Model):
 	imagen_small = fields.Binary(attachment=True)
 	imagen_medium = fields.Binary(attachment=True)
 	company_id = fields.Many2one('itbase.equipo.compania', string="Compañia")
+	equipo_nuevo = fields.Boolean(string="Equipo Nuevo")
 
 	_sql_constraints = [('equipo_uniq', 'UNIQUE (name)', '¡El numero del equipo ya existe!')]
 
@@ -206,6 +207,7 @@ class Compania(models.Model):
 	_name = 'itbase.equipo.compania'
 	name = fields.Char(string="Compañia")
 	sequence = fields.Char(string="Inicio Secuencia")
+	imagen = fields.Binary(string="Avatar", attachment=True)
 			
 
 	

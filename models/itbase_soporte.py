@@ -13,7 +13,7 @@ class ItBaseSoporte(models.Model):
 		return datetime.datetime.now()
 
 	name = fields.Char(string="Asunto", track_visibility='onchange')
-	seq = fields.Char(string="Secuencia", store="True")
+	seq = fields.Char(string="Secuencia", store=True)
 	solicitante = fields.Many2one('res.partner', string="Solicitante")
 	correo = fields.Char(string="Correo")
 	asignada = fields.Many2one('itbase.departamento', string="Asignada", track_visibility='onchange')

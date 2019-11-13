@@ -133,7 +133,7 @@ class ItBaseErrores(models.Model):
 
 	name = fields.Char(string="Secuencia", default="Nuevo")
 	asunto = fields.Char(string="Asunto", track_visibility='onchange')
-	producto_id = fields.Many2one('itbase.productos', string="Producto", track_visibility='onchange')
+	producto_id = fields.Many2one('itbase.productos', string="Producto", track_visibility='onchange', store=True)
 	tarea_id = fields.Many2one('itbase.proyectos.tarea', string="Tarea", track_visibility='onchange')
 	responsable = fields.Many2one('itbase.departamento', string="Responsable", track_visibility='onchange')
 	fecha_inicio = fields.Date(string="Fecha", track_visibility='onchange')
