@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
-        <record id="paperformat_carta_responsiva" model="report.paperformat">
+        <!-- <record id="paperformat_carta_responsiva" model="report.paperformat">
             <field name="name">Bid selection</field>
             <field name="orientation">Landscape</field>
             <field name="margin_top">5</field>
             <field name="margin_bottom">15</field>
             <field name="header_spacing">5</field>
-        </record>
+        </record> -->
 
 
         <report id="carta_responsiva" string="Carta Responsiva" model="itbase.equipo" report_type="qweb-pdf"
-                name="ItBase.carta_responsiva_document" paperformat="account_check_printing_report_base.paperformat_check"/>
+                name="ItBase.carta_responsiva_document"/> <!--paperformat="account_check_printing_report_base.paperformat_check"/>-->
         <template id="carta_responsiva_document">
             <t t-call="report.html_container">
                 <div class="page">

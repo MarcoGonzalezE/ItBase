@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+<!-- DISPOSITIVOS -->
+		<record id="itbase_redes_form_view" model="ir.ui.view">
+			<field name="name">itbase.redes.view.form</field>
+			<field name="model">itbase.redes</field>
+			<field name="arch" type="xml">
+				<form>
+					<sheet>
+						<div>
+							<field name="imagen" widget="image" class="oe_avatar"/>
+						</div>
+						<group>
+							<group>
+								<field name="name"/>
+								<field name="marca"/>
+								<field name="modelo"/>
+								<field name="tipo"/>
+								<field name="proveedor"/>
+							</group>
+							<group>
+								<field name="company_id"/>
+								<field name="ubicacion"/>
+								<field name="usuario"/>
+								<field name="contrasena"/>
+								<field name="ip"/>
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="itbase_redes_view_tree" model="ir.ui.view">
+            <field name="name">itbase.redes.tree.view</field>
+            <field name="model">itbase.redes</field>
+            <field name="arch" type="xml">
+                <tree string="Departamento de IT">
+                    <field name="name"/>
+                    <field name="company_id"/>
+                    <field name="tipo"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="itbase_redes_action" model="ir.actions.act_window">
+            <field name="name">Dispositivos</field>
+            <field name="res_model">itbase.redes</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+<!-- TELEFONOS -->
+		<record id="itbase_redes_telefonos_form_view" model="ir.ui.view">
+			<field name="name">itbase.redes.telefonos.view.form</field>
+			<field name="model">itbase.redes.telefonos</field>
+			<field name="arch" type="xml">
+				<form>
+					<sheet>						
+						<group>
+							<group>
+								<field name="name"/>
+								<field name="company_id"/>
+							</group>
+							<group>
+								<field name="telefonia"/>
+								<field name="conmutador" domain="[('tipo','=','Conmutador')]"/>
+							</group>
+						</group>
+						<group>
+							<notebook>
+								<page string="Reportes">
+									<field name="reportes_id">
+										<tree editable="top">
+											<field name="reporte"/>
+											<field name="fecha_inicio"/>
+											<field name="fecha_final"/>
+										</tree>
+									</field>
+								</page>
+							</notebook>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="itbase_redes_telefono_view_tree" model="ir.ui.view">
+            <field name="name">itbase.redes.telefonos_tree.view</field>
+            <field name="model">itbase.redes.telefonos</field>
+            <field name="arch" type="xml">
+                <tree string="Departamento de IT">
+                    <field name="name"/>
+                    <field name="company_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="itbase_redes_telefonos_action" model="ir.actions.act_window">
+            <field name="name">Telefonos</field>
+            <field name="res_model">itbase.redes.telefonos</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+    </data>
+</odoo>
+

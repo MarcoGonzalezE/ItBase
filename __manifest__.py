@@ -22,6 +22,7 @@
         'views/itbase_proyectos.xml',
         'views/itbase_departamento.xml',
         'views/itbase_reuniones.xml',
+        'views/itbase_redes.xml',
         'views/menu.xml',
     ],
     # only loaded in demonstration mode

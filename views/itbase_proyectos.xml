@@ -214,7 +214,7 @@
 			<field name="arch" type="xml">
 				<form>
 					<header>
-						<button name="asignar" string="Yo lo hago" class="oe_highlight" type="object" icon='fa-thumbs-o-up' attrs="{'invisible': [('asignada', '!=', False)]}"/>
+						<button name="asignar" string="Yo lo hago" class="oe_highlight" type="object" icon='fa-thumbs-o-up' attrs="{'invisible': ['|',('asignada', '!=', False), ('estado', '=', 'complete')]}"/>
 						<field name="estado" widget="statusbar" clickable="True"/>
 					</header>
 					<sheet>
@@ -233,6 +233,7 @@
 								<field name="fecha_creacion" readonly="1"/>								
 								<field name="asignada" readonly="1"/>
 								<field name="horas" attrs="{'required': [('asignada', '!=', False)]}"/>
+								<field name="fecha_fin" readonly="1" attrs="{'invisible' :[('fecha_fin','=', False)]}"/>
 								<field name="soporte_id" readonly="1" attrs="{'invisible': [('soporte_id', '=', False)]}"/>
 							</group>							
 						</group>

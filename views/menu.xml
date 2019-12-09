@@ -13,26 +13,30 @@
 		<menuitem id="itbase_mantenimiento_servidores_menu" name="Servidores" sequence="32" parent="itbase_mantenimiento_menu" action="itbase_mantenimiento_servidor_action"/>
 		<menuitem id="itbase_mantenimiento_basedatos_menu" name="Base de Datos" sequence="33" parent="itbase_mantenimiento_menu" action="itbase_mantenimiento_base_action"/>
 
-		<menuitem id="itbase_soluciones_menu" name="Soluciones" sequence="40" parent="itbase_parent_menu" action="itbase_soluciones_action"/>
+		<menuitem id="itbase_redes_menu" name="Redes" sequence="40" parent="itbase_parent_menu"/>
+		<menuitem id="itbase_redes_dispositivos_menu" name="Dispositivos" sequence="41" parent="itbase_redes_menu" action="itbase_redes_action"/>
+		<menuitem id="itbase_redes_telefonos_menu" name="Telefonos" sequence="42" parent="itbase_redes_menu" action="itbase_redes_telefonos_action"/>
 
-		<menuitem id="itbase_desarollo_menu" name="Desarrollo" sequence="50" parent="itbase_parent_menu"/>
-		<menuitem id="itbase_proyectos_menu" name="Proyectos" sequence="51" parent="itbase_desarollo_menu" action="itbase_proyectos_action"/>
-		<menuitem id="itbase_productos_menu" name="Productos" sequence="52" parent="itbase_desarollo_menu" action="itbase_productos_action"/>
-		<menuitem id="itbase_tareas_menu" name="Tareas" sequence="53" parent="itbase_desarollo_menu" action="itbase_tareas_action"/>
-		<menuitem id="itbase_historias_menu" name="Historias" sequence="54" parent="itbase_desarollo_menu" action="itbase_historias_action"/>
-		<menuitem id="itbase_errores_menu" name="Bugs" sequence="55" parent="itbase_desarollo_menu" action="itbase_errores_action"/>
+		<menuitem id="itbase_soluciones_menu" name="Soluciones" sequence="50" parent="itbase_parent_menu" action="itbase_soluciones_action"/>
+
+		<menuitem id="itbase_desarollo_menu" name="Desarrollo" sequence="60" parent="itbase_parent_menu"/>
+		<menuitem id="itbase_proyectos_menu" name="Proyectos" sequence="61" parent="itbase_desarollo_menu" action="itbase_proyectos_action"/>
+		<menuitem id="itbase_productos_menu" name="Productos" sequence="62" parent="itbase_desarollo_menu" action="itbase_productos_action"/>
+		<menuitem id="itbase_tareas_menu" name="Tareas" sequence="63" parent="itbase_desarollo_menu" action="itbase_tareas_action"/>
+		<menuitem id="itbase_historias_menu" name="Historias" sequence="64" parent="itbase_desarollo_menu" action="itbase_historias_action"/>
+		<menuitem id="itbase_errores_menu" name="Bugs" sequence="65" parent="itbase_desarollo_menu" action="itbase_errores_action"/>
 
 
-		<menuitem id="itbase_soporte_menu" name="Soporte" sequence="60" parent="itbase_parent_menu" action="itbase_soporte_action"/>
+		<menuitem id="itbase_soporte_menu" name="Soporte" sequence="70" parent="itbase_parent_menu" action="itbase_soporte_action"/>
 
-		<menuitem id="itbase_reuniones_menu" name="Reuniones" sequence="70" parent="itbase_parent_menu" action="itbase_reuniones_action"/>
+		<menuitem id="itbase_reuniones_menu" name="Reuniones" sequence="80" parent="itbase_parent_menu" action="itbase_reuniones_action"/>
 
-		<menuitem id="itbase_departamento_menu" name="Departamento de IT" sequence="80" parent="itbase_parent_menu" action="itbase_departamento_action"/>
+		<menuitem id="itbase_departamento_menu" name="Departamento de IT" sequence="90" parent="itbase_parent_menu" action="itbase_departamento_action"/>
 
-		<menuitem id="itbase_configuracion_menu" name="Configuracion" sequence="90" parent="itbase_parent_menu"/>		
-		<menuitem id="itbase_valores_menu" name="Valores" sequence="91" parent="itbase_configuracion_menu"/>
-		<menuitem id="itbase_companias_menu" name="Compañias" sequence="92" parent="itbase_valores_menu" action="itbase_companias_action"/>
-		<menuitem id="itbase_area_menu" name="Areas" sequence="93" parent="itbase_valores_menu" action="itbase_area_action"/>
+		<menuitem id="itbase_configuracion_menu" name="Configuracion" sequence="100" parent="itbase_parent_menu"/>		
+		<menuitem id="itbase_valores_menu" name="Valores" sequence="101" parent="itbase_configuracion_menu"/>
+		<menuitem id="itbase_companias_menu" name="Compañias" sequence="102" parent="itbase_valores_menu" action="itbase_companias_action"/>
+		<menuitem id="itbase_area_menu" name="Areas" sequence="103" parent="itbase_valores_menu" action="itbase_area_action"/>
 
 	</data>
 </odoo>

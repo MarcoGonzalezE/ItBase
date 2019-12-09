@@ -61,6 +61,7 @@ class ItBaseProyectosTareas(models.Model):
 	fecha_creacion = fields.Datetime(string="Fecha de Creacion", default=fields.Datetime.now)
 	fecha_inicio = fields.Date(string="Fecha de Inicio", track_visibility='onchange')
 	fecha_final = fields.Date(string="Fecha Final", track_visibility='onchange')
+	fecha_fin = fields.Datetime(string="Fecha finalizacion", track_visibility='onchange', store=True, compute="_get_fechafin")
 	responsable = fields.Many2one('itbase.departamento', string="Responsable", track_visibility='onchange')
 	asignada = fields.Many2one('res.users', string="Asignada", track_visibility='onchange')
 	horas = fields.Char(string="En: (Horas)")
@@ -86,6 +87,12 @@ class ItBaseProyectosTareas(models.Model):
 			record.estado = 'asignar'
 			record.sudo().asignada = record.env.user
 
+	@api.one
+	@api.depends('estado')
+	def _get_fechafin(self):
+		print("Entrando a funcion de fecha fin")
+		if self.estado == 'complete':
+			self.fecha_fin = datetime.datetime.now()
 
 
 class ItBaseHistorias(models.Model):

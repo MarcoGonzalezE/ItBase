@@ -45,6 +45,21 @@
 			<field name="name">PostgreSQL</field>
 		</record>
 	</data>
+<!-- Dispositivos Redes -->
+	<data noupdate="1">
+		<record id="itbase_redes_repetidor" model="itbase.redes.dispositivo">
+			<field name="name">Repetidor</field>
+		</record>
+		<record id="itbase_redes_modem" model="itbase.redes.dispositivo">
+			<field name="name">Modem</field>
+		</record>
+		<record id="itbase_redes_router" model="itbase.redes.dispositivo">
+			<field name="name">Router</field>
+		</record>
+		<record id="itbase_redes_conmutador" model="itbase.redes.dispositivo">
+			<field name="name">Conmutador</field>
+		</record>
+	</data>
 <!-- Secuencias -->
 	<!-- Equipo Laptop -->
 	<data noupdate="1">

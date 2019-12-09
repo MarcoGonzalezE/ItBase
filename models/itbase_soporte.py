@@ -20,7 +20,7 @@ class ItBaseSoporte(models.Model):
 	prioridad = fields.Selection(PRIORIDADES, select=True, string="Prioridad", default=PRIORIDADES[0][0], track_visibility='onchange')
 	fecha_soporte = fields.Datetime(string="Fecha de solicitud", default=_default_fecha_soporte, track_visibility='onchange')
 	fecha_limite = fields.Date(string="Fecha limite", track_visibility='onchange')
-	fecha_fin = fields.Datetime(string="Fecha finalizacion", track_visibility='onchange')
+	fecha_fin = fields.Datetime(string="Fecha finalizacion", track_visibility='onchange', store=True, compute="_get_fechafin")
 	descripcion = fields.Char(string="Descripcion")
 	estado = fields.Selection([('nuevo','Nuevo'),
 							  ('process','En Proceso'),
@@ -50,11 +50,11 @@ class ItBaseSoporte(models.Model):
 			vals['seq'] = self.env['ir.sequence'].next_by_code('itbase.soporte') or "Nuevo"
 			return super(ItBaseSoporte, self).create(vals)
 
-	# @api.onchange('estado')
-	# def _get_fechafin(self):
-	# 	print("Entrando a funcion de fech fin")
-	# 	if self.estado == "Completado":
-	# 		self.fecha_fin = datetime.datetime.now()
+	@api.depends('estado')
+	def _get_fechafin(self):
+		print("Entrando a funcion de fecha fin")
+		if self.estado == 'complete':
+			self.fecha_fin = datetime.datetime.now()
 
 	# @api.multi
 	# def write(self, values):
