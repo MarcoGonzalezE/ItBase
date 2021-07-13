@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    	<record id="itbase_companias_view_tree" model="ir.ui.view">
+            <field name="name">itbase.equipo.compania.tree.view</field>
+            <field name="model">itbase.equipo.compania</field>
+            <field name="arch" type="xml">
+                <tree string="Compañias" editable="buttom">
+                    <field name="name"/>
+                    <field name="sequence"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="itbase_companias_view_kanban" model="ir.ui.view">
+            <field name="name">itbase.equipo..compania.kanban.view</field>
+            <field name="model">itbase.equipo.compania</field>
+            <field name="arch" type="xml">
+                <kanban class="o_res_partner_kanban">
+                    <field name="name"/>
+                    <field name="sequence"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <div class="o_kanban_image">
+                                    <img t-att-src="kanban_image('itbase.equipo.compania', 'imagen', record.id.value)"/>
+                                </div>
+                                <div class="oe_kanban_details">
+                                    <strong class="oe_partner_heading">
+                                        <field name="name"/>
+                                    </strong>
+                                    <ul>
+                                        <field name="sequence"/>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>                        
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="itbase_companias_view_form" model="ir.ui.view">
+            <field name="name">itbase.equipo.compania.form.view</field>
+            <field name="model">itbase.equipo.compania</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                    	<div class="oe_button_box" name="button_box">
+                    		<button name="act_equipos" type="object" class="oe_stat_button" icon="fa-tv">
+                    			<div class="o_form_field o_stat_info">
+                    				<span class="o_stat_value"><field name="equipos_cont"/></span>
+                                    <span class="o_stat_text"> Equipos</span>
+                    			</div>
+                    		</button>
+                    		<button name="act_servidores" type="object" class="oe_stat_button" icon="fa-server">
+                    			<div class="o_form_field o_stat_info">
+                    				<span class="o_stat_value"><field name="servidores_cont"/></span>
+                                    <span class="o_stat_text"> Servidores</span>
+                    			</div>
+                    		</button>
+                    		<button name="act_dispositivos" type="object" class="oe_stat_button" icon="fa-hdd-o">
+                    			<div class="o_form_field o_stat_info">
+                    				<span class="o_stat_value"><field name="dispositivos_cont"/></span>
+                                    <span class="o_stat_text"> Dispositivos</span>
+                    			</div>
+                    		</button>
+                    		<button name="act_telefonos" type="object" class="oe_stat_button" icon="fa-phone">
+                    			<div class="o_form_field o_stat_info">
+                    				<span class="o_stat_value"><field name="telefonos_cont"/></span>
+                                    <span class="o_stat_text"> Telefonos</span>
+                    			</div>
+                    		</button>
+                    		<button name="act_proyectos" type="object" class="oe_stat_button" icon="fa-pie-chart">
+                    			<div class="o_form_field o_stat_info">
+                    				<span class="o_stat_value"><field name="proyectos_cont"/> Proyectos</span>
+                                    <span class="o_stat_value"><field name="productos_cont"/> Productos</span>
+                    			</div>
+                    		</button>
+                    		<button name="act_soportes" type="object" class="oe_stat_button" icon="fa-check-square-o">
+                    			<div class="o_form_field o_stat_info">
+                    				<span class="o_stat_value"><field name="soporte_cont"/></span>
+                                    <span class="o_stat_text"> Soportes</span>
+                    			</div>
+                    		</button>
+                    		<button name="act_reuniones" type="object" class="oe_stat_button" icon="fa-group">
+                    			<div class="o_form_field o_stat_info">
+                    				<span class="o_stat_value"><field name="reuniones_cont"/></span>
+                                    <span class="o_stat_text"> Reuniones</span>
+                    			</div>
+                    		</button>
+                    	</div>
+                        <field name="imagen" widget="image" class="oe_avatar"/>
+                        <div class="oe_title">
+                        	<label for="name" class="oe_edit_only"/>
+                        	<h1>
+                        		<field name="name" class="oe_inline"/>
+                        	</h1>
+                            <label for="sequence"/>
+                            <field name="sequence"/>
+                        </div>
+                        <group>
+                            <notebook>
+                                <page string="Secuencias">
+                                    <group col="3">
+                                        <group string="Celulares">
+                                            <field name="prefijo_celular"/>
+                                            <field name="siguiente_celular"/>
+                                        </group>
+                                        <group string="Laptops">
+                                            <field name="prefijo_laptop"/>
+                                            <field name="siguiente_laptop"/>
+                                        </group>
+                                        <group string="Equipos de Escritorio">
+                                            <field name="prefijo_escritorio"/>
+                                            <field name="siguiente_escritorio"/>
+                                        </group>
+                                    </group>
+                                </page>
+                            </notebook>                            
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="itbase_companias_action" model="ir.actions.act_window">
+            <field name="name">Compañias</field>
+            <field name="res_model">itbase.equipo.compania</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="help" type="html">
+                <p>
+                    No se encontro ninguna compañia.
+                </p>
+            </field>
+        </record>
+    </data>
+</odoo>

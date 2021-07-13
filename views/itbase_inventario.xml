@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="itbase_computadora_view_form" model="ir.ui.view">
+            <field name="name">itbase.equipo.form.view</field>
+            <field name="model">itbase.equipo</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button type="object" name="asignar_equipo" string="Asignar" class="btn-primary" attrs="{'invisible' :[('estado', '!=', 'not_assigned')]}"/>
+                        <button type="object" name="disponible_equipo" string="Devolucion" class="oe_inline btn-primary" attrs="{'invisible' :[('estado', '!=', 'assigned')]}"/>
+                        <button type="object" name="reporte_asignacion" string="Imprimir Asignacion" attrs="{'invisible' :[('estado', '!=', 'assigned')]}"/>
+                        <button type="object" name="reparacion_equipo" string="Reparacion" attrs="{'invisible' :[('estado', '=', 'scrap')]}"/>
+                        <button type="object" name="mantenimiento_equipo" string="Mantenimiento" attrs="{'invisible' :[('estado', '!=', 'assigned'),('estado', '!=', 'not_assigned')]}"/>
+                        <button type="object" name="desecho_equipo" string="Desecho" attrs="{'invisible' :[('estado', '=', 'scrap')]}"/>
+                        <field name="estado" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="act_mantenimientos" type="object" class="oe_stat_button" icon="fa-cogs">
+                                <div class="o_form_field o_stat_info">
+                                    <span class="o_stat_value"><field string="Mantenimientos" name="mantenimiento_cont"/><small> Mantenimientos</small></span>
+                                    <span class="o_stat_value"><field string="Mantenimientos Activos" name="mantenimiento"/><small> Activos</small></span>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h2><field name="name"/></h2>
+                        </div>
+                        <field name="imagen_medium" widget="image" class="oe_avatar" attrs="{'readonly':[('estado','=','scrap')]}"/>
+                        <div class="oe_title">
+                            <div>
+                                <label for="equipo_nuevo" class="oe_edit_only"/>
+                                <field name="equipo_nuevo" class="oe_edit_only"/>
+                                <p attrs="{'invisible':[('equipo_nuevo','!=',True)]}"  class="oe_read_only">Equipo nuevo</p>
+                            </div>
+                            <p>
+                                <strong><field name="tipo" placeholder="Tipo"/></strong><br/>
+                                <strong><field name="marca" placeholder="Marca"/></strong><br/>
+                                <strong><field name="modelo" placeholder="Modelo"/></strong><br/>
+                            </p>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="company_id" required="1"/>
+                                <field name="asignado" readonly="1" class="oe_read_only"/>
+                                <field name="correo" readonly="1" class="oe_read_only"/>
+                                <field name="departamento" readonly="1" class="oe_read_only"/>
+                                <field name="fecha_asignacion" readonly="1" class="oe_read_only"/>
+                            </group>
+                            <group>
+                                <field name="arquitectura" widget="radio" attrs="{'invisible':[('tipo','=','celular')]}" options="{'horizontal': true}"/>
+                                <field name="so_id" attrs="{'invisible':[('tipo','=','celular')]}"/>
+                                <field name="ip" attrs="{'invisible':[('tipo','=','celular')]}"/>
+                                <field name="mac" attrs="{'invisible':[('tipo','=','celular')]}"/>
+                                <label for="ram" attrs="{'invisible':[('tipo','=','celular')]}"/>
+                                <div class="o_row" attrs="{'invisible':[('tipo','=','celular')]}">
+                                    <field name="ram" attrs="{'invisible':[('tipo','=','celular')]}"/> GB
+                                </div>
+                                <field name="procesador" attrs="{'invisible':[('tipo','=','celular')]}"/>
+                                <field name="numero_tel" attrs="{'invisible':[('tipo','!=','celular')]}"/>
+                                <field name="imei" attrs="{'invisible':[('tipo','!=','celular')]}"/>
+                                <field name="telefonia" attrs="{'invisible':[('tipo','!=','celular')]}"/>
+                            </group>
+                        </group>
+                        <group>
+                            <notebook>
+                                <page string="Historial de Asignaciones">
+                                    <field name="asignar_ids" attrs="{'readonly':[('estado','!=','not_assigned')]}">
+                                        <tree editable="top">
+                                            <field name="nombre"/>
+                                            <field name="correo"/>
+                                            <field name="departamento"/>
+                                            <field name="fecha_asignacion"/>
+                                            <field name="fecha_devolucion"/>
+                                            <field name="nota"/>
+                                        </tree>
+                                    </field>
+                                </page>
+                                <page string="Dispositivos Adicionales" attrs="{'invisible':[('tipo','=','celular')]}">
+                                    <field name="dispositivos_ids">
+                                        <tree editable="bottom">
+                                            <field name="name"/>
+                                            <field name="estado"/>
+                                            <button name="dispositivo_id" icon="fa-check text-success" attrs="{'invisible': [('estado','!=','uso')]}"/>
+                                            <button name="dispositivo_id" icon="fa-times-circle text-danger" attrs="{'invisible': [('estado','!=','def')]}"/>
+                                        </tree>
+                                    </field>
+                                </page>
+                                <page string="Programas Adicionales" attrs="{'invisible':[('tipo','=','celular')]}">
+                                    <field name="licencia_ids">
+                                        <tree editable="bottom">
+                                            <field name="name"/>
+                                            <field name="licencia_bolean"/>
+                                            <field name="numero_licencia"/>
+                                        </tree>
+                                    </field>
+                                </page>
+                            </notebook>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                      <style>
+                          .o_chatter_button_new_message {
+                              display: none;
+                          }
+                      </style>
+                      <field name="message_follower_ids" widget="mail_followers"/>
+                      <field name="message_ids" widget="mail_thread"/>
+                  </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="itbase_computadora_view_tree" model="ir.ui.view">
+            <field name="name">itbase.equipo.tree.view</field>
+            <field name="model">itbase.equipo</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="modelo"/>
+                    <field name="company_id"/>
+                    <field name="asignado"/>
+                    <field name="numero_tel"/>
+                    <field name="estado"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="itbase_computadora_view_kanban" model="ir.ui.view">
+            <field name="name">itbase.equipo.kanban.view</field>
+            <field name="model">itbase.equipo</field>
+            <field name="arch" type="xml">
+                <kanban class="o_res_partner_kanban">
+                    <field name="name"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <div class="oe_kanban_bottom_right">
+                                    <span class="float-right text-right">
+                                        <p class="text-success" attrs="{'invisible': [('estado','=', 'scrap')]}"><field name="estado"/></p>
+                                        <p class="text-danger" attrs="{'invisible': [('estado','!=', 'scrap')]}"><field name="estado"/></p>
+                                    </span>
+                                </div>
+                                <div class="o_kanban_image">
+                                    <img t-att-src="kanban_image('itbase.equipo', 'imagen_medium', record.id.value)"/>
+                                </div>
+                                <div class="oe_kanban_details">
+                                    <strong class="oe_partner_heading">
+                                        <span  t-if="record.marca.value">[<field name="name"/>]</span>
+                                    </strong>
+                                    <ul>
+                                        <strong><field name="marca"/></strong> - <field name="modelo"/>
+                                    </ul>
+                                    <ul>
+                                        <field name="company_id"/>
+                                    </ul>
+                                    <ul>
+                                        <field name="asignado"/>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="itbase_computadora_action" model="ir.actions.act_window">
+            <field name="name">Equipos</field>
+            <field name="res_model">itbase.equipo</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="help" type="html">
+                <p>
+                    No se encontro ningun equipo.
+                </p>
+            </field>
+        </record>
+
+
+<!--- VENTANA DE ASIGNACION DE EQUIPO -->
+        <record id="itbase_asignacion_view_form" model="ir.ui.view">
+          <field name="name">itbase.equipo.asignar.form.view</field>
+          <field name="model">itbase.equipo.transaccion</field>
+          <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="equipo_id" readonly="True"/>
+                    <field name="name" options="{'no_quick_create': true,'no_create ': True, 'no_create_edit' : True}"/>
+                    <field name="nombre" required="1"/>
+                    <field name="correo" required="1"/>
+                    <field name="departamento" required="1"/>
+                    <field name="fecha_asignacion" required="1"/>
+                    <field name="nota"/>
+                </group>
+                <footer>
+                    <button string="Asignar" name="asignar" type="object" class="btn-primary"/>
+                    <button string="Cancelar" name="cancel" special="cancel" class="btn-primary"/>
+                </footer>
+            </form>
+          </field>
+      </record>
+
+<!--- VENTANA DE DEVOLUCION DE EQUIPO -->
+        <record id="itbase_devolucion_view_form" model="ir.ui.view">
+          <field name="name">itbase.equipo.devolucion.form.view</field>
+          <field name="model">itbase.equipo.asignar</field>
+          <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="equipo_id" readonly="True"/>
+                    <field name="nombre" readonly="True"/>
+                    <field name="correo" readonly="True"/>
+                    <field name="departamento" readonly="True"/>
+                    <field name="fecha_asignacion" readonly="True"/>
+                    <field name="fecha_devolucion" required="1"/>
+                    <field name="nota"/>
+                </group>
+                <button type="object" name="reporte_devolucion" string="Imprimir Devolucion"/>
+                <footer>
+                    <button string="Devolver" name="devolucion" type="object" class="btn-primary oe_edit_only"/>
+                    <button string="Cancelar" name="cancel" special="cancel" class="btn-primary"/>
+                </footer>
+            </form>
+          </field>
+      </record>
+    </data>
+</odoo>

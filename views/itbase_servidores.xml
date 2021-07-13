@@ -6,16 +6,22 @@
 			<field name="model">itbase.servidores</field>
 			<field name="arch" type="xml">
 				<form>
-					<header>                        
-						<field name="estado" widget="statusbar" clickable="True"/>
-					</header>
 					<sheet>
 						<div class="oe_button_box" name="button_box">
-                            <button class="oe_inline oe_stat_button" name="%(itbase_mantenimiento_servidor_action)d" type="action" icon="fa-cogs" context="{'search_default_servidor_id': active_id}">
-                                <field string="Mantenimientos" name="mantenimientos" widget="statinfo"/>
+							<button name="estado_activo" type="object" class="oe_stat_button" icon="fa-archive">
+								<field name="estado"/>
+							</button>
+                            <button name="act_mantenimientos" type="object" class="oe_stat_button" icon="fa-cogs">
+                                <div class="o_form_field o_stat_info">
+                                    <span class="o_stat_value"><field string="Mantenimientos" name="mantenimiento_count"/></span>
+                                    <span class="o_stat_text">Mantenimientos</span>
+                                </div>
                             </button>
-                            <button class="oe_inline oe_stat_button" name="%(itbase_basedatos_action)d" type="action" icon="fa-database" context="{'search_default_servidor_id': active_id}">
-                                <field string="Base de Datos" name="bases" widget="statinfo"/>
+                            <button name="act_bases" type="object" class="oe_stat_button" icon="fa-database">
+                                <div class="o_form_field o_stat_info">
+                                    <span class="o_stat_value"><field string="Bases" name="base_count"/></span>
+                                    <span class="o_stat_text">Bases</span>
+                                </div>
                             </button>
                         </div>
 						<group col="2">
@@ -31,7 +37,7 @@
 								<field name="contrasena"/>
 								<field name="ip_tipo" widget="radio"/>
 								<field name="ram"/>
-								<field name="responsable"/>
+								<field name="responsable" domain="[('activo','=',True)]" options="{'no_quick_create': true,'no_create ': True, 'no_create_edit' : True}"/>
 							</group>
 							<group>
 								<field name="compania"/>

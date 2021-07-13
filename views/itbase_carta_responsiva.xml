@@ -1,17 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
-        <!-- <record id="paperformat_carta_responsiva" model="report.paperformat">
-            <field name="name">Bid selection</field>
-            <field name="orientation">Landscape</field>
-            <field name="margin_top">5</field>
-            <field name="margin_bottom">15</field>
-            <field name="header_spacing">5</field>
-        </record> -->
+<!-- FORMATO -->
+        <record id="paperformat_carta" model="report.paperformat">
+            <field name="name">US Bank Check</field>
+            <field name="default" eval="True"/>
+            <field name="format">custom</field>
+            <field name="page_height">297</field>
+            <field name="page_width">210</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">3</field>
+            <field name="margin_bottom">3</field>
+            <field name="margin_left">3</field>
+            <field name="margin_right">3</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">3</field>
+            <field name="dpi">80</field>
+        </record>
 
-
+<!-- CARTA RESPONSIVA -->
         <report id="carta_responsiva" string="Carta Responsiva" model="itbase.equipo" report_type="qweb-pdf"
-                name="ItBase.carta_responsiva_document"/> <!--paperformat="account_check_printing_report_base.paperformat_check"/>-->
+                name="ItBase.carta_responsiva_document" paperformat="ItBase.paperformat_carta"/>
         <template id="carta_responsiva_document">
             <t t-call="report.html_container">
                 <div class="page">
@@ -20,8 +29,8 @@
                             <p style="max-height: 500px;max-width: 500px;">
                                 <span t-field="o.company_id.imagen" t-options='{"widget": "image"}'/>
                             </p>
-                            <p align="center">
-                                <H3 style="text-transform: uppercase;">carta responsiva de asignacion de
+                            <p>
+                                <H3 align="center" style="text-transform: uppercase;">carta responsiva de asignacion de
                                     <span t-field="o.tipo"/>
                                 </H3>
                             </p>
@@ -106,7 +115,7 @@
                                 </tr>
                             </table>
                             <br/>
-                            <p>Reconozco que este equipo de cómputo es propiedad de <strong>GRUPO ALVAMEX</strong> como
+                            <p>Reconozco que este equipo de cómputo es propiedad de <strong> GRUPO ALVAMEX</strong> como
                                 préstamo para cubrir las necesidades de herramienta de trabajo.
                             </p>
                             <p>Quedo como único y exclusivo responsable del resguardo de dicho equipo, así como el uso
@@ -135,9 +144,8 @@
                                 <br/>
                                 <br/>
                             </t>
-                            <p align="center">Recibe:____________________________________________<br/>Nombre y firma
+                            <p align="center">Recibe:____________________________________________<br/><span t-field="o.asignado.nombre"/>
                                 <br/>
-                                Departamento:
                                 <span t-field="o.departamento"/>
                             </p>
                             <br/>
@@ -150,6 +158,146 @@
                                 <p>Nota: Cualquier aplicación descargada con costo adicional NO la pagara la empresa y
                                     acepto que se me descuente via nomina.
                                 </p>
+                            </t>
+                        </t>
+                    </div>
+                </div>
+            </t>
+        </template>
+
+<!-- CARTA DE DEVOLUCION -->
+        <report id="carta_devolucion" string="Carta Devolucion" model="itbase.equipo" report_type="qweb-pdf"
+                name="ItBase.carta_devolucion_document" paperformat="ItBase.paperformat_carta"/>
+        <template id="carta_devolucion_document">
+            <t t-call="report.html_container">
+                <div class="page">
+                    <div style="padding-top:15mm;">
+                        <Script Language="JavaScript">
+                            function DameLaFechaHora() {
+                              var hora = new Date()
+                              var hrs = hora.getHours();
+                              var min = hora.getMinutes();
+                              var hoy = new Date();
+                              var m = new Array();
+                              var d = new Array()
+                              var an= hoy.getYear();
+                              m[0]="Enero";  m[1]="Febrero";  m[2]="Marzo";
+                              m[3]="Abril";   m[4]="Mayo";  m[5]="Junio";
+                              m[6]="Julio";    m[7]="Agosto";   m[8]="Septiembre";
+                              m[9]="Octubre";   m[10]="Noviembre"; m[11]="Diciembre";
+                              document.write("La Barca, Jalisco; ");
+                              document.write(hoy.getDate());
+                              document.write(" de ");
+                              document.write(m[hoy.getMonth()]);
+                            }
+                        </Script>
+                        <t t-foreach="docs" t-as="o">
+                            <p style="max-height: 500px;max-width: 500px;">
+                                <span t-field="o.company_id.imagen" t-options='{"widget": "image"}'/>
+                            </p>
+                            <p align="center">
+                                <H3 style="text-transform: uppercase;">carta de devolución de
+                                    <span t-field="o.tipo"/>
+                                </H3>
+                            </p>
+                            <p><script>DameLaFechaHora();</script>
+                                <!-- <span t-field="o.fecha_devolucion"/> -->
+                            </p>
+                            <t t-if="o.tipo!='celular'">
+                                <p>Reconozco que este equipo de cómputo es propiedad de <strong> GRUPO ALVAMEX</strong> como
+                                    préstamo fue cubrir mis necesidades de herramienta de trabajo, esto con el objetivo de facilitar mis actividades.</p>
+                            </t>
+                            <t t-if="o.tipo!='laptop'">
+                                <p>Reconozco que este teléfono celular es propiedad de <strong> GRUPO ALVAMEX</strong> como
+                                    préstamo fue cubrir mis necesidades de comunicacion, esto con el objetivo de facilitar mis actividades.</p>
+                            </t>
+                            <br/>
+                            <table style="width:100%;">
+                                <tr>
+                                    <td align="right" style="padding: 5px; width:20%;">Marca</td>
+                                    <td align="center" style="padding: 5px; width:20%;">
+                                        <strong>
+                                            <span t-field="o.marca.name"/>
+                                        </strong>
+                                    </td>
+                                    <t t-if="o.tipo!='celular'">
+                                        <td align="left" rowspan="6" style="width:15%;">
+                                            <span t-field="o.imagen_medium" t-options='{"widget": "image"}'/>
+                                        </td>
+                                    </t>
+                                    <t t-if="o.tipo=='celular'">
+                                        <td align="left" rowspan="5" style="width:15%;">
+                                            <span t-field="o.imagen_medium" t-options='{"widget": "image"}'/>
+                                        </td>
+                                    </t>
+                                </tr>
+                                <tr>
+                                    <td align="right" style="padding: 5px; width:20%;">Modelo</td>
+                                    <td align="center" style="padding: 5px; width:20%;">
+                                        <strong>
+                                            <span t-field="o.modelo"/>
+                                        </strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right" style="padding: 5px; width:20%;">Referencia Interna</td>
+                                    <td align="center" style="padding: 5px; width:20%;">
+                                        <strong>
+                                            <span t-field="o.name"/>
+                                        </strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <t t-if="o.tipo!='celular'">
+                                        <td align="right" style="padding: 5px; width:20%;">Sistema Operativo</td>
+                                        <td align="center" style="padding: 5px; width:20%;">
+                                            <span t-field="o.so_id.name"/>
+                                            <span t-field="o.arquitectura"/>
+                                        </td>
+                                    </t>
+                                    <t t-if="o.tipo=='celular'">
+                                        <td align="right" style="padding: 5px; width:20%;">Numero de Telefono</td>
+                                        <td align="center" style="padding: 5px; width:20%;">
+                                            <strong>
+                                                <span t-field="o.numero_tel"/>
+                                            </strong>
+                                        </td>
+                                    </t>
+                                </tr>
+                                <tr>
+                                    <t t-if="o.tipo!='celular'">
+                                        <td align="right" style="padding: 5px; width:20%;">Dispositivo Extra</td>
+                                        <td align="center" style="padding: 5px; width:20%;">
+                                            <t t-foreach="o.dispositivos_ids" t-as="dispo">
+                                                <span t-field="dispo.name"/>
+                                                <br/>
+                                            </t>
+                                        </td>
+                                    </t>
+                                </tr>
+                            </table>
+                            <br/>                            
+                            <p>Por este conducto hago entrega del equipo, donde hago constar las siguientes observaciones:<br/><br/>
+                            ___________________________________________________________________________________________________<br/>
+                            ___________________________________________________________________________________________________<br/>
+                            ___________________________________________________________________________________________________<br/>
+                            ___________________________________________________________________________________________________</p>
+                            <br/>                            
+                            <p>Acepto y reconozco las observaciones mencionadas, sabiendo que en caso de falla o daño en el equipo pagare el costo de su reparación.</p>
+                            <br/>
+                            <t t-if="o.tipo!='celular'">
+                                <br/>
+                                <br/>
+                                <br/>
+                            </t>
+                            <p align="center">____________________________________________<br/><span t-field="o.asignado.nombre"/><br/><span t-field="o.departamento"/><br/></p>
+                            <br/>
+                            <br/>
+                            <t t-if="o.tipo!='celular'">
+                                <p align="center">____________________________________________<br/>Departamento de IT</p>
+                            </t>
+                            <t t-if="o.tipo!='laptop'">
+                                <p align="center">____________________________________________<br/>Departamento de Capital Humano</p>
                             </t>
                         </t>
                     </div>

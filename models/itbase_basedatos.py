@@ -23,18 +23,28 @@ class ItBaseBaseDeDatos(models.Model):
 
 	#CONTADOR DE MANTENIMIENTOS
 	mantenimiento = fields.One2many('itbase.mantenimiento', 'base_id', string="Mantenimientos")
-	mantenimiento_count = fields.Integer(compute="_count_mantenimiento", string="Mantenimientos")
-	mantenimientos = fields.Char(compute="_count_mantenimientos", string="Mantenimientos")
+	mantenimiento_count = fields.Integer(compute="get_contadores")
 
 	@api.one
 	@api.depends('mantenimiento')
-	def _count_mantenimiento(self):
-		self.mantenimiento_count = self.mantenimiento.search_count([('base_id','=',self.id)])
+	def get_contadores(self):
+		self.mantenimiento_count = len(self.mantenimiento)
 
-	@api.one
-	@api.depends('mantenimiento_count')
-	def _count_mantenimientos(self):
-		self.mantenimientos = str(self.mantenimiento_count)
+	@api.multi
+	def act_mantenimientos(self):
+		action = self.env.ref('ItBase.itbase_mantenimientos_action')
+		result = {
+			'name': action.name,
+			'help': action.help,
+			'type': action.type,
+			'view_type': action.view_type,
+			'view_mode': action.view_mode,
+			'target': action.target,
+			'context': action.context,
+			'res_model': action.res_model,
+		}
+		result['domain'] = "[('id','in',[" + ','.join(map(str, self.mantenimiento.ids)) + "])]"
+		return result
 
 class ItBaseBaseDeDatosSistema(models.Model):
 	_name = 'itbase.basedatos.sistema'

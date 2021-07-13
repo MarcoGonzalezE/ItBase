@@ -11,8 +11,11 @@
 					</header> -->
 					<sheet>
 						<div class="oe_button_box" name="button_box">
-                            <button class="oe_inline oe_stat_button" name="%(itbase_mantenimiento_base_action)d" type="action" icon="fa-cogs" context="{'search_default_servidor_id': active_id}">
-                                <field string="Mantenimientos" name="mantenimientos" widget="statinfo"/>
+                            <button name="act_mantenimientos" type="object" class="oe_stat_button" icon="fa-cogs">
+                                <div class="o_form_field o_stat_info">
+                                    <span class="o_stat_value"><field name="mantenimiento_count"/></span>
+                                    <span class="o_stat_text"> Mantenimientos</span>
+                                </div>
                             </button>
                         </div>
 						<group col="2">

@@ -9,7 +9,9 @@
             <field name="arch" type="xml">
                 <form>
                     <header>
-                        <button type="object" name="finalizado" string="Finalizado" attrs="{'invisible' :[('estado','=', 'final')]}"/>
+                        <button type="object" name="proceso" string="Proceso" attrs="{'invisible' :[('fecha_mantenimiento','!=', False)]}"/>
+                        <button type="object" name="finalizado" string="Finalizar" attrs="{'invisible' :['|',('fecha_finalizacion','!=', False),('estado','=', 'cancel')]}"/>
+                        <button type="object" name="cancelado" string="Cancelar" attrs="{'invisible' :['|',('estado','=', 'final'),('estado','=', 'cancel')]}"/>
                         <field name="estado" widget="statusbar"/>
                     </header>
                     <sheet>
@@ -18,23 +20,24 @@
                         </div>
                         <group>
                             <group>
-                                <field name="equipo_id"/>
-                                <field name="servidor_id"/>
-                                <field name="base_id"/>
-                                <field name="tipo"/>
+                                <field name="equipo_id" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
+                                <field name="servidor_id" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
+                                <field name="base_id" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
+                                <field name="tipo" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
+                                <field name="encargado" domain="['|',('activo','=',True)]" options="{'no_quick_create': true,'no_create ': True, 'no_create_edit' : True}" string="Responsable" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
                             </group>
-                            <group>
-                                <field name="encargado"/>
-                                <field name="fecha_mantenimiento"/>
-                                <field name="fecha_programado"/>
+                            <group>                                
+                                <field name="fecha_mantenimiento" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
+                                <field name="fecha_programado" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
+                                <field name="fecha_finalizacion" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
                             </group>
                         </group>
                         <notebook>
                             <page string="Descripcion">
-                                <field name="descripcion" widget="html" attrs="{'readonly' :[('estado','=', 'cancel')]}"/>
+                                <field name="descripcion" widget="html" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
                             </page>
                             <page string = "Refacciones">
-                                <field name="dispositivos_ids">
+                                <field name="dispositivos_ids" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}">
                                     <tree editable="buttom">
                                         <field name="name"/>
                                     </tree>
@@ -62,7 +65,9 @@
             <field name="arch" type="xml">
                 <form>
                     <header>
-                        <button type="object" name="finalizado" string="Finalizado" attrs="{'invisible' :[('estado','=', 'final')]}"/>
+                        <button type="object" name="proceso" string="Proceso" attrs="{'invisible' :[('fecha_mantenimiento','!=', False)]}"/>
+                        <button type="object" name="finalizado" string="Finalizar" attrs="{'invisible' :['|',('fecha_finalizacion','!=', False),('estado','=', 'cancel')]}"/>
+                        <button type="object" name="cancelado" string="Cancelar" attrs="{'invisible' :['|',('estado','=', 'final'),('estado','=', 'cancel')]}"/>
                         <field name="estado" widget="statusbar"/>
                     </header>
                     <sheet>
@@ -71,21 +76,22 @@
                         </div>
                         <group>
                             <group>
-                                <field name="equipo_id"/>
-                                <field name="tipo"/>
+                                <field name="equipo_id" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
+                                <field name="tipo" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
+                                <field name="encargado" domain="[('activo','=',True)]" options="{'no_quick_create': true,'no_create ': True, 'no_create_edit' : True}" string="Responsable" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
                             </group>
                             <group>
-                                <field name="encargado"/>
-                                <field name="fecha_mantenimiento"/>
-                                <field name="fecha_programado"/>
+                                <field name="fecha_mantenimiento" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
+                                <field name="fecha_programado" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
+                                <field name="fecha_finalizacion" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
                             </group>
                         </group>
                         <notebook>
                             <page string="Descripcion">
-                                <field name="descripcion" widget="html" attrs="{'readonly' :[('estado','=', 'cancel')]}"/>
+                                <field name="descripcion" widget="html" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
                             </page>
                             <page string = "Refacciones">
-                                <field name="dispositivos_ids">
+                                <field name="dispositivos_ids" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}">
                                     <tree editable="buttom">
                                         <field name="name"/>
                                     </tree>
@@ -113,7 +119,9 @@
             <field name="arch" type="xml">
                 <form>
                     <header>
-                        <button type="object" name="finalizado" string="Finalizado" attrs="{'invisible' :[('estado','=', 'final')]}"/>
+                        <button type="object" name="proceso" string="Proceso" attrs="{'invisible' :[('fecha_mantenimiento','!=', False)]}"/>
+                        <button type="object" name="finalizado" string="Finalizar" attrs="{'invisible' :['|',('fecha_finalizacion','!=', False),('estado','=', 'cancel')]}"/>
+                        <button type="object" name="cancelado" string="Cancelar" attrs="{'invisible' :['|',('estado','=', 'final'),('estado','=', 'cancel')]}"/>
                         <field name="estado" widget="statusbar"/>
                     </header>
                     <sheet>
@@ -122,21 +130,22 @@
                         </div>
                         <group>
                             <group>
-                                <field name="servidor_id"/>
-                                <field name="tipo"/>
+                                <field name="servidor_id" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
+                                <field name="tipo" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
+                                <field name="encargado" domain="[('activo','=',True)]" options="{'no_quick_create': true,'no_create ': True, 'no_create_edit' : True}" string="Responsable" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
                             </group>
                             <group>
-                                <field name="encargado"/>
-                                <field name="fecha_mantenimiento"/>
-                                <field name="fecha_programado"/>
+                                <field name="fecha_mantenimiento" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
+                                <field name="fecha_programado" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
+                                <field name="fecha_finalizacion" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
                             </group>
                         </group>
                         <notebook>
                             <page string="Descripcion">
-                                <field name="descripcion" widget="html" attrs="{'readonly' :[('estado','=', 'cancel')]}"/>
+                                <field name="descripcion" widget="html" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
                             </page>
                             <page string = "Refacciones">
-                                <field name="dispositivos_ids">
+                                <field name="dispositivos_ids" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}">
                                     <tree editable="buttom">
                                         <field name="name"/>
                                     </tree>
@@ -164,7 +173,9 @@
             <field name="arch" type="xml">
                 <form>
                     <header>
-                        <button type="object" name="finalizado" string="Finalizado" attrs="{'invisible' :[('estado','=', 'final')]}"/>
+                        <button type="object" name="proceso" string="Proceso" attrs="{'invisible' :[('fecha_mantenimiento','!=', False)]}"/>
+                        <button type="object" name="finalizado" string="Finalizar" attrs="{'invisible' :['|',('fecha_finalizacion','!=', False),('estado','=', 'cancel')]}"/>
+                        <button type="object" name="cancelado" string="Cancelar" attrs="{'invisible' :['|',('estado','=', 'final'),('estado','=', 'cancel')]}"/>
                         <field name="estado" widget="statusbar"/>
                     </header>
                     <sheet>
@@ -173,25 +184,19 @@
                         </div>
                         <group>
                             <group>
-                                <field name="base_id"/>
-                                <field name="tipo"/>
+                                <field name="base_id" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
+                                <field name="tipo" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
+                                <field name="encargado" domain="[('activo','=',True)]" options="{'no_quick_create': true,'no_create ': True, 'no_create_edit' : True}" string="Responsable" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
                             </group>
                             <group>
-                                <field name="encargado"/>
-                                <field name="fecha_mantenimiento"/>
-                                <field name="fecha_programado"/>
+                                <field name="fecha_mantenimiento" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
+                                <field name="fecha_programado" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
+                                <field name="fecha_finalizacion" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
                             </group>
                         </group>
                         <notebook>
                             <page string="Descripcion">
-                                <field name="descripcion" widget="html" attrs="{'readonly' :[('estado','=', 'cancel')]}"/>
-                            </page>
-                            <page string = "Refacciones">
-                                <field name="dispositivos_ids">
-                                    <tree editable="buttom">
-                                        <field name="name"/>
-                                    </tree>
-                                </field>
+                                <field name="descripcion" widget="html" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
                             </page>
                         </notebook>
                     </sheet>
@@ -209,30 +214,12 @@
         </record>
 
 <!--TREE-->
-    <!-- Tree TODOS -->
-        <record id="itbase_mantenimiento_view_tree" model="ir.ui.view">
-            <field name="name">itbase.mantenimiento.tree.view</field>
-            <field name="model">itbase.mantenimiento</field>
-            <field name="arch" type="xml">
-                    <tree string="Mantenimiento">
-                        <field name="name"/>
-                        <field name="equipo_id"/>
-                        <field name="servidor_id"/>
-                        <field name="base_id"/>
-                        <field name="encargado"/>
-                        <field name="fecha_programado"/>
-                        <field name="tipo"/>
-                        <field name="fecha_mantenimiento"/>
-                        <field name="estado"/>
-                    </tree>
-            </field>
-        </record>
     <!-- Tree Equipo -->
         <record id="itbase_mantenimiento_equipo_view_tree" model="ir.ui.view">
             <field name="name">itbase.mantenimiento.equipo.tree.view</field>
             <field name="model">itbase.mantenimiento</field>
             <field name="arch" type="xml">
-                    <tree string="Mantenimiento">
+                    <tree string="Mantenimientos Equipos">
                         <field name="name"/>
                         <field name="equipo_id"/>
                         <field name="fecha_programado"/>
@@ -248,7 +235,7 @@
             <field name="name">itbase.mantenimiento.servidor.tree.view</field>
             <field name="model">itbase.mantenimiento</field>
             <field name="arch" type="xml">
-                    <tree string="Mantenimiento">
+                    <tree string="Mantenimientos Servidores">
                         <field name="name"/>
                         <field name="servidor_id"/>
                         <field name="fecha_programado"/>
@@ -264,7 +251,7 @@
             <field name="name">itbase.mantenimiento.base.tree.view</field>
             <field name="model">itbase.mantenimiento</field>
             <field name="arch" type="xml">
-                    <tree string="Mantenimiento">
+                    <tree string="Mantenimientos Base de Datos">
                         <field name="name"/>
                         <field name="base_id"/>
                         <field name="fecha_programado"/>
@@ -275,6 +262,25 @@
             </field>
         </record>
 
+    <!-- Tree TODOS -->
+        <record id="itbase_mantenimiento_view_tree" model="ir.ui.view">
+            <field name="name">itbase.mantenimiento.tree.view</field>
+            <field name="model">itbase.mantenimiento</field>
+            <field name="arch" type="xml">
+                    <tree string="Mantenimientos">
+                        <field name="name"/>
+                        <field name="equipo_id"/>
+                        <field name="servidor_id"/>
+                        <field name="base_id"/>
+                        <field name="encargado" string="Responsable"/>
+                        <field name="fecha_programado"/>
+                        <field name="tipo"/>
+                        <field name="fecha_mantenimiento"/>
+                        <field name="fecha_finalizacion"/>
+                        <field name="estado"/>
+                    </tree>
+            </field>
+        </record>
 
 <!--ACTIONS-->
     <!-- Manteniminto - Todos -->
@@ -305,7 +311,7 @@
 
     <!-- Mantenimiento - Equipo -->
         <record id="itbase_mantenimiento_equipo_action" model="ir.actions.act_window">
-            <field name="name">Mantenimiento</field>
+            <field name="name">Mantenimiento Equipos</field>
             <field name="res_model">itbase.mantenimiento</field>
             <field name="view_mode">tree,form</field>
             <field name="domain">[('equipo_id','!=', False)]</field>
@@ -331,7 +337,7 @@
 
     <!-- Mantenimiento - Servidor -->
         <record id="itbase_mantenimiento_servidor_action" model="ir.actions.act_window">
-            <field name="name">Mantenimiento</field>
+            <field name="name">Mantenimiento Servidores</field>
             <field name="res_model">itbase.mantenimiento</field>
             <field name="view_mode">tree,form</field>
             <field name="domain">[('servidor_id','!=', False)]</field>
@@ -357,7 +363,7 @@
 
     <!-- Mantenimiento - Base de Datos -->
         <record id="itbase_mantenimiento_base_action" model="ir.actions.act_window">
-            <field name="name">Mantenimiento</field>
+            <field name="name">Mantenimiento Base de Datos</field>
             <field name="res_model">itbase.mantenimiento</field>
             <field name="view_mode">tree,form</field>
             <field name="domain">[('base_id','!=', False)]</field>

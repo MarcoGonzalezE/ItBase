@@ -1,2 +1,12 @@
 # -*- coding: utf-8 -*-
-import itbase_inventario, itbase_mantenimiento,	itbase_soluciones, itbase_soporte, itbase_servidores, itbase_basedatos,	itbase_departamento, itbase_proyectos, itbase_reuniones, itbase_redes
+from . import itbase_inventario
+from . import itbase_mantenimiento
+from . import itbase_soluciones
+from . import itbase_soporte
+from . import itbase_servidores
+from . import itbase_basedatos
+from . import itbase_departamento
+from . import itbase_proyectos
+from . import itbase_reuniones
+from . import itbase_redes
+from . import itbase_companias

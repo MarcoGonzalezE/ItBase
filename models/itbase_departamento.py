@@ -8,64 +8,138 @@ class ItBaseDepartamento(models.Model):
 
 	name = fields.Many2one('res.users', string="Nombre")
 	puesto = fields.Char(string="Puesto")
+	correo = fields.Char(string="Correo")
+	telefono = fields.Char(string="Telefono")
 	imagen = fields.Binary(string="Avatar", attachment=True)
+	activo = fields.Boolean('Activo', default=True)
+	#MANTENIMIENTOS
+	mantenimientos_ids = fields.One2many('itbase.mantenimiento', 'encargado', string="Mantenimientos")
+	mantenimientos_count = fields.Integer(compute='get_contadores')
+	#SOPORTES
+	soportes_ids = fields.One2many('itbase.soporte', 'asignada', string="Soporte")
+	soportes_count = fields.Integer(compute='get_contadores')
+	#TAREAS
+	tareas_ids = fields.One2many('itbase.proyectos.tarea', 'responsable', string="Tareas")
+	tareas_count = fields.Integer(compute='get_contadores')
+	bugs_count = fields.Integer(compute='get_contadores')
+	#SERVIDORES
+	servidores_ids = fields.One2many('itbase.servidores', 'responsable', string="Servidores")
+	servidores_count = fields.Integer(compute='get_contadores')
+	#PRODUCTOS
+	productos_ids = fields.One2many('itbase.productos', 'responsable', string="Productos")
+	productos_count = fields.Integer(compute='get_contadores')
+	#HISTORIAS
+	historias_ids = fields.One2many('itbase.historias', 'responsable', string="Historias")
+	historias_count = fields.Integer(compute='get_contadores')
 
-#CONTADOR DE MANTENIMIENTOS REALIZADOS
-	mantenimiento = fields.One2many('itbase.mantenimiento', 'encargado', string="Mantenimientos")
-	mantenimiento_count = fields.Integer(compute="_count_mantenimiento", string="Mantenimientos")
-	mantenimientos = fields.Char(compute="_count_mantenimientos", string="Mantenimientos")
-
-	@api.one
-	@api.depends('mantenimiento')
-	def _count_mantenimiento(self):
-		self.mantenimiento_count = self.mantenimiento.search_count([('encargado','=',self.id)])
-
-	@api.one
-	@api.depends('mantenimiento_count')
-	def _count_mantenimientos(self):
-		self.mantenimientos = str(self.mantenimiento_count)
-
-#CONTADOR DE SOPORTE REALIZADO
-	soporte = fields.One2many('itbase.soporte', 'asignada', string="Soporte")
-	soporte_count = fields.Integer(compute="_count_soporte", string="Soporte")
-	soportes = fields.Char(compute="_count_soportes", string="Soporte")
-
-	@api.one
-	@api.depends('soporte')
-	def _count_soporte(self):
-		self.soporte_count = self.soporte.search_count([('asignada','=',self.id)])
-
-	@api.one
-	@api.depends('soporte_count')
-	def _count_soportes(self):
-		self.soportes = str(self.soporte_count)
-
-#CONTADOR DE PROYECTOS
-	proyecto = fields.One2many('itbase.productos', 'responsable', string="Proyectos")
-	proyecto_count = fields.Integer(compute="_count_proyecto", string="Proyectos")
-	proyectos = fields.Char(compute="_count_proyectos", string="Proyectos")
+	@api.multi
+	def estado_activo(self):
+		for r in self:
+			r.activo = not r.activo
 
 	@api.one
-	@api.depends('proyecto')
-	def _count_proyecto(self):
-		self.proyecto_count = self.proyecto.search_count([('responsable','=',self.id)])
+	@api.depends('mantenimientos_ids','soportes_ids','tareas_ids','servidores_ids','productos_ids','historias_ids')
+	def get_contadores(self):
+		self.mantenimientos_count = len(self.mantenimientos_ids)
+		self.soportes_count = len(self.soportes_ids)
+		self.tareas_count = len(self.tareas_ids)
+		self.bugs_count = len(self.env['itbase.errores'].search([('responsable','=',self.id)]))
+		self.servidores_count = len(self.servidores_ids)
+		self.productos_count = len(self.productos_ids)
+		self.historias_count = len(self.historias_ids)
 
-	@api.one
-	@api.depends('proyecto_count')
-	def _count_proyectos(self):
-		self.proyectos = str(self.proyecto_count)
+	@api.multi
+	def act_mantenimientos(self):
+		action = self.env.ref('ItBase.itbase_mantenimientos_action')
+		result = {
+			'name': action.name,
+			'help': action.help,
+			'type': action.type,
+			'view_type': action.view_type,
+			'view_mode': action.view_mode,
+			'target': action.target,
+			'context': action.context,
+			'res_model': action.res_model,
+		}
+		result['domain'] = "[('id','in',["+','.join(map(str, self.mantenimientos_ids.ids))+"])]"
+		return result
 
-# #CONTADOR DE TAREAS
-# 	tarea = fields.One2many('itbase.proyectos.tarea', 'responsable', string="Tareas")
-# 	tarea_count = fields.Integer(compute="_count_tarea", string="Tareas")
-# 	tareas = fields.Char(compute="_count_tareas", string="Tareas")
+	@api.multi
+	def act_soportes(self):
+		action = self.env.ref('ItBase.itbase_soporte_action')
+		result = {
+			'name': action.name,
+			'help': action.help,
+			'type': action.type,
+			'view_type': action.view_type,
+			'view_mode': action.view_mode,
+			'target': action.target,
+			'context': action.context,
+			'res_model': action.res_model,
+		}
+		result['domain'] = "[('id','in',["+','.join(map(str, self.soportes_ids.ids))+"])]"
+		return result
 
-# 	@api.one
-# 	@api.depends('tarea')
-# 	def _count_tarea(self):
-# 		self.tarea_count = self.tarea.search_count([('responsable','=',self.id)])
+	@api.multi
+	def act_tareas(self):
+		action = self.env.ref('ItBase.itbase_tareas_action')
+		result = {
+			'name': action.name,
+			'help': action.help,
+			'type': action.type,
+			'view_type': action.view_type,
+			'view_mode': action.view_mode,
+			'target': action.target,
+			'context': action.context,
+			'res_model': action.res_model,
+		}
+		result['domain'] = "[('id','in',["+','.join(map(str, self.tareas_ids.ids))+"])]"
+		return result
 
-# 	@api.one
-# 	@api.depends('tarea_count')
-# 	def _count_tareas(self):
-# 		self.tareas = str(self.tarea_count)
+	@api.multi
+	def act_servidores(self):
+		action = self.env.ref('ItBase.itbase_servidores_action')
+		result = {
+			'name': action.name,
+			'help': action.help,
+			'type': action.type,
+			'view_type': action.view_type,
+			'view_mode': action.view_mode,
+			'target': action.target,
+			'context': action.context,
+			'res_model': action.res_model,
+		}
+		result['domain'] = "[('id','in',["+','.join(map(str, self.servidores_ids.ids))+"])]"
+		return result
+
+	@api.multi
+	def act_productos(self):
+		action = self.env.ref('ItBase.itbase_productos_action')
+		result = {
+			'name': action.name,
+			'help': action.help,
+			'type': action.type,
+			'view_type': action.view_type,
+			'view_mode': action.view_mode,
+			'target': action.target,
+			'context': action.context,
+			'res_model': action.res_model,
+		}
+		result['domain'] = "[('id','in',["+','.join(map(str, self.productos_ids.ids))+"])]"
+		return result
+
+	@api.multi
+	def act_historias(self):
+		action = self.env.ref('ItBase.itbase_historias_action')
+		result = {
+			'name': action.name,
+			'help': action.help,
+			'type': action.type,
+			'view_type': action.view_type,
+			'view_mode': action.view_mode,
+			'target': action.target,
+			'context': action.context,
+			'res_model': action.res_model,
+		}
+		result['domain'] = "[('id','in',["+','.join(map(str, self.historias_ids.ids))+"])]"
+		return result

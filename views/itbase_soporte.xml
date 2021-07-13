@@ -25,7 +25,7 @@
 								<field name="proyecto_id" attrs="{'readonly' :[('estado','=', 'cancel')]}"/>
 							</group>
 							<group>
-								<field name="asignada" attrs="{'readonly' :[('estado','=', 'cancel')]}"/>
+								<field name="asignada" attrs="{'readonly' :[('estado','=', 'cancel')]}" domain="[('activo','=',True)]" options="{'no_quick_create': true,'no_create ': True, 'no_create_edit' : True}"/>
 								<field name="fecha_soporte" attrs="{'readonly' :[('estado','=', 'cancel')]}"/>
 								<field name="fecha_limite" attrs="{'readonly' :[('estado','=', 'cancel')]}"/>
 								<field name="prioridad" attrs="{'readonly' :[('estado','=', 'cancel')]}"/>
