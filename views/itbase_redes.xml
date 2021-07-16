@@ -25,6 +25,7 @@
 								<field name="usuario"/>
 								<field name="contrasena"/>
 								<field name="ip"/>
+								<field name="mac"/>
 							</group>
 						</group>
 					</sheet>

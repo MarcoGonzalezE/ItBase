@@ -8,6 +8,7 @@ class Compania(models.Model):
 	name = fields.Char(string="Compañia")
 	sequence = fields.Char(string="Inicio de Secuencia")
 	imagen = fields.Binary(string="Logo", attachment=True)
+	correo = fields.Char(string="Correo")
 	#EQUIPOS
 	equipos_ids = fields.One2many('itbase.equipo','company_id', string="Equipos")
 	equipos_cont = fields.Integer(compute='get_contadores')

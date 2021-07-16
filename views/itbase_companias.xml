@@ -98,6 +98,9 @@
                         	</h1>
                             <label for="sequence"/>
                             <field name="sequence"/>
+                            <br/>
+                            <label for="correo"/>
+                            <field name="correo"/>
                         </div>
                         <group>
                             <notebook>

@@ -11,6 +11,7 @@ class ItBaseRedes(models.Model):
 	marca = fields.Many2one('itbase.marca', string="Marca", track_visibility='onchange')
 	tipo = fields.Many2one('itbase.redes.dispositivo', string="Tipo", track_visibility='onchange')
 	ip = fields.Char(string="IP", track_visibility='onchange')
+	mac = fields.Char(string="MAC")
 	company_id = fields.Many2one('itbase.equipo.compania', string="Compañia")
 	usuario = fields.Char(string="Usuario", track_visibility='onchange')
 	contrasena = fields.Char(string="Contrasena", track_visibility='onchange')

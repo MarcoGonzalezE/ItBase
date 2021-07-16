@@ -24,3 +24,8 @@ access_itbase_errores,itbase.errores,model_itbase_errores,,1,1,1,1
 access_itbase_historias,itbase.historias,model_itbase_historias,,1,1,1,1
 access_itbase_reuniones,itbase.reuniones,model_itbase_reuniones,,1,1,1,1
 access_itbase_soporte_tarea,itbase.soporte.tarea,model_itbase_soporte_tarea,,1,1,1,1
+access_itbase_equipo_transaccion,itbase.equipo.transaccion,model_itbase_equipo_transaccion,,1,1,1,1
+access_itbase_redes,itbase.redes,model_itbase_redes,,1,1,1,1
+access_itbase_redes_dispositivo,itbase.redes.dispositivo,model_itbase_redes_dispositivo,,1,1,1,1
+access_itbase_redes_telefonos,itbase.redes.telefonos,model_itbase_redes_telefonos,,1,1,1,1
+access_itbase_redes_telefonos_reportes,itbase.redes.telefonos.reportes,model_itbase_redes_telefonos_reportes,,1,1,1,1

@@ -10,6 +10,7 @@
     'depends': [],
     'data': [
         'data/itbase.data.xml',
+        'data/website.menu.csv',
         'security/ir.model.access.csv',        
         'views/itbase_basedatos.xml',        
         'views/itbase_mantenimiento.xml',        
@@ -19,7 +20,7 @@
         'views/itbase_carta_responsiva.xml',
         'views/itbase_soluciones.xml',
         'views/itbase_soporte.xml',
-        'views/itbase_soporte_template.xml',        
+        'views/itbase_soporte_ticket_template.xml',        
         'views/itbase_proyectos.xml',
         'views/itbase_departamento.xml',
         'views/itbase_reuniones.xml',
@@ -28,6 +29,6 @@
     ],
     # only loaded in demonstration mode
     'demo': [],
-    'depends': ['mail'],
+    'depends': ['mail','web', 'website'],
     'installable': True,
 }

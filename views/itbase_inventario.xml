@@ -52,7 +52,7 @@
                                 <field name="arquitectura" widget="radio" attrs="{'invisible':[('tipo','=','celular')]}" options="{'horizontal': true}"/>
                                 <field name="so_id" attrs="{'invisible':[('tipo','=','celular')]}"/>
                                 <field name="ip" attrs="{'invisible':[('tipo','=','celular')]}"/>
-                                <field name="mac" attrs="{'invisible':[('tipo','=','celular')]}"/>
+                                <field name="mac"/>
                                 <label for="ram" attrs="{'invisible':[('tipo','=','celular')]}"/>
                                 <div class="o_row" attrs="{'invisible':[('tipo','=','celular')]}">
                                     <field name="ram" attrs="{'invisible':[('tipo','=','celular')]}"/> GB

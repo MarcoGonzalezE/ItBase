@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<template id="itbase_enviar_ticket" name="Crear solicitud de soporte" page="True">
+			<t t-call="website.layout">
+				<div id="wrap" class="oe_stucture oe_empty">
+					<section>
+						<div class="container">
+							<div class="row">
+								<div class="col-md-12">
+									<h1 class="text-center">Solicitud de Soporte</h1>
+								</div>
+							</div>
+						</div>
+					</section>
+					<form action="/soporte/ticket/enviar" method="POST" class="form-horizontal mt32" enctype="multipart/form-data">
+						<input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+						<div t-attf-class="form-group #{error and 'solicitante_id' in error and 'has-error' or ''}">
+							<label class="col-md-3 col-sm-4 control-label" for="solicitante_id">SOLICITANTE</label>
+							<div class="col-md-7 col-sm-8">
+								<input type="text" class="form-control" name="solicitante_id" required="True" t-attf-value="#{solicitante_id or ''}"/>
+							</div>
+						</div>
+						<div t-attf-class="form-group #{error and 'correo' in error and 'has-error' or ''}" >
+							<label class="col-md-3 col-sm-4 control-label" for="correo">CORREO</label>
+							<div class="col-md-7 col-sm-8">
+								<input type="email" class="form-control" name="correo" required="False" t-attf-value="#{correo or ' '}"/>
+							</div>
+						</div>
+						<div t-attf-class="form-group #{error and 'compania' in error and 'has-error' or ''}">
+							<label class="col-md-3 col-sm-4 control-label" for="name">COMPAÑIA</label>
+							<div class="col-md-7 col-sm-8">
+								<select class="form-control" id="compania" name="compania">
+									<t t-foreach="companias" t-as="compania">
+										<option t-attf-value="#{compania.id}">
+											<t t-esc="compania.name"/>
+										</option>
+									</t>
+								</select>
+							</div>
+						</div>
+						<script>
+							$(document).ready(function(){
+								update_equipos()
+							});
+							$(document).on('change',"#compania", function(){
+								update_equipos()
+							});
+							function update_equipos(){
+								$.ajax({url: "/soporte/ticket/equipos?compania=" + $("#compania").val(), success: function(result){
+									$("#equipos_container").html(result);
+								}});
+							}
+						</script>
+						<div id="equipos_container"></div>
+						<div t-attf-class="form-group">
+							<label class="col-md-3 col-sm-4 control-label" for="name">ASUNTO</label>
+							<div class="col-md-7 col-sm-8">
+								<input type="text" class="form-control" name="name" required="True"/>
+							</div>
+						</div>
+						<div t-attf-class="form-group">
+							<label class="col-md-3 col-sm-4 control-label" for="descripcion">DESCRIPCION</label>
+							<div class="col-md-7 col-sm-8">
+								<textarea class="form-control" name="descripcion" style="min-height: 120px" required="True"></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-md-offset-3 col-sm-offset-4 col-sm-8 col-md-7">
+								<button class="btn btn-primary btn-lg">ENVIAR</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</t>
+		</template>
+		<template id="itbase_soporte_ticket_enviado" name="Soporte enviado" page="True">
+			<t t-call="website.layout">
+				<div id="wrap" class="oe_structure oe_empty">
+					<section>
+						<div class="container">
+							<div class="row">
+								<div align="center">
+									<img src="/ItBase/static/img/icon.png" style="width:10%"/>
+								</div>
+								<div class="col-md-12" style="align:center;">  
+									<h1 class="text-center">Solicitud de Soporte enviada</h1>
+									<h3 class="text-muted text-center">
+										Se ha enviado una nueva solicitud de soporte.<br/>
+										Con Folio<br/>
+										<strong>
+											<input type="text" name="soporte" readonly="True" t-attf-value="#{soporte or ''}" style="text-align:center"/>
+										</strong>
+									</h3>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+			</t>
+		</template>
+		<record id="itbase_soporte_ticket_nuevo" model="mail.template">
+			<field name="name">Solicitud de Soporte</field>
+			<field name="model_id" ref="model_itbase_soporte"></field>
+			<field name="email_from"><![CDATA[${object.compania.name} <${object.compania.correo}>]]></field>
+			<field name="subject">Solicitud de Soporte</field>
+			<field name="auto_delete" eval="False"/>
+			<field name="built_in" eval="True"/>
+			<field name="body_html"><![CDATA[
+				<p>_personal_it, Se ha creado una nueva solicitud de Soporte</p>
+                <p>Folio: ${object.seq}</P>
+                <p>Compañia: ${object.compania.name}</p>
+                <p>Fecha de Solicitud: ${object.fecha_soporte}</p>
+                <p>Equipo: ${object.equipo_id.name}</p>
+                <p>Asunto:  ${object.name}</p>
+                <p>Descripcion:  ${object.descripcion|safe}</p>
+                <p>Click <a href="_ticket_url_">aqui</a> para la ver la solicitud.</p>
+            ]]>
+            </field>
+        </record>
+	</data>
+</odoo>

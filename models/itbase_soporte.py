@@ -7,6 +7,7 @@ PRIORIDADES = [('0', 'Muy bajo'), ('1', 'Bajo'), ('2', 'Normal'), ('3', 'Alto'),
 
 class ItBaseSoporte(models.Model):
 	_name = 'itbase.soporte'
+	_rec_name = 'seq'
 	_inherit = ['mail.thread']
 
 	def _default_fecha_soporte(self):
@@ -15,6 +16,7 @@ class ItBaseSoporte(models.Model):
 	name = fields.Char(string="Asunto", track_visibility='onchange')
 	seq = fields.Char(string="Secuencia", store=True)
 	solicitante = fields.Many2one('res.partner', string="Solicitante")
+	solicitante_id = fields.Char(string="solicitante")
 	correo = fields.Char(string="Correo")
 	asignada = fields.Many2one('itbase.departamento', string="Asignada", track_visibility='onchange')
 	prioridad = fields.Selection(PRIORIDADES, select=True, string="Prioridad", default=PRIORIDADES[0][0], track_visibility='onchange')
@@ -34,6 +36,7 @@ class ItBaseSoporte(models.Model):
 
 	@api.onchange('solicitante')
 	def _onchange_solicitante(self):
+		self.solicitante_id = self.solicitante.name
 		self.correo = self.solicitante.email
 
 	@api.onchange('producto_id')
@@ -45,14 +48,28 @@ class ItBaseSoporte(models.Model):
 
 	@api.model
 	def create(self, vals):
-		print("Has creado un nuevo soporte")
 		if vals.get('seq', "Nuevo") == "Nuevo":
 			vals['seq'] = self.env['ir.sequence'].next_by_code('itbase.soporte') or "Nuevo"
-			return super(ItBaseSoporte, self).create(vals)
+		nuevo = super(ItBaseSoporte, self).create(vals)
+		personal_it = self.env['itbase.departamento'].search([('activo','=',"true")])
+		if nuevo.asignada:
+			print("")
+		else:
+			notificacion_soporte = self.env['ir.model.data'].sudo().get_object('ItBase','itbase_soporte_ticket_nuevo')
+			menu_soporte = self.env['ir.model.data'].sudo().get_object('ItBase','itbase_soporte_menu')
+			action_soporte = self.env['ir.model.data'].sudo().get_object('ItBase','itbase_soporte_action')
+			for it in personal_it:
+				values = notificacion_soporte.generate_email(nuevo.id)
+				values['body_html'] = values['body_html'].replace("_ticket_url_", "web#id=" +
+						str(nuevo.id) + "&view_type=form&model=itbase.soporte&menu_id=" +
+						str(menu_soporte.id) + "&action=" + str(action_soporte.id)).replace("_personal_it", it.name.name)
+				values['email_to'] = it.correo
+				send_mail = self.env['mail.mail'].create(values)
+				send_mail.send()
+		return nuevo
 
 	@api.depends('estado')
 	def _get_fechafin(self):
-		print("Entrando a funcion de fecha fin")
 		if self.estado == 'complete':
 			self.fecha_fin = datetime.datetime.now()
 

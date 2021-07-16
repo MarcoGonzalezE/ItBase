@@ -90,7 +90,6 @@ class ItBaseProyectosTareas(models.Model):
 	@api.one
 	@api.depends('estado')
 	def _get_fechafin(self):
-		print("Entrando a funcion de fecha fin")
 		if self.estado == 'complete':
 			self.fecha_fin = datetime.datetime.now()
 

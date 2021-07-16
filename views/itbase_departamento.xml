@@ -59,7 +59,7 @@
                             </div>
                             <div>
                                 <label for="correo"/>
-                                <field name="correo" widget="email"/>
+                                <field name="correo" widget="email" required="True"/>
                             </div>
                             <div>
                                 <label for="telefono"/>
