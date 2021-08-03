@@ -25,7 +25,9 @@
         'views/itbase_departamento.xml',
         'views/itbase_reuniones.xml',
         'views/itbase_redes.xml',
+        'views/itbase_configuracion.xml',
         'views/menu.xml',
+        'wizard/itbase_wizard_view.xml'
     ],
     # only loaded in demonstration mode
     'demo': [],

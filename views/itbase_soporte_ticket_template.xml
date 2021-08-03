@@ -111,6 +111,7 @@
                 <p>Folio: ${object.seq}</P>
                 <p>Compañia: ${object.compania.name}</p>
                 <p>Fecha de Solicitud: ${object.fecha_soporte}</p>
+                <p>Solicitante: ${object.solicitante_id}</p>
                 <p>Equipo: ${object.equipo_id.name}</p>
                 <p>Asunto:  ${object.name}</p>
                 <p>Descripcion:  ${object.descripcion|safe}</p>

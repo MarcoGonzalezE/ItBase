@@ -10,3 +10,4 @@ from . import itbase_proyectos
 from . import itbase_reuniones
 from . import itbase_redes
 from . import itbase_companias
+from . import itbase_configuracion

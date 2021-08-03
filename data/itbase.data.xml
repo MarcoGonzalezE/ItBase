@@ -101,5 +101,22 @@
 			<field name="company_id" eval="False"/>
 		</record>
 	</data>
+<!-- Medios de Notificaciones -->
+	<data noupdate="1">
+		<record id="itbase_medio_notificacion_correo" model="itbase.notificaciones.medios">
+			<field name="nombre">Correo</field>
+		</record>
+		<record id="itbase_medio_notificacion_telegram" model="itbase.notificaciones.medios">
+			<field name="nombre">Telegram</field>
+		</record>
+		<record id="itbase_medio_notificacion_odoo" model="itbase.notificaciones.medios">
+			<field name="nombre">Odoo</field>
+		</record>			
+	</data>
+<!-- Configuracion -->
+	<data noupdate="1">
+		<record id="itbase_configuracion" model="itbase.config.settings">
+		</record>
+	</data>
 
 </odoo>

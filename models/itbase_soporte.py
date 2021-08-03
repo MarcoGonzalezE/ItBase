@@ -2,6 +2,8 @@
 from odoo import models, fields, api, tools
 import datetime
 from odoo.exceptions import ValidationError
+import requests
+
 
 PRIORIDADES = [('0', 'Muy bajo'), ('1', 'Bajo'), ('2', 'Normal'), ('3', 'Alto'), ('4', 'Muy alto')]
 
@@ -46,6 +48,16 @@ class ItBaseSoporte(models.Model):
 	def cancelar(self):
 		self.estado = 'cancel'
 
+	def notificacion_telegram(self, mensaje, url):
+		bot_mensaje = mensaje + '\n' + url
+		print bot_mensaje
+		parametro = self.env['itbase.config.settings'].search([])
+		token = parametro.token_telegram
+		chatID = parametro.id_chat
+		enviar_mensaje = "https://api.telegram.org/bot" + token + "/sendMessage?chat_id=" + chatID + "&parse_mode=HTML&text=" + mensaje #+ "&reply_markup='inline_keyboard':[{'text':'VER SOLICITUD','url': 'http://odoo.avicampo.com.mx/support/help',}]"
+		respuesta = requests.get(enviar_mensaje)
+		return respuesta.json()
+
 	@api.model
 	def create(self, vals):
 		if vals.get('seq', "Nuevo") == "Nuevo":
@@ -55,19 +67,28 @@ class ItBaseSoporte(models.Model):
 		if nuevo.asignada:
 			print("")
 		else:
+			#CORREO
 			notificacion_soporte = self.env['ir.model.data'].sudo().get_object('ItBase','itbase_soporte_ticket_nuevo')
 			menu_soporte = self.env['ir.model.data'].sudo().get_object('ItBase','itbase_soporte_menu')
 			action_soporte = self.env['ir.model.data'].sudo().get_object('ItBase','itbase_soporte_action')
 			for it in personal_it:
-				values = notificacion_soporte.generate_email(nuevo.id)
-				values['body_html'] = values['body_html'].replace("_ticket_url_", "web#id=" +
-						str(nuevo.id) + "&view_type=form&model=itbase.soporte&menu_id=" +
-						str(menu_soporte.id) + "&action=" + str(action_soporte.id)).replace("_personal_it", it.name.name)
-				values['email_to'] = it.correo
-				send_mail = self.env['mail.mail'].create(values)
-				send_mail.send()
+				if it.correo:
+					print ("Tiene Correo")
+					if it.notificaciones.nombre == "Correo":
+						print  ("Correo Enviado")
+						values = notificacion_soporte.generate_email(nuevo.id)
+						values['body_html'] = values['body_html'].replace("_ticket_url_", "web#id=" +
+								str(nuevo.id) + "&view_type=form&model=itbase.soporte&menu_id=" +
+								str(menu_soporte.id) + "&action=" + str(action_soporte.id)).replace("_personal_it", it.name.name)
+						values['email_to'] = it.correo
+						send_mail = self.env['mail.mail'].create(values)
+						send_mail.send()
+			notificacion = "Se ha creado una nueva solicitud de Soporte\nFolio: " + str(nuevo.seq) + "\nEmpresa: " + str(nuevo.compania.name) + "\nFecha de Solicitud: " + str(nuevo.fecha_soporte) + "\nSolicitante: " + str(nuevo.solicitante_id) + "\nEquipo: " + str(nuevo.equipo_id.name) + "\nAsunto: " + str(nuevo.name) + "\nDescripcion: " + str(nuevo.descripcion)
+			url = "<a href=web#id=" + str(nuevo.id) + '&view_type=form&model=itbase.soporte&menu_id=' + str(menu_soporte.id) + '&action=' + str(action_soporte.id) + ">VER SOLICITUD</a>"
+			#TELEGRAM
+			print (notificacion, url)
+			nuevo.notificacion_telegram(notificacion, url)
 		return nuevo
-
 	@api.depends('estado')
 	def _get_fechafin(self):
 		if self.estado == 'complete':

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="itbase_mensaje_wizard_form" model="ir.ui.view">
+            <field name="name">itbase.mensaje.wizard.form</field>
+            <field name="model">itbase.mensaje.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <p class="text-center">
+                        <field name="mensaje" readonly="1"/>
+                    </p>
+                    <footer>
+                        <button name="action_cerrar" string="Cerrar" type="object" class="oe_highlight"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

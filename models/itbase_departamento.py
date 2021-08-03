@@ -12,6 +12,7 @@ class ItBaseDepartamento(models.Model):
 	telefono = fields.Char(string="Telefono")
 	imagen = fields.Binary(string="Avatar", attachment=True)
 	activo = fields.Boolean('Activo', default=True)
+	notificaciones = fields.Many2many('itbase.notificaciones.medios', string="Notificaciones")
 	#MANTENIMIENTOS
 	mantenimientos_ids = fields.One2many('itbase.mantenimiento', 'encargado', string="Mantenimientos")
 	mantenimientos_count = fields.Integer(compute='get_contadores')
@@ -143,3 +144,10 @@ class ItBaseDepartamento(models.Model):
 		}
 		result['domain'] = "[('id','in',["+','.join(map(str, self.historias_ids.ids))+"])]"
 		return result
+
+class ITBaseNotificacionesMedios(models.Model):
+	_name = 'itbase.notificaciones.medios'
+	_description = "Medios de notificaciones"
+	_rec_name = "nombre"
+
+	nombre = fields.Char(string="Medio")

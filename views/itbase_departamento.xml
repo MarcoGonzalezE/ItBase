@@ -66,6 +66,9 @@
                                 <field name="telefono" widget="phone"/>
                             </div>
                         </div>
+                        <group>
+                            <field name="notificaciones" widget="many2many_checkboxes" options="{'no_create_edit':'1'}"/>
+                        </group>
                     </sheet>
                 </form>
 			</field>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="itbase_config_settings_view" model="ir.ui.view">
+            <field name="name">ITBase Configuracion</field>
+            <field name="model">itbase.config.settings</field>
+            <field name="arch" type="xml">
+                <form string="Configuracion ITBase" class="oe_form_configuration">
+                    <header>
+                        <button string="Aplicar" type="object" name="execute" class="oe_highlight"/>
+                        <button string="Cancelar" type="object" name="cancel" class="oe_link" special="cancel"/>
+                    </header>
+                    <group string="Parametros" name="parametros">
+                        <label string="Telegram"/>
+                        <div>
+                            <div>
+                                <field name="activar_telegram" class="oe_inline"/>
+                                <label for="activar_telegram"/>                                
+                            </div>
+                            <div attrs="{'invisible' :[('activar_telegram', '!=', True)]}">
+                                <label for="token_telegram"/>
+                                <field name="token_telegram" class="oe_inline" password="1" attrs="{'required' :[('activar_telegram', '!=', False)]}"/>
+                            </div>
+                            <div attrs="{'invisible' :[('activar_telegram', '!=', True),('id_chat', '!=', True)]}">
+                                <label string="ID Chat Principal"/>
+                                <field name="id_chat" class="oe_inline" readonly="1"/>
+                            </div>
+                            <div>
+                                <button type="object" name="btVerificarTelegram" string="Veficar" class="btn-primary" attrs="{'invisible' :[('activar_telegram', '!=', True)]}"/>
+                            </div>
+                            <br/>
+                            <legend attrs="{'invisible' :[('activar_telegram', '!=', True)]}">Conexiones Activas</legend>
+                            <div attrs="{'invisible' :[('activar_telegram', '!=', True)]}">
+                                <field name="conexiones_ids" readonly="1">
+                                    <tree>
+                                        <field name="id_conexion"/>
+                                        <field name="nombre"/>
+                                        <field name="tipo"/>
+                                        <button type="object" name="btUsarPrincipal" string="Usar como Principal" class="btn-primary"/>
+                                        <field name="principal"/>
+                                    </tree>
+                                </field>
+                            </div>
+                        </div>
+                    </group>
+                </form>
+            </field>
+        </record>
+        <record id="itbase_config_settings_action" model="ir.actions.act_window">
+            <field name="name">ITBase Configuracion</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">itbase.config.settings</field>
+            <field name="view_mode">form</field>
+            <field name="res_id">1</field>
+            <field name="target">inline</field>
+        </record>
+    </data>
+</odoo>

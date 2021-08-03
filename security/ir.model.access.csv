@@ -28,4 +28,8 @@ access_itbase_equipo_transaccion,itbase.equipo.transaccion,model_itbase_equipo_t
 access_itbase_redes,itbase.redes,model_itbase_redes,,1,1,1,1
 access_itbase_redes_dispositivo,itbase.redes.dispositivo,model_itbase_redes_dispositivo,,1,1,1,1
 access_itbase_redes_telefonos,itbase.redes.telefonos,model_itbase_redes_telefonos,,1,1,1,1
-access_itbase_redes_telefonos_reportes,itbase.redes.telefonos.reportes,model_itbase_redes_telefonos_reportes,,1,1,1,1
+access_itbase_redes_telefonos_resportes,itbase.redes.telefonos.resportes,model_itbase_redes_telefonos_resportes,,1,1,1,1
+access_itbase_notificaciones_medios,itbase.notificaciones.medios,model_itbase_notificaciones_medios,,1,1,1,1
+access_itbase_config_settings,itbase.config.settings,model_itbase_config_settings,,1,1,1,1
+access_itbase_config_settings_telegram_line,itbase.config.settings.telegram.line,model_itbase_config_settings_telegram_line,,1,1,1,1
+access_itbase_mensaje_wizard,itbase.mensaje.wizard,model_itbase_mensaje_wizard,,1,1,1,1
