@@ -65,6 +65,10 @@
                                 <label for="telefono"/>
                                 <field name="telefono" widget="phone"/>
                             </div>
+                            <div>
+                                <label for="id_telegram"/>
+                                <field name="id_telegram"/>
+                            </div>
                         </div>
                         <group>
                             <field name="notificaciones" widget="many2many_checkboxes" options="{'no_create_edit':'1'}"/>

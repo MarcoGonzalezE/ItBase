@@ -166,6 +166,19 @@
             </field>
         </record>
 
+        <record id="itbase_equipo_search" model="ir.ui.view">
+            <field name="name">itbase.equipo.search</field>
+            <field name="model">itbase.equipo</field>
+            <field name="arch" type="xml">
+                <search string="Busqueda de Equipos">                    
+                    <field name="asignado"/>
+                    <field name="numero_tel"/>
+                    <field name="name"/>
+                    <field name="departamento"/>
+                </search>
+            </field>
+        </record>
+
         <record id="itbase_computadora_action" model="ir.actions.act_window">
             <field name="name">Equipos</field>
             <field name="res_model">itbase.equipo</field>

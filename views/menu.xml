@@ -31,14 +31,16 @@
 
 		<menuitem id="itbase_reuniones_menu" name="Reuniones" sequence="80" parent="itbase_parent_menu" action="itbase_reuniones_action"/>
 
-		<menuitem id="itbase_departamento_menu" name="Departamento de IT" sequence="90" parent="itbase_parent_menu" action="itbase_departamento_action"/>
+		<menuitem id="itbase_recordatorio_menu" name="Recordatorios" sequence="90" parent="itbase_parent_menu" action="itbase_recordatorio_action"/>
 
-		<menuitem id="itbase_configuracion_menu" name="Configuracion" sequence="100" parent="itbase_parent_menu"/>
+		<menuitem id="itbase_departamento_menu" name="Departamento de IT" sequence="100" parent="itbase_parent_menu" action="itbase_departamento_action"/>
 
-		<menuitem id="itbase_ajustes_menu" name="Configuracion" sequence="101" parent="itbase_configuracion_menu" action="itbase_config_settings_action"/>		
-		<menuitem id="itbase_valores_menu" name="Valores" sequence="102" parent="itbase_configuracion_menu"/>
-		<menuitem id="itbase_companias_menu" name="Compañias" sequence="103" parent="itbase_valores_menu" action="itbase_companias_action"/>
-		<menuitem id="itbase_area_menu" name="Areas" sequence="104" parent="itbase_valores_menu" action="itbase_area_action"/>
+		<menuitem id="itbase_configuracion_menu" name="Configuracion" sequence="110" parent="itbase_parent_menu"/>
+
+		<menuitem id="itbase_ajustes_menu" name="Configuracion" sequence="111" parent="itbase_configuracion_menu" action="itbase_config_settings_action"/>		
+		<menuitem id="itbase_valores_menu" name="Valores" sequence="112" parent="itbase_configuracion_menu"/>
+		<menuitem id="itbase_companias_menu" name="Compañias" sequence="113" parent="itbase_valores_menu" action="itbase_companias_action"/>
+		<menuitem id="itbase_area_menu" name="Areas" sequence="114" parent="itbase_valores_menu" action="itbase_area_action"/>
 
 	</data>
 </odoo>
@@ -57,10 +59,11 @@
 (50)	Proyectos
 (60)	Soporte
 (70)	Reuniones
-(80)	Departamento de IT
-(90)	Configuracion
-(91)		Configuracion
-(91)		Valores
-(92)			Compañias
-(93)			Areas
+(80)	Recordatorios
+(90)	Departamento de IT
+(100)	Configuracion
+(110)		Configuracion
+(111)		Valores
+(112)			Compañias
+(113)			Areas
  -->

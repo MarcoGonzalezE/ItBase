@@ -36,11 +36,43 @@
                                         <field name="id_conexion"/>
                                         <field name="nombre"/>
                                         <field name="tipo"/>
-                                        <button type="object" name="btUsarPrincipal" string="Usar como Principal" class="btn-primary"/>
                                         <field name="principal"/>
+                                        <button type="object" name="btUsarPrincipal" string="Usar como Principal" class="btn-primary"/>
+                                        <button type="object" name="fnAbrirConexion" string="Asginar ID a Usuario" class="btn-primary"/>
                                     </tree>
                                 </field>
                             </div>
+                        </div>
+                    </group>
+                    <group string="Recordatorios" name="recordatorios">
+                        <label string="Notificaciones"/>
+                        <div>
+                            <div>
+                                <field name="correo_recordatorios"/>
+                                <label for="correo_recordatorios"/>
+                            </div>
+                            <div>
+                                <field name="telegram_recordatorios"/>
+                                <label for="telegram_recordatorios"/>
+                            </div>
+                            <!-- <div>
+                                <field name="usar_intervalo"/>
+                                <label for="usar_intervalo"/>
+                            </div>
+                            <div attrs="{'invisible' :[('usar_intervalo', '!=', True)]}">
+                                <div>
+                                    <label for="intervalo"/>
+                                    <field name="intervalo"/>
+                                </div>
+                                <div>
+                                    <label for="intervalo_tipo"/>
+                                    <field name="intervalo_tipo"/>
+                                </div>
+                            </div>
+                            <div>
+                                <field name="semanal_recordatorios"/>
+                                <label for="semanal_recordatorios"/>
+                            </div> -->
                         </div>
                     </group>
                 </form>

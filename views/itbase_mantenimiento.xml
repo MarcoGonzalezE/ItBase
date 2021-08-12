@@ -12,6 +12,7 @@
                         <button type="object" name="proceso" string="Proceso" attrs="{'invisible' :[('fecha_mantenimiento','!=', False)]}"/>
                         <button type="object" name="finalizado" string="Finalizar" attrs="{'invisible' :['|',('fecha_finalizacion','!=', False),('estado','=', 'cancel')]}"/>
                         <button type="object" name="cancelado" string="Cancelar" attrs="{'invisible' :['|',('estado','=', 'final'),('estado','=', 'cancel')]}"/>
+                        <button type="object" name="crear_recordatorio" string="Crear recordatorio" attrs="{'invisible' :['|',('estado','!=', 'programado'),('recordatorio','=', True)]}"/>
                         <field name="estado" widget="statusbar"/>
                     </header>
                     <sheet>
@@ -29,12 +30,15 @@
                             <group>                                
                                 <field name="fecha_mantenimiento" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
                                 <field name="fecha_programado" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
+                                <field name="recordatorio" attrs="{'invisible' :[('recordatorio','=', False)]}" readonly="1"/>
+                                <field name="recordatorio_id" invisible="1"/>
                                 <field name="fecha_finalizacion" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
+
                             </group>
                         </group>
                         <notebook>
                             <page string="Descripcion">
-                                <field name="descripcion" widget="html" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
+                                <field name="descripcion" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
                             </page>
                             <page string = "Refacciones">
                                 <field name="dispositivos_ids" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}">
@@ -68,6 +72,7 @@
                         <button type="object" name="proceso" string="Proceso" attrs="{'invisible' :[('fecha_mantenimiento','!=', False)]}"/>
                         <button type="object" name="finalizado" string="Finalizar" attrs="{'invisible' :['|',('fecha_finalizacion','!=', False),('estado','=', 'cancel')]}"/>
                         <button type="object" name="cancelado" string="Cancelar" attrs="{'invisible' :['|',('estado','=', 'final'),('estado','=', 'cancel')]}"/>
+                        <button type="object" name="crear_recordatorio" string="Crear recordatorio" attrs="{'invisible' :['|',('estado','!=', 'programado'),('recordatorio','=', True)]}"/>
                         <field name="estado" widget="statusbar"/>
                     </header>
                     <sheet>
@@ -83,12 +88,14 @@
                             <group>
                                 <field name="fecha_mantenimiento" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
                                 <field name="fecha_programado" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
+                                <field name="recordatorio" attrs="{'invisible' :[('recordatorio','=', False)]}" readonly="1"/>
+                                <field name="recordatorio_id" invisible="1"/>
                                 <field name="fecha_finalizacion" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
                             </group>
                         </group>
                         <notebook>
                             <page string="Descripcion">
-                                <field name="descripcion" widget="html" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
+                                <field name="descripcion" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
                             </page>
                             <page string = "Refacciones">
                                 <field name="dispositivos_ids" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}">
@@ -122,6 +129,7 @@
                         <button type="object" name="proceso" string="Proceso" attrs="{'invisible' :[('fecha_mantenimiento','!=', False)]}"/>
                         <button type="object" name="finalizado" string="Finalizar" attrs="{'invisible' :['|',('fecha_finalizacion','!=', False),('estado','=', 'cancel')]}"/>
                         <button type="object" name="cancelado" string="Cancelar" attrs="{'invisible' :['|',('estado','=', 'final'),('estado','=', 'cancel')]}"/>
+                        <button type="object" name="crear_recordatorio" string="Crear recordatorio" attrs="{'invisible' :['|',('estado','!=', 'programado'),('recordatorio','=', True)]}"/>
                         <field name="estado" widget="statusbar"/>
                     </header>
                     <sheet>
@@ -137,12 +145,14 @@
                             <group>
                                 <field name="fecha_mantenimiento" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
                                 <field name="fecha_programado" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
+                                <field name="recordatorio" attrs="{'invisible' :[('recordatorio','=', False)]}" readonly="1"/>
+                                <field name="recordatorio_id" invisible="1"/>
                                 <field name="fecha_finalizacion" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
                             </group>
                         </group>
                         <notebook>
                             <page string="Descripcion">
-                                <field name="descripcion" widget="html" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
+                                <field name="descripcion" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
                             </page>
                             <page string = "Refacciones">
                                 <field name="dispositivos_ids" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}">
@@ -176,6 +186,7 @@
                         <button type="object" name="proceso" string="Proceso" attrs="{'invisible' :[('fecha_mantenimiento','!=', False)]}"/>
                         <button type="object" name="finalizado" string="Finalizar" attrs="{'invisible' :['|',('fecha_finalizacion','!=', False),('estado','=', 'cancel')]}"/>
                         <button type="object" name="cancelado" string="Cancelar" attrs="{'invisible' :['|',('estado','=', 'final'),('estado','=', 'cancel')]}"/>
+                        <button type="object" name="crear_recordatorio" string="Crear recordatorio" attrs="{'invisible' :['|',('estado','!=', 'programado'),('recordatorio','=', True)]}"/>
                         <field name="estado" widget="statusbar"/>
                     </header>
                     <sheet>
@@ -191,12 +202,14 @@
                             <group>
                                 <field name="fecha_mantenimiento" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
                                 <field name="fecha_programado" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
+                                <field name="recordatorio" attrs="{'invisible' :[('recordatorio','=', False)]}" readonly="1"/>
+                                <field name="recordatorio_id" invisible="1"/>
                                 <field name="fecha_finalizacion" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
                             </group>
                         </group>
                         <notebook>
                             <page string="Descripcion">
-                                <field name="descripcion" widget="html" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
+                                <field name="descripcion" attrs="{'readonly' :['|',('estado','=', 'cancel'),('estado','=','final')]}"/>
                             </page>
                         </notebook>
                     </sheet>

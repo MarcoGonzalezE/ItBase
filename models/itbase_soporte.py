@@ -74,15 +74,16 @@ class ItBaseSoporte(models.Model):
 			for it in personal_it:
 				if it.correo:
 					print ("Tiene Correo")
-					if it.notificaciones.nombre == "Correo":
-						print  ("Correo Enviado")
-						values = notificacion_soporte.generate_email(nuevo.id)
-						values['body_html'] = values['body_html'].replace("_ticket_url_", "web#id=" +
-								str(nuevo.id) + "&view_type=form&model=itbase.soporte&menu_id=" +
-								str(menu_soporte.id) + "&action=" + str(action_soporte.id)).replace("_personal_it", it.name.name)
-						values['email_to'] = it.correo
-						send_mail = self.env['mail.mail'].create(values)
-						send_mail.send()
+					for n in it.notificaciones:
+						if n.nombre == "Correo":
+							print  ("Correo Enviado")
+							values = notificacion_soporte.generate_email(nuevo.id)
+							values['body_html'] = values['body_html'].replace("_ticket_url_", "web#id=" +
+									str(nuevo.id) + "&view_type=form&model=itbase.soporte&menu_id=" +
+									str(menu_soporte.id) + "&action=" + str(action_soporte.id)).replace("_personal_it", it.name.name)
+							values['email_to'] = it.correo
+							send_mail = self.env['mail.mail'].create(values)
+							send_mail.send()
 			notificacion = "Se ha creado una nueva solicitud de Soporte\nFolio: " + str(nuevo.seq) + "\nEmpresa: " + str(nuevo.compania.name) + "\nFecha de Solicitud: " + str(nuevo.fecha_soporte) + "\nSolicitante: " + str(nuevo.solicitante_id) + "\nEquipo: " + str(nuevo.equipo_id.name) + "\nAsunto: " + str(nuevo.name) + "\nDescripcion: " + str(nuevo.descripcion)
 			url = "<a href=web#id=" + str(nuevo.id) + '&view_type=form&model=itbase.soporte&menu_id=' + str(menu_soporte.id) + '&action=' + str(action_soporte.id) + ">VER SOLICITUD</a>"
 			#TELEGRAM

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="itbase_recordatorio_form" model="ir.ui.view">
+            <field name="name">ItBase Recordatorios</field>
+            <field name="model">itbase.recordatorios</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button type="object" name="cancelado" string="Cancelar" attrs="{'invisible' :['|',('estado','=', 'finalizado'),('estado','=', 'cancelado')]}"/>
+                        <field name="estado" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h2><field name="name" placeholder="Recordarme que..." attrs="{'readonly':['|',('estado','=', 'finalizado'),('estado','=', 'cancelado')]}"/></h2>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="responsable" attrs="{'readonly':['|',('estado','=', 'finalizado'),('estado','=', 'cancelado')]}" domain="[('activo','=',True)]" options="{'no_quick_create': true,'no_create ': True, 'no_create_edit' : True}" required="1"/>
+                            </group>
+                            <group>
+                                <field name="fecha" attrs="{'readonly':['|',('estado','=', 'finalizado'),('estado','=', 'cancelado')]}"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Descripcion">
+                                <p><field name="descripcion" attrs="{'readonly':['|',('estado','=', 'finalizado'),('estado','=', 'cancelado')]}"/></p>
+                            </page>
+                        </notebook>                    
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="itbase_recordatorio_tree" model="ir.ui.view">
+            <field name="name">ItBase Recordatorios</field>
+            <field name="model">itbase.recordatorios</field>
+            <field name="arch" type="xml">
+                <tree string="Recordatorios" default_order="fecha asc">
+                    <field name="name"/>
+                    <field name="responsable"/>
+                    <field name="fecha"/>
+                    <field name="estado"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="itbase_recordatorio_calendar" model="ir.ui.view">
+            <field name="name">ItBase Recordatorios</field>
+            <field name="model">itbase.recordatorios</field>
+            <field name="arch" type="xml">
+                <calendar date_start="fecha" quick_add="1" event_open_popup="1" color="estado">
+                    <field name="name"/>
+                    <field name="responsable"/>
+                </calendar>
+            </field>
+        </record>
+
+        <record id="itbase_recordatorios_search" model="ir.ui.view">
+            <field name="name">itbase.recordatorios.search</field>
+            <field name="model">itbase.recordatorios</field>
+            <field name="arch" type="xml">
+                <search string="Recordatorios">
+                    <field name="responsable"/>
+                    <separator/>
+                    <filter domain="[('estado', '=', 'activo')]" string="Activos" name="activo"/>
+                    <filter domain="[('estado', '=', 'finalizado')]" string="Inactivos" name="finalizado"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="itbase_recordatorio_action" model="ir.actions.act_window">
+            <field name="name">ITBase Recordatorios</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">itbase.recordatorios</field>
+            <field name="view_mode">tree,calendar,form</field>
+            <field name="context">{"search_default_activo":1}</field>
+        </record>
+
+    </data>
+</odoo>

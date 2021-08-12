@@ -12,6 +12,7 @@ class ItBaseDepartamento(models.Model):
 	telefono = fields.Char(string="Telefono")
 	imagen = fields.Binary(string="Avatar", attachment=True)
 	activo = fields.Boolean('Activo', default=True)
+	id_telegram = fields.Char(string="ID Telegram")
 	notificaciones = fields.Many2many('itbase.notificaciones.medios', string="Notificaciones")
 	#MANTENIMIENTOS
 	mantenimientos_ids = fields.One2many('itbase.mantenimiento', 'encargado', string="Mantenimientos")

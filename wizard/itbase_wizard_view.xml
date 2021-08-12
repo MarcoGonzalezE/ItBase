@@ -15,5 +15,27 @@
                 </form>
             </field>
         </record>
+<!-- ASIGNAR ID DE TELEGRAM A USUARIO-->
+        <record id="itbase_asignacion_telegram_form" model="ir.ui.view">
+            <field name="name">itbase.asignacion.telegram.form</field>
+            <field name="model">itbase.config.settings.telegram.line</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group string="Conexion Telegram">
+                            <field name="id_conexion" readonly="1"/>
+                            <field name="nombre" readonly="1"/>
+                            <field name="tipo" readonly="1"/>
+                        </group>
+                        <group string="Asignacion">
+                            <field name="asignar_id" domain="[('activo','=',True)]" options="{'no_quick_create': true,'no_create ': True, 'no_create_edit' : True}"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="btAsignarID" string="Asignar" type="object" class="btn-primary"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
     </data>
 </odoo>

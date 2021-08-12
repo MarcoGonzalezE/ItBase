@@ -13,6 +13,13 @@ class ItBaseConfiguracion(models.TransientModel):
 	token_telegram = fields.Char(string="Token")
 	id_chat = fields.Char(string="ID Chat")
 	conexiones_ids = fields.One2many('itbase.config.settings.telegram.line', 'line_id', string="Conexiones")
+	#RECORDATORIOS
+	correo_recordatorios = fields.Boolean(string="Notificar por Correo")
+	telegram_recordatorios = fields.Boolean(string="Notificar por Telegram")
+	# usar_intervalo = fields.Boolean(string="Notificar antes")
+	# intervalo = fields.Integer(string="Numero")
+	# intervalo_tipo = fields.Selection([('minutes','Minutos'),('hours','Horas'),('days','Dias')], string="Unidad")
+	# semanal_recordatorios = fields.Boolean(string="Recordatorios totales semanal")
 
 	@api.onchange('activar_telegram')
 	def onchange_telegram(self):
@@ -87,6 +94,7 @@ class ItBaseConfiguracionTelegramLineas(models.TransientModel):
 	nombre = fields.Char(string="Nombre")
 	tipo = fields.Char(string="Tipo")
 	principal = fields.Boolean(string="Principal")
+	asignar_id = fields.Many2one('itbase.departamento', string="Asignar a Usuario")
 
 	def btUsarPrincipal(self):
 		conexiones = self.env['itbase.config.settings.telegram.line'].search([])
@@ -94,3 +102,22 @@ class ItBaseConfiguracionTelegramLineas(models.TransientModel):
 			c.principal = False
 		self.principal = True
 		self.line_id.id_chat = self.id_conexion
+
+	def fnAbrirConexion(self):
+		form_id = self.env.ref('ItBase.itbase_asignacion_telegram_form')
+		return {
+			'name': "Asignar ID de Chat",
+			'type': 'ir.actions.act_window',
+			'view_type': 'form',
+            'res_id': self.id,
+            'view_id': form_id.id,
+            'view_mode': 'form',
+            'view_name': 'form',
+            'res_model': 'itbase.config.settings.telegram.line',
+            'context': {},
+            'target': 'new'
+		}
+
+	def btAsignarID(self):
+		self.asignar_id.id_telegram = self.id_conexion
+		return True

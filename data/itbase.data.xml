@@ -118,5 +118,15 @@
 		<record id="itbase_configuracion" model="itbase.config.settings">
 		</record>
 	</data>
-
+<!-- Cron Jobs -->
+	<record id="itbase_cronjob_recordatorios" forcecreate="True" model="ir.cron">
+		<field name="name">ItBase Recordatorios</field>
+		<field eval="True" name="active"/>
+		<field name="user_id" ref="base.user_root"/>
+		<field name="interval_number">1</field>
+		<field name="interval_type">minutes</field>
+		<field name="numbercall">-1</field>
+		<field name="model" eval="'itbase.recordatorios'"/>
+		<field name="function" eval="'notificar_recordatorio'"/>
+	</record>
 </odoo>
